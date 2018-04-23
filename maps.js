@@ -1,8 +1,11 @@
-/** This file  is designed to find Sbs near you, it usese request module and 
-
-*/
 const request = require('request');
 var list_of_places=[];
+/**
+This function is used to get Sbs near you based on the coordinates
+It uses Google Place API. It creates a Promise and if the body.status=="OK", will return tuple of body and list of places
+@param {string} lat - Latitude of the position
+@param {string} long - Longtitude of the position
+*/
 var get_sturbuckses = (lat, long) => {
 	return new Promise((resolve, reject) => {
 		request({
@@ -23,7 +26,11 @@ var get_sturbuckses = (lat, long) => {
 	});
 };
 
-
+/**
+This function is used to get address based on the word position and returns the latitude and longtitude
+@param {string} address - Address in words, that will be converted to the URI format
+@returns {dictionary} Dict of the long and lat of the address 
+*/
 var getAddress = (address) => {
     return new Promise((resolve,reject)=> {
     request({
