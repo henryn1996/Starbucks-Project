@@ -19,12 +19,19 @@ var logged_in = ""
 var current_long = ''
 var current_lat = ''
 var last_save = ""
-
-
+var user_id = '';
+/**
+ * Calls the function ReadAccfile and returns the list into the variable Accs
+ */
 var LoadAccfile = () => {
     Accs = ReadAccfile('accounts.json')
 };
 
+/**
+ * Reads the file and returns the contents so its usable in node. 
+ * If the file doesnt exist it will create the file with an empty list
+ * @param {string} file - The file that you want to read
+ */
 var ReadAccfile = (file) => {
     try {
         return JSON.parse(fs.readFileSync(file))
@@ -40,9 +47,19 @@ var ReadAccfile = (file) => {
     }
 };
 
+/**
+ * Turns the variable Accs into a string and writes it into the accounts.json file
+ */
+
 var WriteAccfile = () => {
     fs.writeFileSync('accounts.json', JSON.stringify(Accs));
 };
+
+/**
+ * Reads the account file and also calls the function LoginCheck. Renders error page or index page
+ * @param {string} request - Grabs the username and password values from the form lin loginbox
+ * @param {string} response - Renders index2.hbs or error1.hbs
+ */
 
 var Login = (request, response) => {
     var filecontents = ReadAccfile('accounts.json')
@@ -54,14 +71,27 @@ var Login = (request, response) => {
     }
 };
 
+/**
+ * Verifies that the username and password exist in the accs arg.
+ * @param {string} request - Grabs the username and password values from the form
+ * @param {string} accs - The list object passed in from Login fucntion
+ */
+
 var LoginCheck = (request, accs) => {
     for (i = 0; i < accs.length; i++) {
         if ((request.body.username == accs[i].user) && (request.body.password == accs[i].pass)) {
         	logged_in = accs[i]
+            user_id = i
             return 0
         }
     };
 };
+
+/**
+ * Adds a user to the file and Acc list variable if UserNameCheck and PasswordCheck returns 0.
+ * @param {string} request - Grabs the username, password and confirm password values from the form createacc 
+ * @param {string} response - renders origional login page 
+ */
 
 var AddUsr = (request, response) => {
     LoadAccfile()
@@ -77,6 +107,12 @@ var AddUsr = (request, response) => {
     }
 };
 
+/**
+ * checks if new username is already saved
+ * @param {string} request - Grabs the new username
+ * @param {string} response - renders errorpage 
+ */
+
 var UserNameCheck = (request, response) => {
     for (i = 0; i < Accs.length; i++) {
         if (request.body.NewUser == Accs[i].user) {
@@ -87,6 +123,13 @@ var UserNameCheck = (request, response) => {
     return 0
 };
 
+
+/**
+ * checks if password and confirmed password is not the same
+ * @param {string} request - Grabs the password and confirm password
+ * @param {string} response - renders errorpage 
+ */
+
 var PasswordCheck = (request, response) => {
     if (request.body.NewPassword != request.body.confirmp) {
         response.render('error.hbs');
@@ -96,16 +139,10 @@ var PasswordCheck = (request, response) => {
     }
 };
 
-// ////////////////////////////////////////////////////////////
+
 app.set('view engine', 'hbs');
 
-app.get('/map', (request, response) => {
-    response.render('map_view.hbs', {
-        title: 'map page'
-    })
-})
-
-app.get('/home', (request, response) => {
+app.get('/', (request, response) => {
     response.render('index.hbs');
 });
 
@@ -116,6 +153,14 @@ app.post('/login', (request, response) => {
 app.post('/home', (request, response) => {
     AddUsr(request, response);
 }); 
+
+
+/**
+ * gets the search and form and populates the 
+ * @param {string} request - Grabs the password and confirm password
+ * @param {string} response - renders errorpage 
+ */
+
 
 app.post('/loginsearch', (request, response) => {
     place = request.body.search
@@ -161,11 +206,15 @@ app.post('/storeuserdata', (request, response) => {
 
 app.post('/favdata', (request, response) => {
     displaySaved = '<ul>'
-    for (var i = 0; i < logged_in.saved.length; i++) {
-    	console.log(logged_in.saved[i]);
-        displaySaved += `<li><a onclick="getMap(${logged_in.saved[i]})"> ${logged_in.saved[i]}</a></li>`
+    LoadAccfile()
+    var userdata = Accs[user_id]
+    console.log(userdata.saved);
+
+    for (var i = 0; i < userdata.saved.length; i++) {
+    	console.log(userdata.saved[i]);
+        displaySaved += `<li><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></li>`
     }
-    displaySaved += `<li><a onclick="getMap(${last_save})"> ${last_save}</a></li>`
+    // displaySaved += `<li><a onclick="getMap(${last_save})"> ${last_save}</a></li>`
     displaySaved += '</ul>'
 	response.render('index2.hbs', {
         savedSpots: displaySaved
