@@ -110,13 +110,13 @@ var AddUsr = (request, response) => {
 /**
  * checks if new username is already saved
  * @param {string} request - Grabs the new username
- * @param {string} response - renders errorpage 
+ * @param {string} response - renders errorpage
  */
 
 var UserNameCheck = (request, response) => {
     for (i = 0; i < Accs.length; i++) {
         if (request.body.NewUser == Accs[i].user) {
-            response.render('error.hbs');
+            response.render('userexistserror.hbs');
             return 1
         }
     }
@@ -214,7 +214,6 @@ app.post('/favdata', (request, response) => {
     	console.log(userdata.saved[i]);
         displaySaved += `<li><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></li>`
     }
-    // displaySaved += `<li><a onclick="getMap(${last_save})"> ${last_save}</a></li>`
     displaySaved += '</ul>'
 	response.render('index2.hbs', {
         savedSpots: displaySaved
