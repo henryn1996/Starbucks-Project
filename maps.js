@@ -1,7 +1,7 @@
 const request = require('request');
 var list_of_places=[];
 /**
-This function is used to get Sbs near you based on the coordinates
+This function is used to get Sbs near you based on the coordinates. THIS IS A TEST
 It uses Google Place API. It creates a Promise and if the body.status=="OK", will return tuple of body and list of places
 @param {string} lat - Latitude of the position
 @param {string} long - Longtitude of the position
