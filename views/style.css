@@ -21,11 +21,11 @@
 #starbucks{
     position: absolute;
     height:20%;
-    width:20%;
+    width:auto;
     left:0px;
     right:0px;
     margin:auto;
-    border-radius: 40%;
+    /*border-radius: 40%;*/
 }
 #loginout{
     position: absolute;
