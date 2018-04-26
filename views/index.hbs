@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Web-App</title>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
-    </head>
-    <body background='background1.jpg'>
-        <div id="loginbox">
-            <div id=logintitle>Welcome</div>
-            <img id="starbucks" src="starbucks.png">
-            <div id='loginout'>
-                <form action='/login' method='post'>
-                    Username<br>
-                    <input type="text" id='userlogin' name="username" placeholder="Enter your username">
-                    <br>
-                    Password<br>
-                    <input type="password" id='passwordlogin' name="password" placeholder="Enter your password">
-                    <br><br>
-                    <button type="login" id='login'>Login</button>
-                </form>
-                <button type="account" id='create'>Create Account</button>
-            </div>
-        </div>
-        <div id="createacc">
-            <form action='/home' method='post'>
-                <label for="NewUser">Username</label>
-                <input class='inputs' type="text" name="NewUser" id='newuser' placeholder="enter your username">
-                <label for="NewPassword" id='npasslabel'>Password</label>
-                <input class='inputs' type="password" name="NewPassword" id='newpw' placeholder="enter your password">
-                <label id='confirmtitle' for="confirmp">Confirm P</label>
-                <input class='inputs' type="password" name="confirmp" id='confirmpw' placeholder="confirm your password">
-                <input type="submit" value="Submit" id='submitbutton'>
-            <form>
-        </div>
 
-        <script src="i1.js"></script>
-    </body>
+<head>
+    <title>Web-App</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body background='background1.jpg'>
+    <div id="loginbox">
+        <div id=logintitle>Welcome</div>
+        <img id="starbucks" src="starbucks.png">
+        <div id='loginout'>
+            <form action='/login' method='post'>
+                Username
+                <br>
+                <input type="text" id='userlogin' name="username" placeholder="Enter your username">
+                <br> Password
+                <br>
+                <input type="password" id='passwordlogin' name="password" placeholder="Enter your password">
+                <br>
+                <br>
+                <button type="login" id='login'>Login</button>
+            </form>
+            <button type="account" id='create'>Create Account</button>
+        </div>
+    </div>
+    <div id="createacc">
+        <form action='/home' method='post'>
+            <label for="NewUser">Username</label>
+            <input class='inputs' type="text" name="NewUser" id='newuser' placeholder="enter your username">
+            <label for="NewPassword" id='npasslabel'>Password</label>
+            <input class='inputs' type="password" name="NewPassword" id='newpw' placeholder="enter your password">
+            <label id='confirmtitle' for="confirmp">Confirm P</label>
+            <input class='inputs' type="password" name="confirmp" id='confirmpw' placeholder="confirm your password">
+            <input type="submit" value="Submit" id='submitbutton'>
+            <form>
+    </div>
+
+    <script src="i1.js"></script>
+</body>
 
 
 
