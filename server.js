@@ -1,11 +1,9 @@
 const express = require('express');
-var crypto = require('crypto');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const maps = require('./maps.js')
 
-var shasum = crypto.createHash('sha1');
 
 var app = express();
 const port = process.env.PORT || 8080;
@@ -28,7 +26,6 @@ var user_id = '';
  */
 var LoadAccfile = () => {
     Accs = ReadAccfile('accounts.json')
-    console.log(Accs);
 };
 
 /**
@@ -114,6 +111,7 @@ var AddUsr = (request, response) => {
 		response.render('index.hbs');
     }
 };
+
 var hash_data = (data) => {
     return crypto.createHash('md5').update(data).digest('hex');
 }
