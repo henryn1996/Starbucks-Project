@@ -1,11 +1,8 @@
 const express = require('express');
-var crypto = require('crypto');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const maps = require('./maps.js')
-
-var shasum = crypto.createHash('sha1');
 
 var app = express();
 const port = process.env.PORT || 8080;
@@ -28,7 +25,6 @@ var user_id = '';
  */
 var LoadAccfile = () => {
     Accs = ReadAccfile('accounts.json')
-    console.log(Accs);
 };
 
 /**
@@ -81,12 +77,9 @@ var Login = (request, response) => {
  * @param {string} accs - The list object passed in from Login fucntion
  */
 
-var LoginCheck = (request, accs) => {     
-    hashed_pass = shasum.update(request.body.password);
-    hashed_pass = shasum.digest('hex');
-
+var LoginCheck = (request, accs) => {
     for (i = 0; i < accs.length; i++) {
-        if ((request.body.username == accs[i].user) && (hashed_pass == accs[i].pass)) {
+        if ((request.body.username == accs[i].user) && (request.body.password == accs[i].pass)) {
         	logged_in = accs[i]
             user_id = i
             return 0
@@ -103,13 +96,9 @@ var LoginCheck = (request, accs) => {
 var AddUsr = (request, response) => {
     LoadAccfile()
     if (UserNameCheck(request, response) == 0 && PasswordCheck(request, response) == 0 && request.body.NewUser.length != 0 && request.body.NewPassword.length != 0) {
-       
-        hashed_pass = shasum.update(request.body.NewPassword);
-        hashed_pass = shasum.digest('hex');
-       
         var acc = {
             'user': request.body.NewUser,
-            'pass': hashed_pass,
+            'pass': request.body.NewPassword,
             'saved': []
         }
         Accs.push(acc)
