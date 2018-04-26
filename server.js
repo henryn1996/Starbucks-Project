@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const maps = require('./maps.js')
 
+
 var app = express();
 const port = process.env.PORT || 8080;
 
@@ -78,8 +79,11 @@ var Login = (request, response) => {
  */
 
 var LoginCheck = (request, accs) => {
+    hashing_password = hash_data(request.body.password)
+
     for (i = 0; i < accs.length; i++) {
-        if ((request.body.username == accs[i].user) && (request.body.password == accs[i].pass)) {
+        if ((request.body.username == accs[i].user) && (hashing_password == accs[i].pass)) {
+            console.log("User pass is ", accs[i].pass);
         	logged_in = accs[i]
             user_id = i
             return 0
@@ -96,9 +100,10 @@ var LoginCheck = (request, accs) => {
 var AddUsr = (request, response) => {
     LoadAccfile()
     if (UserNameCheck(request, response) == 0 && PasswordCheck(request, response) == 0 && request.body.NewUser.length != 0 && request.body.NewPassword.length != 0) {
+        hash_password = hash_data(request.body.NewPassword)    
         var acc = {
             'user': request.body.NewUser,
-            'pass': request.body.NewPassword,
+            'pass': hash_password,
             'saved': []
         }
         Accs.push(acc)
@@ -106,6 +111,10 @@ var AddUsr = (request, response) => {
 		response.render('index.hbs');
     }
 };
+
+var hash_data = (data) => {
+    return crypto.createHash('md5').update(data).digest('hex');
+}
 
 /**
  * checks if new username is already saved
