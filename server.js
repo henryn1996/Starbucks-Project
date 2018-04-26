@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const maps = require('./maps.js')
 
+const crypto = require('crypto')
+
 var app = express();
 const port = process.env.PORT || 8080;
 
@@ -78,8 +80,11 @@ var Login = (request, response) => {
  */
 
 var LoginCheck = (request, accs) => {
+    hashing_password = hash_data(request.body.password)
+
     for (i = 0; i < accs.length; i++) {
-        if ((request.body.username == accs[i].user) && (request.body.password == accs[i].pass)) {
+        if ((request.body.username == accs[i].user) && (hashing_password == accs[i].pass)) {
+            console.log("User pass is ", accs[i].pass);
         	logged_in = accs[i]
             user_id = i
             return 0
@@ -96,9 +101,10 @@ var LoginCheck = (request, accs) => {
 var AddUsr = (request, response) => {
     LoadAccfile()
     if (UserNameCheck(request, response) == 0 && PasswordCheck(request, response) == 0 && request.body.NewUser.length != 0 && request.body.NewPassword.length != 0) {
+        hash_password = hash_data(request.body.NewPassword)    
         var acc = {
             'user': request.body.NewUser,
-            'pass': request.body.NewPassword,
+            'pass': hash_password,
             'saved': []
         }
         Accs.push(acc)
@@ -107,16 +113,20 @@ var AddUsr = (request, response) => {
     }
 };
 
+var hash_data = (data) => {
+    return crypto.createHash('md5').update(data).digest('hex');
+}
+
 /**
  * checks if new username is already saved
  * @param {string} request - Grabs the new username
- * @param {string} response - renders errorpage 
+ * @param {string} response - renders errorpage
  */
 
 var UserNameCheck = (request, response) => {
     for (i = 0; i < Accs.length; i++) {
         if (request.body.NewUser == Accs[i].user) {
-            response.render('error.hbs');
+            response.render('userexistserror.hbs');
             return 1
         }
     }
@@ -214,7 +224,6 @@ app.post('/favdata', (request, response) => {
     	console.log(userdata.saved[i]);
         displaySaved += `<li><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></li>`
     }
-    // displaySaved += `<li><a onclick="getMap(${last_save})"> ${last_save}</a></li>`
     displaySaved += '</ul>'
 	response.render('index2.hbs', {
         savedSpots: displaySaved

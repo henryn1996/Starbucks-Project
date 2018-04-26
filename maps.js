@@ -60,9 +60,3 @@ module.exports ={
 	getAddress
 };
 module.exports.listofmaps = list_of_places;
-
-// get_sturbuckses().then((response) => {
-// 	console.log(response);
-// }).catch((error) => {
-// 	console.log("Error ",error);
-// })
