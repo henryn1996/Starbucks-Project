@@ -1,6 +1,6 @@
 
 
-document.getElementById("create").addEventListener("click",function(){
+document.getElementById("create").addEventListener("click", function () {
     document.getElementById("createacc").style.display = "block";
 })
 
