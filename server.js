@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const maps = require('./maps.js')
 
+const crypto = require('crypto')
 
 var app = express();
 const port = process.env.PORT || 8080;
