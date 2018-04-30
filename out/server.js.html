@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: server.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: server.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const express = require('express');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const hbs = require('hbs');
+const maps = require('./maps.js')
+
+const crypto = require('crypto')
+
+var app = express();
+const port = process.env.PORT || 8080;
+
+hbs.registerPartials(__dirname + '/views/partials');
+app.use(express.static(__dirname + '/views'));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+var Accs = []
+var place = '';
+var logged_in = ""
+var current_long = ''
+var current_lat = ''
+var last_save = ""
+var user_id = '';
+/**
+ * Calls the function ReadAccfile and returns the list into the variable Accs
+ */
+var LoadAccfile = () => {
+    Accs = ReadAccfile('accounts.json')
+};
+
+/**
+ * Reads the file and returns the contents so its usable in node. 
+ * If the file doesnt exist it will create the file with an empty list
+ * @param {string} file - The file that you want to read
+ */
+var ReadAccfile = (file) => {
+    try {
+        return JSON.parse(fs.readFileSync(file))
+    }
+    catch (exception) {
+        if (exception.code === 'ENOENT') {
+            fs.writeFileSync(file, '[]');
+            return JSON.parse(fs.readFileSync(file))
+        }
+        else {
+            window.alert(exception)
+        }
+    }
+};
+
+/**
+ * Turns the variable Accs into a string and writes it into the accounts.json file
+ */
+
+var WriteAccfile = () => {
+    fs.writeFileSync('accounts.json', JSON.stringify(Accs));
+};
+
+/**
+ * Reads the account file and also calls the function LoginCheck. Renders error page or index page
+ * @param {string} request - Grabs the username and password values from the form lin loginbox
+ * @param {string} response - Renders index2.hbs or error1.hbs
+ */
+
+var Login = (request, response) => {
+    var filecontents = ReadAccfile('accounts.json')
+    if (LoginCheck(request, filecontents) == 0) {
+        response.render('index2.hbs');
+    } 
+    else {
+        response.render('error1.hbs');
+    }
+};
+
+/**
+ * Verifies that the username and password exist in the accs arg.
+ * @param {string} request - Grabs the username and password values from the form
+ * @param {string} accs - The list object passed in from Login fucntion
+ */
+
+var LoginCheck = (request, accs) => {
+    hashing_password = hash_data(request.body.password)
+
+    for (i = 0; i &lt; accs.length; i++) {
+        if ((request.body.username == accs[i].user) &amp;&amp; (hashing_password == accs[i].pass)) {
+            console.log("User pass is ", accs[i].pass);
+        	logged_in = accs[i]
+            user_id = i
+            return 0
+        }
+    };
+};
+
+/**
+ * Adds a user to the file and Acc list variable if UserNameCheck and PasswordCheck returns 0.
+ * @param {string} request - Grabs the username, password and confirm password values from the form createacc 
+ * @param {string} response - renders origional login page 
+ */
+
+var AddUsr = (request, response) => {
+    LoadAccfile()
+    if (UserNameCheck(request, response) == 0 &amp;&amp; PasswordCheck(request, response) == 0 &amp;&amp; request.body.NewUser.length != 0 &amp;&amp; request.body.NewPassword.length != 0) {
+        hash_password = hash_data(request.body.NewPassword)    
+        var acc = {
+            'user': request.body.NewUser,
+            'pass': hash_password,
+            'saved': []
+        }
+        Accs.push(acc)
+        WriteAccfile()
+		response.render('index.hbs');
+    }
+};
+
+var hash_data = (data) => {
+    return crypto.createHash('md5').update(data).digest('hex');
+}
+
+/**
+ * checks if new username is already saved
+ * @param {string} request - Grabs the new username
+ * @param {string} response - renders errorpage
+ */
+
+var UserNameCheck = (request, response) => {
+    for (i = 0; i &lt; Accs.length; i++) {
+        if (request.body.NewUser == Accs[i].user) {
+            response.render('userexistserror.hbs');
+            return 1
+        }
+    }
+    return 0
+};
+
+
+/**
+ * checks if password and confirmed password is not the same
+ * @param {string} request - Grabs the password and confirm password
+ * @param {string} response - renders errorpage 
+ */
+
+var PasswordCheck = (request, response) => {
+    if (request.body.NewPassword != request.body.confirmp) {
+        response.render('error.hbs');
+        return 1
+    } else {
+        return 0
+    }
+};
+
+
+app.set('view engine', 'hbs');
+
+app.get('/', (request, response) => {
+    response.render('index.hbs');
+});
+
+app.post('/login', (request, response) => {
+    Login(request, response);
+});
+
+app.post('/home', (request, response) => {
+    AddUsr(request, response);
+}); 
+
+
+/**
+ * gets the search and form and populates the 
+ * @param {string} request - Grabs the password and confirm password
+ * @param {string} response - renders errorpage 
+ */
+
+
+app.post('/loginsearch', (request, response) => {
+    place = request.body.search
+    maps.getAddress(place).then((coordinates) => {
+        console.log(coordinates);
+        maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
+            console.log(response1.list_of_places);
+            displayText = '&lt;ul>'
+            for (var i = 0; i &lt; maps.listofmaps.length; i++) {
+                displayText += `&lt;li>&lt;a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}&lt;/a>&lt;/li>`
+            }
+            displayText += '&lt;/ul>'
+            response.render('index2.hbs', {
+                testvar: displayText,
+                coord: `&lt;script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};defMap()&lt;/script>`
+            })
+        }).catch((error) => {
+            console.log("Error ", error);
+        })
+    })
+})
+
+app.post('/getLocation', (request, response) => {
+    place = request.body.location
+    maps.getAddress(place).then((coordinates) => {
+        console.log(coordinates.lat, coordinates.long);
+        response.send(coordinates)
+    })
+})
+
+app.post('/storeuserdata', (request, response) => {
+	let account = JSON.parse(fs.readFileSync('accounts.json'));
+	for (var i = 0; i &lt; account.length; i++) {
+		if (logged_in.user == account[i].user) {
+            console.log('push list');
+			account[i].saved.push(request.body.location)
+            last_save = request.body.location
+		}
+	}
+    console.log(account);
+	fs.writeFileSync('accounts.json', JSON.stringify(account));
+})
+
+app.post('/favdata', (request, response) => {
+    displaySaved = '&lt;ul>'
+    LoadAccfile()
+    var userdata = Accs[user_id]
+    console.log(userdata.saved);
+
+    for (var i = 0; i &lt; userdata.saved.length; i++) {
+    	console.log(userdata.saved[i]);
+        displaySaved += `&lt;li>&lt;a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}&lt;/a>&lt;/li>`
+    }
+    displaySaved += '&lt;/ul>'
+	response.render('index2.hbs', {
+        savedSpots: displaySaved
+    })
+})
+
+app.get('/404', (request, response) => {
+    response.send({
+        error: 'Page not found'
+    })
+})
+
+app.listen(port, () => {
+    console.log('Server is up on the port 8080');
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddUsr">AddUsr</a></li><li><a href="global.html#LoadAccfile">LoadAccfile</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#LoginCheck">LoginCheck</a></li><li><a href="global.html#PasswordCheck">PasswordCheck</a></li><li><a href="global.html#ReadAccfile">ReadAccfile</a></li><li><a href="global.html#UserNameCheck">UserNameCheck</a></li><li><a href="global.html#WriteAccfile">WriteAccfile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Apr 28 2018 17:38:37 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
