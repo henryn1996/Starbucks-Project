@@ -65,7 +65,7 @@ var Login = (request, response) => {
     var filecontents = ReadAccfile('accounts.json')
     if (LoginCheck(request, filecontents) == 0) {
         response.render('index2.hbs');
-    } 
+    }
     else {
         response.render('error1.hbs');
     }
