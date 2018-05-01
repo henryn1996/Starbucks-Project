@@ -1,4 +1,32 @@
-const express = require('express');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: server.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: server.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
@@ -67,7 +95,7 @@ var Login = (request, response) => {
     var filecontents = ReadAccfile('accounts.json')
     if (LoginCheck(request, filecontents) == 0) {
         response.render('index2.hbs');
-    }
+    } 
     else {
         response.render('error1.hbs');
     }
@@ -82,8 +110,8 @@ var Login = (request, response) => {
 var LoginCheck = (request, accs) => {
     hashing_password = hash_data(request.body.password)
 
-    for (i = 0; i < accs.length; i++) {
-        if ((request.body.username == accs[i].user) && (hashing_password == accs[i].pass)) {
+    for (i = 0; i &lt; accs.length; i++) {
+        if ((request.body.username == accs[i].user) &amp;&amp; (hashing_password == accs[i].pass)) {
             console.log("User pass is ", accs[i].pass);
         	logged_in = accs[i]
             user_id = i
@@ -100,7 +128,7 @@ var LoginCheck = (request, accs) => {
 
 var AddUsr = (request, response) => {
     LoadAccfile()
-    if (UserNameCheck(request, response) == 0 && PasswordCheck(request, response) == 0 && request.body.NewUser.length != 0 && request.body.NewPassword.length != 0) {
+    if (UserNameCheck(request, response) == 0 &amp;&amp; PasswordCheck(request, response) == 0 &amp;&amp; request.body.NewUser.length != 0 &amp;&amp; request.body.NewPassword.length != 0) {
         hash_password = hash_data(request.body.NewPassword)    
         var acc = {
             'user': request.body.NewUser,
@@ -124,7 +152,7 @@ var hash_data = (data) => {
  */
 
 var UserNameCheck = (request, response) => {
-    for (i = 0; i < Accs.length; i++) {
+    for (i = 0; i &lt; Accs.length; i++) {
         if (request.body.NewUser == Accs[i].user) {
             response.render('userexistserror.hbs');
             return 1
@@ -178,14 +206,14 @@ app.post('/loginsearch', (request, response) => {
         console.log(coordinates);
         maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
             console.log(response1.list_of_places);
-            displayText = '<ul>'
-            for (var i = 0; i < maps.listofmaps.length; i++) {
-                displayText += `<li><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></li>`
+            displayText = '&lt;ul>'
+            for (var i = 0; i &lt; maps.listofmaps.length; i++) {
+                displayText += `&lt;li>&lt;a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}&lt;/a>&lt;/li>`
             }
-            displayText += '</ul>'
+            displayText += '&lt;/ul>'
             response.render('index2.hbs', {
                 testvar: displayText,
-                coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};defMap()</script>`
+                coord: `&lt;script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};defMap()&lt;/script>`
             })
         }).catch((error) => {
             console.log("Error ", error);
@@ -203,7 +231,7 @@ app.post('/getLocation', (request, response) => {
 
 app.post('/storeuserdata', (request, response) => {
 	let account = JSON.parse(fs.readFileSync('accounts.json'));
-	for (var i = 0; i < account.length; i++) {
+	for (var i = 0; i &lt; account.length; i++) {
 		if (logged_in.user == account[i].user) {
             console.log('push list');
 			account[i].saved.push(request.body.location)
@@ -215,16 +243,16 @@ app.post('/storeuserdata', (request, response) => {
 })
 
 app.post('/favdata', (request, response) => {
-    displaySaved = '<ul>'
+    displaySaved = '&lt;ul>'
     LoadAccfile()
     var userdata = Accs[user_id]
     console.log(userdata.saved);
 
-    for (var i = 0; i < userdata.saved.length; i++) {
+    for (var i = 0; i &lt; userdata.saved.length; i++) {
     	console.log(userdata.saved[i]);
-        displaySaved += `<li><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></li>`
+        displaySaved += `&lt;li>&lt;a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}&lt;/a>&lt;/li>`
     }
-    displaySaved += '</ul>'
+    displaySaved += '&lt;/ul>'
 	response.render('index2.hbs', {
         savedSpots: displaySaved
     })
@@ -238,4 +266,26 @@ app.get('/404', (request, response) => {
 
 app.listen(port, () => {
     console.log('Server is up on the port 8080');
-});
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddUsr">AddUsr</a></li><li><a href="global.html#LoadAccfile">LoadAccfile</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#LoginCheck">LoginCheck</a></li><li><a href="global.html#PasswordCheck">PasswordCheck</a></li><li><a href="global.html#ReadAccfile">ReadAccfile</a></li><li><a href="global.html#UserNameCheck">UserNameCheck</a></li><li><a href="global.html#WriteAccfile">WriteAccfile</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Apr 28 2018 17:38:37 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
