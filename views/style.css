@@ -325,4 +325,12 @@ form {
     transition-duration: 1s;
 }
 
+.favItems {
+    background-color: lightblue;
+    border-radius: 10px;
+    padding: 5px;
+    border: solid lightblue 1px;
+    margin: 5px;
+    box-shadow: 1px 1px;
+}
 
