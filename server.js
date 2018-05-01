@@ -67,7 +67,7 @@ var Login = (request, response) => {
     var filecontents = ReadAccfile('accounts.json')
     if (LoginCheck(request, filecontents) == 0) {
         response.render('index2.hbs');
-    } 
+    }
     else {
         response.render('error1.hbs');
     }
@@ -215,16 +215,15 @@ app.post('/storeuserdata', (request, response) => {
 })
 
 app.post('/favdata', (request, response) => {
-    displaySaved = '<ul>'
+    displaySaved = ''
     LoadAccfile()
     var userdata = Accs[user_id]
     console.log(userdata.saved);
 
     for (var i = 0; i < userdata.saved.length; i++) {
     	console.log(userdata.saved[i]);
-        displaySaved += `<li><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></li>`
+        displaySaved += `<div class="favItems"><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></div>`
     }
-    displaySaved += '</ul>'
 	response.render('index2.hbs', {
         savedSpots: displaySaved
     })

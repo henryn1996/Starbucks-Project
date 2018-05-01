@@ -1,15 +1,27 @@
+/*
+body {
+    background-image: url("bgImg/bg1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+    background-position: 50% 50%;
+}
+*/
+
+
 #loginbox{
     height:80%;
-    width:30%;
+    width:25%;
     position: absolute;
     left:0px;
     right:0px;
     margin:auto;
     top:0px;
     bottom:0px;
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color: white;
+    /*border: 2px solid black;*/
+    box-shadow: 2px 2px 10px rgba(0,0,0,.5);
+    /*border-radius: 5px;*/
+    background-color: rgba(255,255,255,.85);
 }
 #logintitle{
     text-align: center;
@@ -17,6 +29,7 @@
     line-height: 100px;
     font-size: 30px;
     font-weight: bold;
+    font-family:'Helvetica';
 }
 #starbucks{
     position: absolute;
@@ -35,6 +48,7 @@
     right:0px;
     margin: auto;
     bottom:10%;
+    text-align: center;
 }
 #usertxt{
     width:80%;
@@ -44,11 +58,58 @@
     width:80%;
     margin:8px;
 }
-#login{
-    border-radius: 5px;
-    position: absolute;
-    right:45%;
+
+form {
+    text-align: center;
 }
+
+#userlogin, #passwordlogin {
+    width: 80%;
+    font-size: 100%;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    line-height: 2rem;
+    border-bottom: 1px solid green;
+    color: #777;
+    outline: none;
+}
+
+#login {
+    width:80%;
+    line-height: 30px;
+    outline:none;
+    color:green;
+    font-weight: bold;
+    background-color:#ECECEC;
+    border-top: .5px solid grey;
+    border-left: .5px solid grey;
+    box-shadow: 2px 2px #999;
+    margin-bottom:10px;
+    transition:.4s;
+}
+
+#login:hover{
+    background-color: #3e8e41;
+    color: white;
+}
+
+#login:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#create {
+    right:0; left:0; bottom:0;
+    margin: auto;
+    padding:0;
+    border:none;
+    background:none;
+    border-bottom:1px solid grey;
+    color: #777;
+}
+
 #createacc{
     position: absolute;
     height:20%;
@@ -59,6 +120,7 @@
     background-color: grey;
     display:none;
 }
+
 #mainpage{
     position: absolute;
     height:90%;
@@ -68,7 +130,7 @@
     left:0px;
     right:0px;
     top:0px;
-    bottom:0px; 
+    bottom:0px;
     margin:auto;
     background-color: white;
     display:block;
@@ -262,3 +324,13 @@
     transition-delay: 0.5s;*/
     transition-duration: 1s;
 }
+
+.favItems {
+    background-color: lightblue;
+    border-radius: 10px;
+    padding: 5px;
+    border: solid lightblue 1px;
+    margin: 5px;
+    box-shadow: 1px 1px;
+}
+
