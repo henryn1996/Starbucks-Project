@@ -1,13 +1,31 @@
-/*
-body {
+
+#bg {
+    width:100vw;
+    height:100vh;
     background-image: url("bgImg/bg1.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size:cover;
     background-position: 50% 50%;
+    margin:0;
 }
-*/
 
+
+#bg:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    margin:0;
+    background-color: rgba(85,107,47,0.25);
+}
+
+body{
+    margin: 0;
+}
 
 #loginbox{
     height:80%;
@@ -21,7 +39,7 @@ body {
     /*border: 2px solid black;*/
     box-shadow: 2px 2px 10px rgba(0,0,0,.5);
     /*border-radius: 5px;*/
-    background-color: rgba(255,255,255,.85);
+    background-color: rgba(255,255,255,.80);
 }
 #logintitle{
     text-align: center;
@@ -76,7 +94,7 @@ form {
     border-bottom: 1px solid green;
     color: #777;
     outline: none;
-    transition-duration: 2s;
+    transition-duration: 0.5s;
 }
 
 #login {
@@ -92,7 +110,7 @@ form {
     border-left: .5px solid grey;
     box-shadow: 2px 2px #999;
     margin-bottom:10px;
-    transition: 2s;
+    transition: 0.5s;
 }
 
 #login:hover, #submitbutton:hover{
@@ -116,7 +134,7 @@ form {
     background:none;
     border-bottom:1px solid grey;
     color: #777;
-    transition: 2s;
+    transition:0.5s;
 }
 
 #mainpage{
@@ -216,7 +234,7 @@ form {
     box-shadow: 2px 2px #999;
     margin-bottom:10px;
     opacity: 0;
-    transition: 2s;
+    transition: 0.5s;
 }
 #confirmtitle{
     position: absolute;
@@ -266,7 +284,7 @@ form {
     color: #777;
     outline: none;
     opacity: 0;
-    transition-duration: 2s;
+    transition-duration:0.5s;
 }
 #confirmtitle{
     position: absolute;
@@ -296,11 +314,10 @@ form {
     width:25%;
     background-color: rgba(255,255,255,.85);
     box-shadow: 2px 2px 10px rgba(0,0,0,.5);
-    border-radius: 5px;
     overflow-y:scroll;
 /*    transition: 1s;*/
     /*transition-delay: 1s;*/
-    transition-duration: 0.3s;
+    transition-duration: 0.4s;
     font-size:17px;
     font-family: Verdana, Geneva, sans-serif;
 }
@@ -316,14 +333,13 @@ form {
     height:90%;
     width:25%;
     box-shadow: 2px 2px 10px rgba(0,0,0,.5);
-    border-radius: 5px;
     overflow-y:scroll;
     display:block;
     font-size:17px;
     font-family: Verdana, Geneva, sans-serif;
 /*    transition: 2s;
     transition-delay: 0.5s;*/
-    transition-duration: .3s;
+    transition-duration: .4s;
     background-color: rgba(255,255,255,.85);
 }
 

@@ -45,7 +45,6 @@ function loginFadeOut(){
     passwordlogin.style.left = "150px";
     passwordlogin.style.opacity = 0;
     login.style.transitionDelay = "0.4s";
-    login.style.transitionDuration = "2s";
     login.style.left = "150px";
     login.style.opacity = 0;
     createBtn.style.opacity = 0;
@@ -67,7 +66,6 @@ function acctFadeIn(){
     submitbutton.style.transitionDelay = "0.6s";
     submitbutton.style.left = "0px";
     submitbutton.style.opacity = 1;
-    submitbutton.style.transitionDelay = "0s"
 }
 
 function acctFadeOut(){
@@ -86,16 +84,20 @@ function acctFadeOut(){
 
 
 
-/*
-var images = ['1','2', '3','4','5','6','7','8','9','10','11']
+
+var images = ['1',
+			  '2',
+			  '3',
+			  '4',
+			  '5'],
+			  bgIndex = 0;
+			  imgDuration = 3000;
 
 setInterval(function(){
 	var url = images[Math.floor(Math.random()*images.length)]
-	document.body.style.backgroundImage = "url(bgImg/bg"+url+".jpg)";
+	document.getElementById("bg").style.backgroundImage = "url(bgImg/bg"+url+".jpg)";
+}, 4000);
 
-}, 5000);
-
-*/
 
 // var saveList = (location) => {
 // 	var xmlhttp = new XMLHttpRequest();
