@@ -9,7 +9,7 @@
     </script>
 </head>
 
-<body background='background1.jpg'>
+<body id="body2">
     <form action="/favdata" method='post'>
         <input type='submit' onclick="savelocation()" value="Save to Favorites" id='savecurrentloc'>
     </form>
@@ -27,7 +27,7 @@
         {{{testvar}}}
     </div>
     <div id="savedloc">
-        <div id="searchbox">Saved Locations</div>
+        <div id="searchbox">Saved Locations   <button id="edit">Edit</button></div>
         {{{savedSpots}}}
     </div>
     <script src="i2.js"></script> {{{coord}}}

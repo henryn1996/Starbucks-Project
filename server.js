@@ -178,11 +178,10 @@ app.post('/loginsearch', (request, response) => {
         console.log(coordinates);
         maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
             console.log(response1.list_of_places);
-            displayText = '<ul>'
+            displayText = ''
             for (var i = 0; i < maps.listofmaps.length; i++) {
-                displayText += `<li><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></li>`
+                displayText += `<div class='favItems'><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></div>`
             }
-            displayText += '</ul>'
             response.render('index2.hbs', {
                 testvar: displayText,
                 coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};defMap()</script>`
