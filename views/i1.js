@@ -45,7 +45,6 @@ function loginFadeOut(){
     passwordlogin.style.left = "150px";
     passwordlogin.style.opacity = 0;
     login.style.transitionDelay = "0.4s";
-    login.style.transitionDuration = "2s";
     login.style.left = "150px";
     login.style.opacity = 0;
     createBtn.style.opacity = 0;
@@ -67,7 +66,6 @@ function acctFadeIn(){
     submitbutton.style.transitionDelay = "0.6s";
     submitbutton.style.left = "0px";
     submitbutton.style.opacity = 1;
-    submitbutton.style.transitionDelay = "0s"
 }
 
 function acctFadeOut(){
