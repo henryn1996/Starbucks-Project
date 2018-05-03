@@ -124,13 +124,18 @@ var hash_data = (data) => {
  */
 
 var UserNameCheck = (request, response) => {
-    for (i = 0; i < Accs.length; i++) {
-        if (request.body.NewUser == Accs[i].user) {
-            response.render('userexistserror.hbs');
-            return 1
+    if (request.body.NewUser.length <= 12 && request.body.NewUser.length >= 3 ) {
+        console.log(request.body.NewUser.length)
+        for (i = 0; i < Accs.length; i++) {
+            if (request.body.NewUser == Accs[i].user) {
+                response.render('userexistserror.hbs');
+                return 1
+            }
         }
+        return 0
     }
-    return 0
+    console.log("RENDER ERROR PAGE")
+    return 2
 };
 
 
@@ -141,12 +146,16 @@ var UserNameCheck = (request, response) => {
  */
 
 var PasswordCheck = (request, response) => {
-    if (request.body.NewPassword != request.body.confirmp) {
-        response.render('error.hbs');
-        return 1
-    } else {
-        return 0
+    if (request.body.NewPassword.length >= 5 && request.body.confirmp.length >= 5){
+        if (request.body.NewPassword != request.body.confirmp) {
+            response.render('error.hbs');
+            return 1
+        } else {
+            return 0
+        }
     }
+    console.log("PASS LENGTH ERROR")
+    return 2
 };
 
 
