@@ -86,16 +86,20 @@ function acctFadeOut(){
 
 
 
-/*
-var images = ['1','2', '3','4','5','6','7','8','9','10','11']
+
+var images = ['1',
+			  '2',
+			  '3',
+			  '4',
+			  '5'],
+			  bgIndex = 0;
+			  imgDuration = 3000;
 
 setInterval(function(){
 	var url = images[Math.floor(Math.random()*images.length)]
-	document.body.style.backgroundImage = "url(bgImg/bg"+url+".jpg)";
+	document.getElementById("bg").style.backgroundImage = "url(bgImg/bg"+url+".jpg)";
+}, 4000);
 
-}, 5000);
-
-*/
 
 // var saveList = (location) => {
 // 	var xmlhttp = new XMLHttpRequest();
