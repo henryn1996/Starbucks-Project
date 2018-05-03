@@ -66,8 +66,19 @@ var WriteAccfile = () => {
 var Login = (request, response) => {
     var filecontents = ReadAccfile('accounts.json')
     if (LoginCheck(request, filecontents) == 0) {
-        response.render('index2.hbs');
-    } 
+    displaySaved = ''
+    LoadAccfile()
+    var userdata = Accs[user_id]
+    console.log(userdata.saved);
+
+    for (var i = 0; i < userdata.saved.length; i++) {
+        console.log(userdata.saved[i]);
+        displaySaved += `<div class="favItems"><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></div>`
+    }
+    response.render('index2.hbs', {
+        savedSpots: displaySaved
+    })
+    }
     else {
         response.render('error1.hbs');
     }
@@ -179,9 +190,8 @@ app.post('/loginsearch', (request, response) => {
             displayText = ''
             displayText = '<ul>'
             for (var i = 0; i < maps.listofmaps.length; i++) {
-                displayText += `<li><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></li>`
+                displayText += `<div class='favItems'><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></div>`
             }
-            displayText += '</ul>'
             response.render('index2.hbs', {
                 testvar: displayText,
                 coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};defMap()</script>`
@@ -225,16 +235,15 @@ app.post('/storeuserdata', (request, response) => {
  * @param {string} response - Renders the index2.hbs page with the variable displaySaved which is a list of all your saved locations
  */
 app.post('/favdata', (request, response) => {
-    displaySaved = '<ul>'
+    displaySaved = ''
     LoadAccfile()
     var userdata = Accs[user_id]
     console.log(userdata.saved);
 
     for (var i = 0; i < userdata.saved.length; i++) {
     	console.log(userdata.saved[i]);
-        displaySaved += `<li><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></li>`
+        displaySaved += `<div class="favItems"><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></div>`
     }
-    displaySaved += '</ul>'
 	response.render('index2.hbs', {
         savedSpots: displaySaved
     })

@@ -1,15 +1,27 @@
+/*
+body {
+    background-image: url("bgImg/bg1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+    background-position: 50% 50%;
+}
+*/
+
+
 #loginbox{
     height:80%;
-    width:30%;
+    width:25%;
     position: absolute;
     left:0px;
     right:0px;
     margin:auto;
     top:0px;
     bottom:0px;
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color: white;
+    /*border: 2px solid black;*/
+    box-shadow: 2px 2px 10px rgba(0,0,0,.5);
+    /*border-radius: 5px;*/
+    background-color: rgba(255,255,255,.85);
 }
 #logintitle{
     text-align: center;
@@ -17,6 +29,7 @@
     line-height: 100px;
     font-size: 30px;
     font-weight: bold;
+    font-family:'Helvetica';
 }
 #starbucks{
     position: absolute;
@@ -35,6 +48,8 @@
     right:0px;
     margin: auto;
     bottom:10%;
+    text-align: center;
+    display: block;
 }
 #usertxt{
     width:80%;
@@ -44,21 +59,66 @@
     width:80%;
     margin:8px;
 }
-#login{
-    border-radius: 5px;
-    position: absolute;
-    right:45%;
+
+form {
+    text-align: center;
 }
-#createacc{
-    position: absolute;
-    height:20%;
-    width:20%;
-    border: 2px solid black;
-    border-radius: 5px;
-    top:10%;
-    background-color: grey;
-    display:none;
+
+#userlogin, #passwordlogin {
+    position: relative;
+    width: 80%;
+    font-size: 100%;
+    left: 0px;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    line-height: 2rem;
+    border-bottom: 1px solid green;
+    color: #777;
+    outline: none;
+    transition-duration: 2s;
 }
+
+#login {
+    position: relative;
+    left: 0px;
+    width:80%;
+    line-height: 30px;
+    outline:none;
+    color:green;
+    font-weight: bold;
+    background-color:#ECECEC;
+    border-top: .5px solid grey;
+    border-left: .5px solid grey;
+    box-shadow: 2px 2px #999;
+    margin-bottom:10px;
+    transition: 2s;
+}
+
+#login:hover, #submitbutton:hover{
+    background-color: #3e8e41;
+    color: white;
+    transition-duration: .4s;
+    transition-delay: 0s;
+}
+
+#login:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#create {
+    right:0; left:0; bottom:0;
+    margin: auto;
+    padding:0;
+    border:none;
+    background:none;
+    border-bottom:1px solid grey;
+    color: #777;
+    transition: 2s;
+}
+
 #mainpage{
     position: absolute;
     height:90%;
@@ -68,7 +128,7 @@
     left:0px;
     right:0px;
     top:0px;
-    bottom:0px; 
+    bottom:0px;
     margin:auto;
     background-color: white;
     display:block;
@@ -106,20 +166,19 @@
 }
 #searchbox {
     position: relative;
-    background: #fff;
-    border-radius: 2px;
+    background-color: rgba(255,255,255,.85);
     box-sizing: border-box;
     width: 100%;
     height: 48px;
-    border-bottom: 1px solid transparent;
-    padding: 12px 104px 11px 64px;
+    padding: 11px;
     transition-property: background,box-shadow;
     transition-duration: 0.3s;
+    text-align:center;
 }
 #search{
     position: absolute;
     left:10px;
-    width:60%;
+    width:70%;
 }
 #go{
     height:100%;
@@ -144,19 +203,20 @@
     text-align: center;
 }
 #submitbutton{
-    position: absolute;
-    bottom:35px;
-    left:100px;
-}
-#newpw{
-    position: absolute;
-    left:69px;
-    top:21px;
-}
-#confirmpw{
-    position: absolute;
-    left:69px;
-    top:42px;
+    position: relative;
+    left: -150px;
+    width:80%;
+    line-height: 30px;
+    outline:none;
+    color:green;
+    font-weight: bold;
+    background-color:#ECECEC;
+    border-top: .5px solid grey;
+    border-left: .5px solid grey;
+    box-shadow: 2px 2px #999;
+    margin-bottom:10px;
+    opacity: 0;
+    transition: 2s;
 }
 #confirmtitle{
     position: absolute;
@@ -170,39 +230,43 @@
 }
 #newmap{
     position: absolute;
-    height:60%;
+    height:70%;
     width:50%;
-    top:0px;
+    top:-20%;
     bottom:0px;
     margin:auto;
     left:38%;
     background-color: black;
+    border-radius: 5px;
+    border: ridge rgba(0, 112, 74, 1) 6px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,.5);
 }
 
 #createacc{
     position: absolute;
-    height:20%;
-    width:20%;
-    border: 2px solid black;
-    border-radius: 5px;
-    top:10%;
-    background-color: grey;
-    display:none;
+    height:40%;
+    width:85%;
+    left:0px;
+    right:0px;
+    margin: auto;
+    bottom:10%;
+    text-align: center;
+    display: none;
 }
-#submitbutton{
-    position: absolute;
-    bottom:35px;
-    left:100px;
-}
-#newpw{
-    position: absolute;
-    left:69px;
-    top:21px;
-}
-#confirmpw{
-    position: absolute;
-    left:69px;
-    top:42px;
+#newuser, #newpw, #confirmpw{
+    position: relative;
+    width: 80%;
+    font-size: 100%;
+    left: -150px;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    line-height: 2rem;
+    border-bottom: 1px solid green;
+    color: #777;
+    outline: none;
+    opacity: 0;
+    transition-duration: 2s;
 }
 #confirmtitle{
     position: absolute;
@@ -230,20 +294,20 @@
     position: absolute;
     height:0%;
     width:25%;
-    background-color: aquamarine;
-    border: 2px solid black;
+    background-color: rgba(255,255,255,.85);
+    box-shadow: 2px 2px 10px rgba(0,0,0,.5);
     border-radius: 5px;
     overflow-y:scroll;
 /*    transition: 1s;*/
     /*transition-delay: 1s;*/
-    transition-duration: 1s;
+    transition-duration: 0.3s;
     font-size:17px;
     font-family: Verdana, Geneva, sans-serif;
 }
 #savecurrentloc{
     position: absolute;
     bottom:15%;
-    right:35%;
+    right:34%;
 }
 #nearme{
     top:0%;
@@ -251,8 +315,7 @@
     position: absolute;
     height:90%;
     width:25%;
-    background-color: aquamarine;
-    border: 2px solid black;
+    box-shadow: 2px 2px 10px rgba(0,0,0,.5);
     border-radius: 5px;
     overflow-y:scroll;
     display:block;
@@ -260,5 +323,19 @@
     font-family: Verdana, Geneva, sans-serif;
 /*    transition: 2s;
     transition-delay: 0.5s;*/
-    transition-duration: 1s;
+    transition-duration: .3s;
+    background-color: rgba(255,255,255,.85);
+}
+
+.favItems {
+    background-color:rgba(255,255,255,0.8);
+    border-radius: 5px;
+    padding: 5px;
+    border: solid rgba(255,255,255,1) 3px;
+    margin: 13px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+}
+
+#body2 {
+    background-image: url(background1.jpg);
 }
