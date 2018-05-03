@@ -84,7 +84,7 @@ document.getElementById("savedlocations").addEventListener("click", function () 
             botMheight += 1;
             document.getElementById("savedloc").style.height = botMheight + '%';
         }
-    }, 670)
+    }, 400)
 });
 
 document.getElementById("Searchlocation").addEventListener("click", function () {
@@ -98,7 +98,7 @@ document.getElementById("Searchlocation").addEventListener("click", function () 
             choiceheight += 1;
             document.getElementById("nearme").style.height = choiceheight + '%';
         }
-    }, 670)
+    }, 400)
 });
 
 
