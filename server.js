@@ -69,7 +69,9 @@ var Login = (request, response) => {
         response.render('index2.hbs');
     }
     else {
-        response.render('error1.hbs');
+        response.render('error.hbs', {
+            error: "Incorrect Username or Password"
+        });
     }
 };
 
@@ -128,13 +130,17 @@ var UserNameCheck = (request, response) => {
         console.log(request.body.NewUser.length)
         for (i = 0; i < Accs.length; i++) {
             if (request.body.NewUser == Accs[i].user) {
-                response.render('userexistserror.hbs');
+                response.render('error.hbs', {
+                    error: "Username Already taken"
+                });
                 return 1
             }
         }
         return 0
     }
-    console.log("RENDER ERROR PAGE")
+    response.render('error.hbs', {
+        error: "Username needs to be  3 to 12 characters long"
+    });
     return 2
 };
 
@@ -148,13 +154,17 @@ var UserNameCheck = (request, response) => {
 var PasswordCheck = (request, response) => {
     if (request.body.NewPassword.length >= 5 && request.body.confirmp.length >= 5){
         if (request.body.NewPassword != request.body.confirmp) {
-            response.render('error.hbs');
+            response.render('error.hbs', {
+                error: "Passwords do not match"
+            });
             return 1
         } else {
             return 0
         }
     }
-    console.log("PASS LENGTH ERROR")
+    response.render('error.hbs', {
+        error: "Password needs to be at least 5 characters"
+    });
     return 2
 };
 
@@ -187,11 +197,10 @@ app.post('/loginsearch', (request, response) => {
         console.log(coordinates);
         maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
             console.log(response1.list_of_places);
-            displayText = '<ul>'
+            displayText = ''
             for (var i = 0; i < maps.listofmaps.length; i++) {
-                displayText += `<li><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></li>`
+                displayText += `<div class='favItems'><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></div>`
             }
-            displayText += '</ul>'
             response.render('index2.hbs', {
                 testvar: displayText,
                 coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};defMap()</script>`
