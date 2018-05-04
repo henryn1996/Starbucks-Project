@@ -114,6 +114,6 @@ document.getElementById("Searchlocation").addEventListener("click", function () 
 
 defMap()
 
-document.getElementById('savecurrentloc').addEventListener("click", function () {
-    window.alert('You have saved the location');
-});
+// document.getElementById('savecurrentloc').addEventListener("click", function () {
+//     window.alert('You have saved the location');
+// });
