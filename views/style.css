@@ -355,3 +355,8 @@ form {
 #body2 {
     background-image: url(background1.jpg);
 }
+#sbucksnearme{
+    position:absolute;
+    bottom:0px;
+    right:0px;
+}

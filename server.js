@@ -80,8 +80,8 @@ var Login = (request, response) => {
     })
     }
     else {
-        response.render('error.hbs', {
-            error: "Incorrect Username or Password"
+        response.render('index.hbs', {
+            username: 3
         });
     }
 };
@@ -122,7 +122,9 @@ var AddUsr = (request, response) => {
         }
         Accs.push(acc)
         WriteAccfile()
-		response.render('index.hbs');
+		response.render('index.hbs', {
+            username:0
+        });
     }
 };
 
@@ -141,16 +143,16 @@ var UserNameCheck = (request, response) => {
         console.log(request.body.NewUser.length)
         for (i = 0; i < Accs.length; i++) {
             if (request.body.NewUser == Accs[i].user) {
-                response.render('error.hbs', {
-                    error: "Username Already taken"
+                response.render('index.hbs', {
+                    username:2
                 });
                 return 1
             }
         }
         return 0
     }
-    response.render('error.hbs', {
-        error: "Username needs to be  3 to 12 characters long"
+    response.render('index.hbs', {
+        username: 1
     });
     return 2
 };
@@ -165,20 +167,25 @@ var UserNameCheck = (request, response) => {
 var PasswordCheck = (request, response) => {
     if (request.body.NewPassword.length >= 5 && request.body.confirmp.length >= 5){
         if (request.body.NewPassword != request.body.confirmp) {
-            response.render('error.hbs', {
-                error: "Passwords do not match"
+            response.render('index.hbs', {
+                username: 4
             });
             return 1
         } else {
             return 0
         }
     }
-    response.render('error.hbs', {
-        error: "Password needs to be at least 5 characters"
+    response.render('index.hbs', {
+        username: 5
     });
     return 2
 };
 
+app.get('/places_funct', (request,response) => {
+    var places = fs.readFileSync('places.json');
+    var parsed_places = JSON.parse(places)
+    response.end(places)
+})
 
 app.set('view engine', 'hbs');
 
@@ -193,6 +200,14 @@ app.post('/login', (request, response) => {
 app.post('/home', (request, response) => {
     AddUsr(request, response);
 }); 
+
+app.post('/starbucksnearme', (request,response) => {
+    longitude = request.body.longitude;
+    latitude = request.body.latitude;
+    maps.get_sturbuckses(latitude, longitude).then((response1) => {
+        console.log(response1.list_of_places);
+})
+});
 
 
 /**
@@ -276,3 +291,9 @@ app.get('/404', (request, response) => {
 app.listen(port, () => {
     console.log('Server is up on the port 8080');
 });
+
+module.exports = {
+    UserNameCheck,
+    PasswordCheck,
+    LoginCheck
+}

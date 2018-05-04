@@ -10,6 +10,8 @@ var userlogin = document.getElementById("userlogin"),
     submitbutton = document.getElementById("submitbutton");
 
 
+
+
 document.getElementById("create").addEventListener("click", function (){
     document.getElementById("createacc").style.display = "block";
     loginFadeOut();
@@ -97,6 +99,22 @@ setInterval(function(){
 	var url = images[Math.floor(Math.random()*images.length)]
 	document.getElementById("bg").style.backgroundImage = "url(bgImg/bg"+url+".jpg)";
 }, 4000);
+
+function shortusername(username){
+    if(username === 1){
+        swal('Username must be 3-12 characters long')
+    } else if (username === 2){
+        swal('Username already exists')
+    } else if (username === 3){
+        swal("Incorrect Username or Password")
+    } else if (username === 4){
+        swal("Passwords do not match")
+    } else if (username === 5){
+        swal("Password needs to be at least 5 characters")
+    } else if (username === 0){
+        swal('Congratulations you have successfully created an account')
+    }
+};
 
 
 // var saveList = (location) => {
