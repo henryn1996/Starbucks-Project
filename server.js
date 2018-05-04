@@ -102,7 +102,7 @@ var LoginCheck = (request, accs) => {
 
 var AddUsr = (request, response) => {
     LoadAccfile()
-    if (UserNameCheck(request, response) == 0 && PasswordCheck(request, response) == 0 && request.body.NewUser.length != 0 && request.body.NewPassword.length != 0) {
+    if (UserNameCheck(request, response, Accs) == 0 && PasswordCheck(request, response) == 0){
         hash_password = hash_data(request.body.NewPassword)    
         var acc = {
             'user': request.body.NewUser,
@@ -125,10 +125,12 @@ var hash_data = (data) => {
  * @param {string} response - renders errorpage
  */
 
-var UserNameCheck = (request, response) => {
+var UserNameCheck = (request, response, Accs) => {
     if (request.body.NewUser.length <= 12 && request.body.NewUser.length >= 3 ) {
         console.log(request.body.NewUser.length)
+        console.log(Accs.length)
         for (i = 0; i < Accs.length; i++) {
+            console.log(Accs[i].user)
             if (request.body.NewUser == Accs[i].user) {
                 response.render('error.hbs', {
                     error: "Username Already taken"
