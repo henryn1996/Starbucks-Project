@@ -139,7 +139,7 @@ var UserNameCheck = (request, response) => {
         return 0
     }
     response.render('error.hbs', {
-        error: "Username needs to be  3 to 12 characters long"
+        error: "Username needs to be 3 to 12 characters long"
     });
     return 2
 };
