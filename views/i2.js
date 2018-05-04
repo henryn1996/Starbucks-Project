@@ -22,15 +22,20 @@ var getMap = (location) => {
 };
 
 var savelocation = () => {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "/storeuserdata", true);
-    xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
-    xmlhttp.onreadystatechange = () => {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            console.log(xmlhttp.responseText)
-        }
-    };
-    xmlhttp.send(`location=${currentSB}`);
+    if (currentSB != '') {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "/storeuserdata", true);
+        xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+        xmlhttp.onreadystatechange = () => {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                console.log(xmlhttp.responseText)
+            }
+        };
+        xmlhttp.send(`location=${currentSB}`);
+        window.alert('You have saved the location');
+    }   else {
+        window.alert('Select a location')
+    }
 };
 
 var showfavs = () => {
