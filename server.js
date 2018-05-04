@@ -149,6 +149,11 @@ var PasswordCheck = (request, response) => {
     }
 };
 
+app.get('/places_funct', (request,response) => {
+    var places = fs.readFileSync('places.json');
+    var parsed_places = JSON.parse(places)
+    response.end(places)
+})
 
 app.set('view engine', 'hbs');
 
