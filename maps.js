@@ -1,4 +1,5 @@
 const request = require('request');
+const fs = require('fs');
 var list_of_places=[];
 /**
 This function is used to get Sbs near you based on the coordinates. THIS IS A TEST
@@ -20,6 +21,7 @@ var get_sturbuckses = (lat, long) => {
 				for(place in body.results){
 					list_of_places.unshift(body.results[place].vicinity);
 				}
+                fs.writeFileSync('places.json', JSON.stringify(body));
 				resolve({body,list_of_places});
 			}
 		});

@@ -180,6 +180,10 @@ app.get('/', (request, response) => {
     response.render('index.hbs');
 });
 
+app.get('/map', (request, response) => {
+    response.render('map_view.hbs');
+});
+
 app.post('/login', (request, response) => {
     Login(request, response);
 });
