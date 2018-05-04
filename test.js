@@ -48,7 +48,7 @@ describe('login', () => {
     })
 })
 
-describe('reigsterUsername', () => {
+describe('registerUsername', () => {
     test("pass", () => {
         expect(testFunc.UserNameCheck(success, response, Accs)).toBe(0)
     })
@@ -63,7 +63,7 @@ describe('reigsterUsername', () => {
     })
 })
 
-describe('reigsterPassword', () => {
+describe('registerPassword', () => {
     test('pass', () => {
         expect(testFunc.PasswordCheck(success, response)).toBe(0)
     })
