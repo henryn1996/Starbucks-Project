@@ -101,7 +101,24 @@ document.getElementById("Searchlocation").addEventListener("click", function () 
     }, 400)
 });
 
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/starbucksnearme", true);
+            xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+            xmlhttp.onreadystatechange = () => {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    console.log(xmlhttp.responseText)
+                }
+            };
+            xmlhttp.send(`longitude=${position.coords.longitude}&latitude=${position.coords.latitude}`);
+            latitude = position.coords.latitude
+            longitude = position.coords.longitude
+        });
+        
 
+}};
 //     document.getElementById("nearme").style.top = '0%';
 //     document.getElementById('savedloc').style.top = '-100%';
 // });
@@ -114,6 +131,6 @@ document.getElementById("Searchlocation").addEventListener("click", function () 
 
 defMap()
 
-document.getElementById('savecurrentloc').addEventListener("click", function () {
-    window.alert('You have saved the location');
-});
+// document.getElementById('savecurrentloc').addEventListener("click", function () {
+//     window.alert('You have saved the location');
+// });

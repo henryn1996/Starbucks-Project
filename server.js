@@ -66,10 +66,23 @@ var WriteAccfile = () => {
 var Login = (request, response) => {
     var filecontents = ReadAccfile('accounts.json')
     if (LoginCheck(request, filecontents) == 0) {
-        response.render('index2.hbs');
+    displaySaved = ''
+    LoadAccfile()
+    var userdata = Accs[user_id]
+    console.log(userdata.saved);
+
+    for (var i = 0; i < userdata.saved.length; i++) {
+        console.log(userdata.saved[i]);
+        displaySaved += `<div class="favItems"><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></div>`
+    }
+    response.render('index2.hbs', {
+        savedSpots: displaySaved
+    })
     }
     else {
-        response.render('error1.hbs');
+        response.render('index.hbs', {
+            username: 3
+        });
     }
 };
 
@@ -100,7 +113,7 @@ var LoginCheck = (request, accs) => {
 
 var AddUsr = (request, response) => {
     LoadAccfile()
-    if (UserNameCheck(request, response) == 0 && PasswordCheck(request, response) == 0 && request.body.NewUser.length != 0 && request.body.NewPassword.length != 0) {
+    if (UserNameCheck(request, response, Accs) == 0 && PasswordCheck(request, response) == 0){
         hash_password = hash_data(request.body.NewPassword)    
         var acc = {
             'user': request.body.NewUser,
@@ -109,7 +122,9 @@ var AddUsr = (request, response) => {
         }
         Accs.push(acc)
         WriteAccfile()
-		response.render('index.hbs');
+		response.render('index.hbs', {
+            username:0
+        });
     }
 };
 
@@ -123,14 +138,25 @@ var hash_data = (data) => {
  * @param {string} response - renders errorpage
  */
 
-var UserNameCheck = (request, response) => {
-    for (i = 0; i < Accs.length; i++) {
-        if (request.body.NewUser == Accs[i].user) {
-            response.render('userexistserror.hbs');
-            return 1
+var UserNameCheck = (request, response, Accs) => {
+    if (request.body.NewUser.length <= 12 && request.body.NewUser.length >= 3 ) {
+        console.log(request.body.NewUser.length)
+        console.log(Accs.length)
+        for (i = 0; i < Accs.length; i++) {
+            console.log(Accs[i].user)
+            if (request.body.NewUser == Accs[i].user) {
+                response.render('index.hbs', {
+                    username:2
+                });
+                return 1
+            }
         }
+        return 0
     }
-    return 0
+    response.render('index.hbs', {
+        username: 1
+    });
+    return 2
 };
 
 
@@ -141,19 +167,36 @@ var UserNameCheck = (request, response) => {
  */
 
 var PasswordCheck = (request, response) => {
-    if (request.body.NewPassword != request.body.confirmp) {
-        response.render('error.hbs');
-        return 1
-    } else {
-        return 0
+    if (request.body.NewPassword.length >= 5 && request.body.confirmp.length >= 5){
+        if (request.body.NewPassword != request.body.confirmp) {
+            response.render('index.hbs', {
+                username: 4
+            });
+            return 1
+        } else {
+            return 0
+        }
     }
+    response.render('index.hbs', {
+        username: 5
+    });
+    return 2
 };
 
+app.get('/places_funct', (request,response) => {
+    var places = fs.readFileSync('places.json');
+    var parsed_places = JSON.parse(places)
+    response.end(places)
+})
 
 app.set('view engine', 'hbs');
 
 app.get('/', (request, response) => {
     response.render('index.hbs');
+});
+
+app.get('/map', (request, response) => {
+    response.render('map_view.hbs');
 });
 
 app.post('/login', (request, response) => {
@@ -164,21 +207,27 @@ app.post('/home', (request, response) => {
     AddUsr(request, response);
 }); 
 
+app.post('/starbucksnearme', (request,response) => {
+    longitude = request.body.longitude;
+    latitude = request.body.latitude;
+    maps.get_sturbuckses(latitude, longitude).then((response1) => {
+        console.log(response1.list_of_places);
+})
+});
+
 
 /**
- * gets the search and form and populates the 
- * @param {string} request - Grabs the password and confirm password
- * @param {string} response - renders errorpage 
+ * gets the starbucks locations based on the location you enter and populates the div
+ * @param {string} request - Grabs the location that you enter in
+ * @param {string} response - Renders the index2.hbs page with the starbucks locations
  */
-
-
 app.post('/loginsearch', (request, response) => {
     place = request.body.search
     maps.getAddress(place).then((coordinates) => {
         console.log(coordinates);
         maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
             console.log(response1.list_of_places);
-            displayText = ''
+            displayText = ' '
             for (var i = 0; i < maps.listofmaps.length; i++) {
                 displayText += `<div class='favItems'><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></div>`
             }
@@ -191,7 +240,11 @@ app.post('/loginsearch', (request, response) => {
         })
     })
 })
-
+/**
+ * gets the longitude and latitude of the location that you enter in
+ * @param {string} request - gets the value of the location that you enter in 
+ * @param {string} response - sends the coordinates of the location that you entered in
+ */
 app.post('/getLocation', (request, response) => {
     place = request.body.location
     maps.getAddress(place).then((coordinates) => {
@@ -200,6 +253,10 @@ app.post('/getLocation', (request, response) => {
     })
 })
 
+/**
+ * saves the selected location into the file
+ * @param {string} request - grabs the location that you have clicked on
+ */
 app.post('/storeuserdata', (request, response) => {
 	let account = JSON.parse(fs.readFileSync('accounts.json'));
 	for (var i = 0; i < account.length; i++) {
@@ -212,7 +269,10 @@ app.post('/storeuserdata', (request, response) => {
     console.log(account);
 	fs.writeFileSync('accounts.json', JSON.stringify(account));
 })
-
+/**
+ * populates the saved div with all the locations that you have saved to your account
+ * @param {string} response - Renders the index2.hbs page with the variable displaySaved which is a list of all your saved locations
+ */
 app.post('/favdata', (request, response) => {
     displaySaved = ''
     LoadAccfile()
@@ -237,3 +297,9 @@ app.get('/404', (request, response) => {
 app.listen(port, () => {
     console.log('Server is up on the port 8080');
 });
+
+module.exports = {
+    UserNameCheck,
+    PasswordCheck,
+    LoginCheck
+}

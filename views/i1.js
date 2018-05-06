@@ -10,6 +10,8 @@ var userlogin = document.getElementById("userlogin"),
     submitbutton = document.getElementById("submitbutton");
 
 
+
+
 document.getElementById("create").addEventListener("click", function (){
     document.getElementById("createacc").style.display = "block";
     loginFadeOut();
@@ -45,7 +47,6 @@ function loginFadeOut(){
     passwordlogin.style.left = "150px";
     passwordlogin.style.opacity = 0;
     login.style.transitionDelay = "0.4s";
-    login.style.transitionDuration = "2s";
     login.style.left = "150px";
     login.style.opacity = 0;
     createBtn.style.opacity = 0;
@@ -67,7 +68,6 @@ function acctFadeIn(){
     submitbutton.style.transitionDelay = "0.6s";
     submitbutton.style.left = "0px";
     submitbutton.style.opacity = 1;
-    submitbutton.style.transitionDelay = "0s"
 }
 
 function acctFadeOut(){
@@ -94,6 +94,25 @@ setInterval(function() {
   current = (current != slides.length - 1) ? current + 1 : 0;
   slides[current].style.opacity = 1;
 }, 5000);
+
+
+
+function shortusername(username){
+    if(username === 1){
+        swal('Username must be 3-12 characters long')
+    } else if (username === 2){
+        swal('Username already exists')
+    } else if (username === 3){
+        swal("Incorrect Username or Password")
+    } else if (username === 4){
+        swal("Passwords do not match")
+    } else if (username === 5){
+        swal("Password needs to be at least 5 characters")
+    } else if (username === 0){
+        swal('Congratulations you have successfully created an account')
+    }
+};
+
 
 // var saveList = (location) => {
 // 	var xmlhttp = new XMLHttpRequest();
