@@ -15,7 +15,7 @@ var getMap = (location) => {
             coordinates = JSON.parse(xmlhttp.responseText);
             latitude = coordinates.lat;
             longitude = coordinates.long;
-            initMap(latitude, longitude, 19);
+            initMap(latitude, longitude, 10);
         }
     };
     xmlhttp.send(`location=${location}`);
@@ -55,7 +55,7 @@ var defMap = () => {
     newmap = new google.maps.Map(document.getElementById('newmap'), {
         zoom: 7,
         center: { lat: latitude, lng: longitude }
-    })
+    });
 }
 
 var initMap = (latitude, longitude, z) => {

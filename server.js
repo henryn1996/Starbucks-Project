@@ -3,6 +3,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const maps = require('./maps.js')
+const current_ip = require('./get_current_ip.js')
 
 const crypto = require('crypto')
 
@@ -75,9 +76,27 @@ var Login = (request, response) => {
         console.log(userdata.saved[i]);
         displaySaved += `<div class="favItems"><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></div>`
     }
-    response.render('index2.hbs', {
-        savedSpots: displaySaved
+    
+    current_ip.request_coodrs().then((response1) => {
+        console.log(response1);
+        maps.get_sturbuckses(response1.lat,response1.lon).then((response2) => {
+            console.log(response2.list_of_places);
+            displayText = ' '
+            for (var i = 0; i < maps.listofmaps.length; i++) {
+                displayText += `<div class='favItems'><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></div>`
+            }
+            response.render('index2.hbs', {
+                savedSpots: displaySaved,
+                testvar: displayText,
+                coord: `<script>latitude = ${response1.lat}; longitude = ${response1.long};defMap()</script>`
+            })
+        })
+        // response.render('index2.hbs', {
+        //     savedSpots: displaySaved,
+        //     coord: `<script>latitude = ${response.lat}; longitude = ${response.lon};defMap()</script>`
+        // })
     })
+
     }
     else {
         response.render('index.hbs', {
@@ -214,6 +233,7 @@ app.post('/starbucksnearme', (request,response) => {
         console.log(response1.list_of_places);
 })
 });
+
 
 
 /**

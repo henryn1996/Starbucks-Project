@@ -27,10 +27,10 @@ var request_coodrs = () => {
 	})
 }
 
-// module.exports ={
-// 	request_coodrs
-// }
+module.exports ={
+	request_coodrs
+}
 
-request_coodrs().then((response) => {
-	console.log(response);
-})
+// request_coodrs().then((response) => {
+// 	console.log(response);
+// })
