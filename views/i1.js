@@ -84,21 +84,18 @@ function acctFadeOut(){
 }
 
 
+var current = 0,
+slides = document.getElementsByClassName("bg");
+
+setInterval(function() {
+  for (var i = 0; i < slides.length; i++) {
+    slides[i].style.opacity = 0;
+  }
+  current = (current != slides.length - 1) ? current + 1 : 0;
+  slides[current].style.opacity = 1;
+}, 5000);
 
 
-
-var images = ['1',
-			  '2',
-			  '3',
-			  '4',
-			  '5'],
-			  bgIndex = 0;
-			  imgDuration = 3000;
-
-setInterval(function(){
-	var url = images[Math.floor(Math.random()*images.length)]
-	document.getElementById("bg").style.backgroundImage = "url(bgImg/bg"+url+".jpg)";
-}, 4000);
 
 function shortusername(username){
     if(username === 1){
