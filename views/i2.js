@@ -13,6 +13,7 @@ var getMap = (location) => {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             console.log(xmlhttp.responseText);
             coordinates = JSON.parse(xmlhttp.responseText);
+            console.log(coordinates);
             latitude = coordinates.lat;
             longitude = coordinates.long;
             initMap(latitude, longitude, 15);
@@ -73,7 +74,7 @@ var initMap = (latitude, longitude, z) => {
 var initMultPlaceMap = () => {
     console.log('This works!');
     newmap = new google.maps.Map(document.getElementById('newmap'), {
-      zoom: 10,
+      zoom: 15,
       center: {lat: latitude, lng : longitude}
     });
     
@@ -106,7 +107,7 @@ var initMultPlaceMap = () => {
           lng = json_places.results[pl].geometry.location.lng;
           var latLng = new google.maps.LatLng(lat,lng);
           newmap.center = latLng;
-          newmap.zoom = 10;
+          newmap.zoom = 11;
           var marker = new google.maps.Marker({
             position: latLng,
             map: newmap
