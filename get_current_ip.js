@@ -18,6 +18,10 @@ var request_coodrs = () => {
 			}
 			else{
 				location = JSON.parse(body)
+				console.log("location ",location);
+				console.log("Body ",body);
+				console.log(location.latitude);
+				console.log(location.longitude);
 				resolve({					
 					lat: location.latitude,
 					lon: location.longitude,
@@ -27,10 +31,10 @@ var request_coodrs = () => {
 	})
 }
 
-// module.exports ={
-// 	request_coodrs
-// }
+module.exports ={
+	request_coodrs
+}
 
-request_coodrs().then((response) => {
-	console.log(response);
-})
+// request_coodrs().then((response) => {
+// 	console.log(response);
+// })
