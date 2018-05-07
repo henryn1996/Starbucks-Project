@@ -10,7 +10,7 @@ It uses Google Place API. It creates a Promise and if the body.status=="OK", wil
 var get_sturbuckses = (lat, long) => {
 	return new Promise((resolve, reject) => {
 		request({
-			url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=10000&type=coffee&keyword=starbucks&key=AIzaSyD5Z4W9aUlSBLzI4mNzhc4Rl9iqZkqSKMc`,
+			url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=1000&type=coffee&keyword=starbucks&key=AIzaSyD5Z4W9aUlSBLzI4mNzhc4Rl9iqZkqSKMc`,
 			json: true
 		}, (error, response, body) => {
 			if(error){
@@ -22,7 +22,8 @@ var get_sturbuckses = (lat, long) => {
 					list_of_places.unshift(body.results[place].vicinity);
 				}
                 fs.writeFileSync('places.json', JSON.stringify(body));
-				resolve({body,list_of_places});
+                resolve({body,list_of_places});
+                list_of_places = []
 			}
 		});
 	});

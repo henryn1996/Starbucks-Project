@@ -74,7 +74,7 @@ var Login = (request, response) => {
 
     for (var i = 0; i < userdata.saved.length; i++) {
         console.log(userdata.saved[i]);
-        displaySaved += `<div class="favItems"><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></div>`
+        displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></div>`
     }
     
     current_ip.request_coodrs().then((response1) => {
@@ -82,8 +82,8 @@ var Login = (request, response) => {
         maps.get_sturbuckses(response1.lat,response1.lon).then((response2) => {
             console.log(response2.list_of_places);
             displayText = ' '
-            for (var i = 0; i < maps.listofmaps.length; i++) {
-                displayText += `<div class='favItems'><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></div>`
+            for (var i = 0; i < response2.list_of_places.length; i++) {
+                displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`
             }
             response.render('index2.hbs', {
                 savedSpots: displaySaved,
@@ -250,8 +250,8 @@ app.post('/loginsearch', (request, response) => {
         maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
             console.log(response1.list_of_places);
             displayText = ' '
-            for (var i = 0; i < maps.listofmaps.length; i++) {
-                displayText += `<div class='favItems'><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></div>`
+            for (var i = 0; i < response1.list_of_places.length; i++) {
+                displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response1.list_of_places[i]}\'); currentSB=\'${response1.list_of_places[i]}\'"> ${response1.list_of_places[i]}</a></div>`
             }
             response.render('index2.hbs', {
                 testvar: displayText,
@@ -302,8 +302,7 @@ app.post('/favdata', (request, response) => {
     console.log(userdata.saved);
 
     for (var i = 0; i < userdata.saved.length; i++) {
-    	console.log(userdata.saved[i]);
-        displaySaved += `<div class="favItems"><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></div>`
+        displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${userdata.saved[i]})"> ${userdata.saved[i]}</a></div>`
     }
 	response.render('index2.hbs', {
         savedSpots: displaySaved
