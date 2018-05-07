@@ -38,7 +38,7 @@ var response = {
     render: function(...args){}
 
 }
-console.log(Accs.length)
+
 describe('login', () => {
     test("pass", () => {
         expect(testFunc.LoginCheck(success, Accs)).toBe(0)
