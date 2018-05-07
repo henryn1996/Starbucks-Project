@@ -88,7 +88,7 @@ var Login = (request, response) => {
             response.render('index2.hbs', {
                 savedSpots: displaySaved,
                 testvar: displayText,
-                coord: `<script>latitude = ${response1.lat}; longitude = ${response1.long};defMap()</script>`
+                coord: `<script>latitude = ${response1.lat}; longitude = ${response1.lon};initMultPlaceMap()</script>`
             })
         })
         // response.render('index2.hbs', {
@@ -202,11 +202,7 @@ var PasswordCheck = (request, response) => {
     return 2
 };
 
-app.get('/places_funct', (request,response) => {
-    var places = fs.readFileSync('places.json');
-    var parsed_places = JSON.parse(places)
-    response.end(places)
-})
+
 
 app.set('view engine', 'hbs');
 
@@ -221,6 +217,12 @@ app.get('/map', (request, response) => {
 app.post('/login', (request, response) => {
     Login(request, response);
 });
+
+app.get('/places_funct', (request,response) => {
+    var places = fs.readFileSync('places.json');
+    var parsed_places = JSON.parse(places)
+    response.end(places)
+})
 
 app.post('/home', (request, response) => {
     AddUsr(request, response);
