@@ -255,7 +255,7 @@ app.post('/loginsearch', (request, response) => {
             }
             response.render('index2.hbs', {
                 testvar: displayText,
-                coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};defMap()</script>`
+                coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};initMultPlaceMap()</script>`
             })
         }).catch((error) => {
             console.log("Error ", error);
