@@ -15,7 +15,7 @@ var getMap = (location) => {
             coordinates = JSON.parse(xmlhttp.responseText);
             latitude = coordinates.lat;
             longitude = coordinates.long;
-            initMap(latitude, longitude, 10);
+            initMap(latitude, longitude, 15);
         }
     };
     xmlhttp.send(`location=${location}`);
@@ -98,6 +98,7 @@ var initMultPlaceMap = () => {
         return test_val;
       }).then((text) => {
         json_places = JSON.parse(text);
+        console.log(json_places);
         var lat = ''
         var lng = ''
         for(pl in json_places.results){
@@ -105,15 +106,16 @@ var initMultPlaceMap = () => {
           lng = json_places.results[pl].geometry.location.lng;
           var latLng = new google.maps.LatLng(lat,lng);
           newmap.center = latLng;
-          newmap.zoom = 14;
+          newmap.zoom = 10;
           var marker = new google.maps.Marker({
             position: latLng,
-            newmap: newmap
+            map: newmap
           });
         }
       })
     }
     places_funct()
+    console.log('This happend!');
 }
 
 var place_marker = () => {
