@@ -244,12 +244,13 @@ app.post('/starbucksnearme', (request,response) => {
  * @param {string} response - Renders the index2.hbs page with the starbucks locations
  */
 app.post('/loginsearch', (request, response) => {
-    place = request.body.search
+    place = request.body.search;
     maps.getAddress(place).then((coordinates) => {
         console.log(coordinates);
-        maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
+        displayText = ' '
+        if (coordinates.lat && coordinates.long){
+            maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
             console.log(response1.list_of_places);
-            displayText = ' '
             for (var i = 0; i < response1.list_of_places.length; i++) {
                 displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response1.list_of_places[i]}\'); currentSB=\'${response1.list_of_places[i]}\'"> ${response1.list_of_places[i]}</a></div>`
             }
@@ -257,9 +258,13 @@ app.post('/loginsearch', (request, response) => {
                 testvar: displayText,
                 coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};defMap()</script>`
             })
-        }).catch((error) => {
-            console.log("Error ", error);
         })
+        } else {
+                response.render('index2.hbs', {
+                error : 1
+            })
+
+        }
     })
 })
 /**
