@@ -42,11 +42,10 @@ var getAddress = (address) => {
         json: true
     }, (error, response, body) => {
         if (error) {
-            reject('Cannot connect to Google Maps');
+            resolve('Cannot connect to Google Maps');
             //console.log('Cannot connect to Google Maps');
         } else if (body.status === 'ZERO_RESULTS') {
-            reject('Cannot find requested address');
-            //console.log('Cannot find requested address');
+            resolve('Cannot find requested address');
         } else if (body.status === 'OK') {
             resolve({
                 lat: body.results[0].geometry.location.lat,

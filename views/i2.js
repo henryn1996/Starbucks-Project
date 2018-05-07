@@ -172,6 +172,12 @@ function getLocation() {
         
 
 }};
+
+function errorMessages(number){
+    if (number == 1){
+        swal('Invalid Location')
+    }
+}
 //     document.getElementById("nearme").style.top = '0%';
 //     document.getElementById('savedloc').style.top = '-100%';
 // });
