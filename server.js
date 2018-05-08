@@ -315,7 +315,7 @@ app.post('/favdata', (request, response) => {
 })
 
 app.get('/404', (request, response) => {
-    response.send({
+    response.send({ 
         error: 'Page not found'
     })
 })
