@@ -64,8 +64,7 @@ function acctFadeIn(){
     newpw.style.opacity = 1;
     confirmpw.style.transitionDelay = "0.4s";
     confirmpw.style.left = "0px";
-    confirmpw.style.opacity = 1;
-    submitbutton.style.transitionDelay = "0.6s";
+    confirmpw.style.opacity = 1;;
     submitbutton.style.left = "0px";
     submitbutton.style.opacity = 1;
 }
