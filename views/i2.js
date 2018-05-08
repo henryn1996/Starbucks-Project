@@ -107,7 +107,7 @@ var initMultPlaceMap = () => {
           lng = json_places.results[pl].geometry.location.lng;
           var latLng = new google.maps.LatLng(lat,lng);
           newmap.center = latLng;
-          newmap.zoom = 11;
+          newmap.zoom = 14;
           var marker = new google.maps.Marker({
             position: latLng,
             map: newmap
