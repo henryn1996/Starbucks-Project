@@ -33,9 +33,9 @@ var savelocation = () => {
             }
         };
         xmlhttp.send(`location=${currentSB}`);
-        window.alert('You have saved the location');
+        swal('You have saved the location');
     }   else {
-        window.alert('Select a location')
+        swal('Select a location')
     }
 };
 
