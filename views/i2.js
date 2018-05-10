@@ -1,3 +1,8 @@
+/**
+@file This is the JavaScript file for the index2.hbs view. It includes the functions with the detecting current position,
+drawing the map on the page and display both multiple and single places on it.
+*/
+
 var newmap;
 var latitude = 49.1783518;
 var longitude = -123.2760839;
@@ -5,6 +10,12 @@ var currentSB = "";
 var botMheight = 0;
 var choiceheight = 90;
 
+/**
+This functions runs functions "/getLocation" on the server. The server's function will get current location, based on the IP.
+It will initialize the initMap function and pass the cooerdinates as parametrs.
+@param {string} location
+@returns {none} 
+*/
 var getMap = (location) => {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "/getLocation", true);
@@ -16,12 +27,18 @@ var getMap = (location) => {
             console.log(coordinates);
             latitude = coordinates.lat;
             longitude = coordinates.long;
-            initMap(latitude, longitude, 15);
+            initMap(latitude, longitude, 18);
         }
     };
     xmlhttp.send(`location=${location}`);
 };
 
+/**
+This functions runs functions "/storeuserdata" on the server. The server's function will checks the logged in persone and
+then add the location to the list of the saved locations. It will send empty string back to the server.
+@param {none}
+@returns {none} 
+*/
 var savelocation = () => {
     if (currentSB != '') {
         var xmlhttp = new XMLHttpRequest();
@@ -39,6 +56,11 @@ var savelocation = () => {
     }
 };
 
+/**
+This functions runs the server function "/favdata", that will add a string of the favotires places, and sends "OK" response.
+@param {none}
+@returns {none} 
+*/
 var showfavs = () => {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "/favdata", true);
@@ -51,14 +73,23 @@ var showfavs = () => {
     xmlhttp.send(`OK`);
 };
 
+// /**
+// This functions creates an empty map on the html page
+// @param {none}
+// @returns {none} 
+// */
+// var defMap = () => {
+//     newmap = new google.maps.Map(document.getElementById('newmap'), {
+//         zoom: 7,
+//         center: { lat: latitude, lng: longitude }
+//     });
+// }
 
-var defMap = () => {
-    newmap = new google.maps.Map(document.getElementById('newmap'), {
-        zoom: 7,
-        center: { lat: latitude, lng: longitude }
-    });
-}
-
+/**
+This function initialize the empty map on the html page and place the marker on the current position
+@param {none}
+@returns {none}
+*/
 var initMap = (latitude, longitude, z) => {
     newmap = new google.maps.Map(document.getElementById('newmap'), {
         zoom: z,
@@ -67,39 +98,24 @@ var initMap = (latitude, longitude, z) => {
     place_marker();
 }
 
-// var initMultPlaceMap = () => {
-
 // }
-
+/**
+This function is used to initialize the map. The function populates the the map with the list of places.
+List of places is created by the fuction in the map.js file and send by thr server side from the http://localhost:8080/places_funct.
+@param {none}
+@returns {none} 
+*/
 var initMultPlaceMap = () => {
-    console.log('This works!');
     newmap = new google.maps.Map(document.getElementById('newmap'), {
-      zoom: 15,
+      zoom: 18,
       center: {lat: latitude, lng : longitude}
     });
-    
-
-    // Create a <script> tag and set the USGS URL as the source.
-    //var script = document.createElement('script');
-    // This example uses a local copy of the GeoJSON stored at
-    // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-    //script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-    //script.src = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=49.2827291,-123.1207375&radius=1000&type=coffee&keyword=starbucks&key=AIzaSyD5Z4W9aUlSBLzI4mNzhc4Rl9iqZkqSKMc';
-    //document.getElementsByTagName('head')[0].appendChild(script);
-    //list_of_places = map.data.loadGeoJson('places.json');
-    // var file = fs.readFileSync('places.json');
-
-    // var list_of_places = JSON.parse(file);
-
-    // console.log('This is google_maps file',list_of_places);
     var places_funct = () =>{
       fetch('http://localhost:8080/places_funct').then((result) => {
-        // json_obj = JSON.parse(result);
         var test_val = result.text();
         return test_val;
       }).then((text) => {
         json_places = JSON.parse(text);
-        console.log(json_places);
         var lat = ''
         var lng = ''
         for(pl in json_places.results){
@@ -116,9 +132,11 @@ var initMultPlaceMap = () => {
       })
     }
     places_funct()
-    console.log('This happend!');
 }
-
+/**
+This function placese the marker on the map
+@param {none}
+*/
 var place_marker = () => {
     var marker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
@@ -169,8 +187,6 @@ function getLocation() {
             latitude = position.coords.latitude
             longitude = position.coords.longitude
         });
-        
-
 }};
 
 function errorMessages(number){
@@ -188,7 +204,7 @@ function errorMessages(number){
 //     document.getElementById('savedloc').style.top = '0%';
 // });
 
-defMap()
+// defMap()
 
 // document.getElementById('savecurrentloc').addEventListener("click", function () {
 //     window.alert('You have saved the location');
