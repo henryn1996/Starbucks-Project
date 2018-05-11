@@ -4,6 +4,12 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const maps = require('./maps.js')
 const current_ip = require('./get_current_ip.js')
+// var mysql = require('mysql');
+// var con = mysql.createConnection({
+//   host: "starbucks-project.csw7mgw0wa6p.ca-central-1.rds.amazonaws.com",
+//   user: "Nightclubs",
+//   password: "venti9000"
+// });
 
 const crypto = require('crypto')
 
