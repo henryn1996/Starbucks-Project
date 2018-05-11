@@ -7,9 +7,8 @@ var userlogin = document.getElementById("userlogin"),
     newpw = document.getElementById("newpw"),
     confirmpw = document.getElementById("confirmpw"),
     acctDiv = document.getElementById("createacc"),
-    submitbutton = document.getElementById("submitbutton");
-
-
+    submitbutton = document.getElementById("submitbutton"),
+    cancelBtn = document.getElementById("cancelBtn");
 
 
 document.getElementById("create").addEventListener("click", function (){
@@ -17,11 +16,17 @@ document.getElementById("create").addEventListener("click", function (){
     loginFadeOut();
     setTimeout(function(){
         acctFadeIn()}, 1000)
-
 });
 
 
 document.getElementById("submitbutton").addEventListener("click", function(){
+    loginDiv.style.display = "block";
+    acctFadeOut();
+    setTimeout(function(){
+        loginFadeIn()}, 1000)
+});
+
+document.getElementById("cancelBtn").addEventListener("click", function(){
     loginDiv.style.display = "block";
     acctFadeOut();
     setTimeout(function(){
@@ -51,7 +56,7 @@ function loginFadeOut(){
     login.style.opacity = 0;
     createBtn.style.opacity = 0;
     setTimeout(function(){
-        loginDiv.style.display = "none";}, 3000)
+        loginDiv.style.display = "none";}, 1000)
     }
 
 
@@ -67,6 +72,7 @@ function acctFadeIn(){
     confirmpw.style.opacity = 1;;
     submitbutton.style.left = "0px";
     submitbutton.style.opacity = 1;
+    cancelBtn.style.opacity = 1;
 }
 
 function acctFadeOut(){
@@ -78,8 +84,9 @@ function acctFadeOut(){
     confirmpw.style.opacity = 0;
     submitbutton.style.left = "-150px";
     submitbutton.style.opacity = 0;
+    cancelBtn.style.opacity = 0;
     setTimeout(function(){
-        document.getElementById("createacc").style.display = "none";}, 3000)
+        document.getElementById("createacc").style.display = "none";}, 1000)
 }
 
 
@@ -107,6 +114,8 @@ function shortusername(username){
         swal("Passwords do not match")
     } else if (username === 5){
         swal("Password needs to be at least 5 characters")
+    } else if (username === 6){
+        swal("Username may not contain spaces or special characters")
     } else if (username === 0){
         swal('Congratulations you have successfully created an account')
     }

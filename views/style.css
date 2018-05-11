@@ -1,7 +1,37 @@
+#header {
+    position: fixed;
+    top:0;left:0;
+    width:100%;
+    height:6%;
+    color:white;
+    font-weight: lighter;
+    font-size:19px;
+    z-index: 999;
+    font-family:'Segoe UI';
+    background-color: rgba(0,0,0,0.4);
+    padding-left:10px;
+}
+
+#header2 {
+    position: fixed;
+    top:0;left:0;
+    width:100%;
+    height:6%;
+    color:white;
+    font-weight: lighter;
+    font-size:19px;
+    z-index: 999;
+    font-family:'Segoe UI';
+    background-color: rgba(0,0,0,0.4);
+    padding-left:10px;
+}
+
+
+
 .bg {
     position: absolute;
-    width:100vw;
-    height:100vh;
+    width:100%;
+    height:100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size:cover;
@@ -20,8 +50,8 @@
     position: absolute;
     top:0;
     left:0;
-    width:100vw;
-    height:100vh;
+    width:100%;
+    height:100%;
     margin:0;
 }
 
@@ -49,7 +79,7 @@ body{
     line-height: 100px;
     font-size: 30px;
     font-weight: bold;
-    font-family:'Helvetica';
+    font-family:'Segoe UI';
 }
 #starbucks{
     position: absolute;
@@ -129,7 +159,7 @@ form {
     transform: translateY(4px);
 }
 
-#create {
+#create, #cancelBtn {
     right:0; left:0; bottom:0;
     margin: auto;
     padding:0;
@@ -139,6 +169,10 @@ form {
     color: #777;
     transition: 0.5s;
     cursor:pointer;
+}
+
+#candelBtn {
+    opacity: 0;
 }
 
 #mainpage{
@@ -199,15 +233,21 @@ form {
 }
 #search{
     position: absolute;
-    left:10px;
+    left:5%;
     width:70%;
 }
 #go{
-    height:100%;
+    height:60%;
     width:20%;
+    top:10%; right:2%;
     position: absolute;
-    right:0px;
-    top:0px;
+    background:#00704a;
+    color:white;
+    padding:0;
+    border-style: outset;
+    border-color:#00704a;
+    text-shadow: none;
+    display:inline-block;
 }
 #loginbox1{
     height:40%;
@@ -334,7 +374,6 @@ form {
 
 #nearme{
     top:0%;
-    left:0px;
     position: absolute;
     height:90%;
     width:25%;
@@ -343,10 +382,9 @@ form {
     display:block;
     font-size:17px;
     font-family: Verdana, Geneva, sans-serif;
-/*    transition: 2s;
-    transition-delay: 0.5s;*/
     transition-duration: .4s;
     background-color: rgba(255,255,255,.85);
+    z-index: 999;
 }
 
 .favItems {
@@ -358,11 +396,9 @@ form {
     box-shadow: 2px 2px 5px rgba(0,0,0,.5);
 }
 
-#body2 {
-    background-image: url(background1.jpg);
-}
 #sbucksnearme{
     position:absolute;
     bottom:0px;
     right:0px;
 }
+

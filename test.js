@@ -10,6 +10,7 @@ var success = {
         confirmp: 'goodpass'
     }
 }
+
 var fail = {
     body: {
         username: 'jason',
@@ -20,6 +21,8 @@ var fail = {
 
     }
 }
+
+/*  fail2: the length of username is shorter than 3.*/
 var fail2 = {
     body: {
         NewUser: '1c',
@@ -28,9 +31,24 @@ var fail2 = {
     }
 }
 
+/*  fail3: the length of username is longer than 12.*/
 var fail3 = {
     body: {
         NewUser: 'thispasswordshouldbetoolongblahblah'
+    }
+}
+
+/*  failSpecialChar: the username contains a special character.*/
+var failSpeChar ={
+    body: {
+        NewUser: '&!=-*^)'
+    }
+}
+
+/*  failSpace: the username contains a space.*/
+var failSpace = {
+    body: {
+        NewUser: '      abcha     '
     }
 }
 
@@ -60,6 +78,12 @@ describe('registerUsername', () => {
     })
     test("Too Long", () => {
         expect(testFunc.UserNameCheck(fail3, response, Accs)).toBe(2)
+    })
+    test("Included Special character", () => {
+        expect(testFunc.UserNameCheck(failSpeChar, response, Accs)).toBe(1)
+    })
+    test("Included Space", ()=> {
+        expect(testFunc.UserNameCheck(failSpace, response, Accs)).toBe(1)
     })
 })
 

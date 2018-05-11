@@ -7,6 +7,7 @@
     </head>
     <body>
         <div class="slideshow">
+            <div id="header">FIND YOUR STARBUCKS</div>
             <div id="bg1" class="bg" style='background-image: url("bgImg/bg1.jpg'); display:"></div>
             <div id="bg2" class="bg" style='background-image: url("bgImg/bg2.jpg');"></div>
             <div id="bg3" class="bg" style='background-image: url("bgImg/bg3.jpg');"></div>
@@ -29,15 +30,16 @@
                 <button type="account" id='create'>Create Account</button>
             </div>
         <div id="createacc">
-        <form action='/home' method='post'>
-            <input class='inputs' type="text" name="NewUser" id='newuser' placeholder="enter desired username">
-            <br><br>
-            <input class='inputs' type="password" name="NewPassword" id='newpw' placeholder="enter password">
-            <br><br>
-            <input class='inputs' type="password" name="confirmp" id='confirmpw' placeholder="confirm password">
-            <br><br>
-            <input type="submit" value="Submit" id='submitbutton'>
-        </form>
+            <form action='/home' method='post'>
+                <input class='inputs' type="text" name="NewUser" id='newuser' placeholder="enter desired username">
+                <br><br>
+                <input class='inputs' type="password" name="NewPassword" id='newpw' placeholder="enter password">
+                <br><br>
+                <input class='inputs' type="password" name="confirmp" id='confirmpw' placeholder="confirm password">
+                <br><br>
+                <input type="submit" value="Submit" id='submitbutton'>
+            </form>
+            <button id="cancelBtn">Cancel</button>
         </div>
     </div>
 

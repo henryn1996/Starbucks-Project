@@ -164,24 +164,28 @@ var hash_data = (data) => {
  */
 
 var UserNameCheck = (request, response, Accs) => {
-    if (request.body.NewUser.length <= 12 && request.body.NewUser.length >= 3 ) {
-        console.log(request.body.NewUser.length)
-        console.log(Accs.length)
-        for (i = 0; i < Accs.length; i++) {
-            console.log(Accs[i].user)
-            if (request.body.NewUser == Accs[i].user) {
-                response.render('index.hbs', {
-                    username:2
-                });
-                return 1
+    if (request.body.NewUser.match(/^[a-z0-9]+$/i)){
+        if (request.body.NewUser.length <= 12 && request.body.NewUser.length >= 3 ) {
+            for (i = 0; i < Accs.length; i++) {
+                //console.log(Accs[i].user)
+                if (request.body.NewUser == Accs[i].user) {
+                    response.render('index.hbs', {
+                        username:2
+                    });
+                    return 1
+                }
             }
+            return 0
         }
-        return 0
+        response.render('index.hbs', {
+            username: 1
+        });
+        return 2
     }
     response.render('index.hbs', {
-        username: 1
+        username: 6
     });
-    return 2
+    return 3
 };
 
 
