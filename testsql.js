@@ -5,12 +5,12 @@ var con = mysql.createConnection({
   user: "Nightclubs",
   password: "venti9000",
   database: "starbucks",
-  port: 3306
+  port: "1433"
 });
 
 
-con.query('CREATE TABLE users(uid INT NOT NULL AUTO_INCREMENT,username VARCHAR(30) NOT NULL,password VARCHAR(20) NOT NULL, PRIMARY KEY (uid));', function(err, rows, fields) {
+con.query('SELECT * FROM users', function(err, rows, fields) {
  if (err) throw err
 
- console.log(rows);
+ console.log(rows[0].username);
 });
