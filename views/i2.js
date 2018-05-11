@@ -95,7 +95,7 @@ var initMap = (latitude, longitude, z) => {
         zoom: z,
         center: { lat: latitude, lng: longitude }
     });
-    place_marker();
+    addMarkerWithTimeout({ lat: latitude, lng: longitude },200);
 }
 
 // }
@@ -124,15 +124,41 @@ var initMultPlaceMap = () => {
           var latLng = new google.maps.LatLng(lat,lng);
           newmap.center = latLng;
           newmap.zoom = 14;
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: newmap
-          });
+
+            markers = [];
+            // var drop = () => {
+            //     for (var i = 0; i < neighborhoods.length; i++) {
+            //       addMarkerWithTimeout(neighborhoods[i], i * 200);
+            //     }
+            //   }
+            addMarkerWithTimeout({lat:lat,lng:lng},pl*75);
+
+          // var marker = new google.maps.Marker({
+          //   position: latLng,
+          //   animation: google.maps.Animation.DROP,
+          //   map: newmap
+          // });
+
         }
       })
     }
     places_funct()
 }
+
+/**
+This is advanced virsion of the placing the marker on the map. It will pop it out with snall delay.
+@param {string} latLng - string, that include latitude and longitude, or the folowing object { lat: latitude, lng: longitude }.
+@param {int} timeout - number in milisec for the delay (pop-up) time. 
+*/
+var addMarkerWithTimeout = (latLng, timeout) => {
+                window.setTimeout(() => {
+                    new google.maps.Marker({
+                    position: latLng,
+                    map: newmap,
+                    animation: google.maps.Animation.DROP
+                  });
+                }, timeout);
+              }
 /**
 This function placese the marker on the map
 @param {none}
