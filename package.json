@@ -4,7 +4,7 @@
   "description": "",
   "main": "login.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage && jshint server.js"
   },
   "author": "Edmund Ya",
   "license": "ISC",
@@ -14,9 +14,14 @@
     "fs": "0.0.1-security",
     "hbs": "^4.0.1",
     "jsdoc": "^3.5.5",
+    "mysql": "^2.15.0",
+    "nodemailer": "^4.6.4",
     "request": "^2.85.0"
   },
   "devDependencies": {
-    "jest": "^22.4.3"
+    "concurrently": "^3.5.1",
+    "jest": "^22.4.3",
+    "jshint": "^2.9.5",
+    "unit-coverage": "^4.0.3"
   }
 }

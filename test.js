@@ -1,5 +1,5 @@
 var testFunc = require("./server")
-var Accs = [{ "user": "jason", "pass": "2b877b4b825b48a9a0950dd5bd1f264d", "saved": ["600 Dunsmuir Street, Vancouver", "80 Pine St, New York", "885 Dunsmuir St, Vancouver", "600 Dunsmuir Street, Vancouver", "720 Granville St, Vancouver", "398 Robson St Unit #5, Vancouver", "811 Hornby St, Vancouver"] }]
+var Accs = [{ "username": "jason", "pass": "2416fa350b95e3792b1709a8892647d0", 'salt': '7vUnsBk08fp6sEkU', "saved": ["600 Dunsmuir Street, Vancouver", "80 Pine St, New York", "885 Dunsmuir St, Vancouver", "600 Dunsmuir Street, Vancouver", "720 Granville St, Vancouver", "398 Robson St Unit #5, Vancouver", "811 Hornby St, Vancouver"] }]
 
 var success = {
     body: {
@@ -59,10 +59,16 @@ var response = {
 
 describe('login', () => {
     test("pass", () => {
-        expect(testFunc.LoginCheck(success, Accs)).toBe(0)
+        return testFunc.LoginCheck(success, Accs).then(e => {
+            expect(e).toBe(0)
+        })
+
+        
     })
     test("fail", () => {
-        expect(testFunc.LoginCheck(fail, Accs)).toBe(undefined)
+        testFunc.LoginCheck(fail, Accs).catch(e => {
+            expect(e).toBe(1)
+        })
     })
 })
 
@@ -98,3 +104,5 @@ describe('registerPassword', () => {
         expect(testFunc.PasswordCheck(fail2, response)).toBe(2)
     })
 })
+
+testFunc.server.close();
