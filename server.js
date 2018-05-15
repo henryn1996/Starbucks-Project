@@ -27,7 +27,6 @@ var current_lat = ''
 var last_save = ""
 var user_id = '';
 var saved_loc
-
 /**
  * Calls the function ReadAccfile and returns the list into the variable Accs
  */
@@ -294,8 +293,8 @@ app.post('/login', (request, response) => {
 
 app.get('/places_funct', (request, response) => {
     var places = fs.readFileSync('places.json');
-    var parsed_places = JSON.parse(places);
-    response.end(places);
+    var parsed_places = JSON.parse(places)
+    response.end(places)
 })
 
 app.post('/home', (request, response) => {
@@ -327,7 +326,7 @@ app.post('/loginsearch', (request, response) => {
                 console.log(saved_loc[i].location_id)
                 displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`
             }
-
+        })
         console.log(coordinates);
         displayText = ' '
         if (coordinates.lat && coordinates.long) {
@@ -340,15 +339,16 @@ app.post('/loginsearch', (request, response) => {
                     savedSpots: displaySaved,
                     testvar: displayText,
                     coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};initMultPlaceMap()</script>`
-                });
-            });
+                })
+            })
         } else {
             response.render('index2.hbs', {
                 error: 1
-            });
+            })
+
         }
-    });
-});
+    })
+})
 /**
  * gets the longitude and latitude of the location that you enter in
  * @param {string} request - gets the value of the location that you enter in 
@@ -359,8 +359,8 @@ app.post('/getLocation', (request, response) => {
     maps.getAddress(place).then((coordinates) => {
         console.log(coordinates.lat, coordinates.long);
         response.send(coordinates)
-    });
-});
+    })
+})
 
 /**
  * saves the selected location into the file
@@ -380,9 +380,9 @@ app.post('/storeuserdata', (request, response) => {
     last_save = request.body.location
     checkLocations(logged_in.username, request.body.location).then(res => {
         addLocations(logged_in.username, request.body.location)
-    }, rej => { console.log('failed') })
-});
-
+    }, rej => { console.log('failed') }
+    )
+})
 /**
  * populates the saved div with all the locations that you have saved to your account
  * @param {string} response - Renders the index2.hbs page with the variable displaySaved which is a list of all your saved locations and displayText that shows the SB based on IP 
@@ -396,7 +396,7 @@ app.post('/favdata', (request, response) => {
             console.log(saved_loc[i].location_id)
             displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`
         }
-        displaySaved += `<div id=s${saved_loc.length} class="favItems"><a onclick="getMap(${last_save})"> ${last_save}</a></div>`
+         displaySaved += `<div id=s${saved_loc.length} class="favItems"><a onclick="getMap(${last_save})"> ${last_save}</a></div>`
 
 
         current_ip.request_coodrs().then((response1) => {
@@ -407,23 +407,25 @@ app.post('/favdata', (request, response) => {
                 for (var i = 0; i < response2.list_of_places.length; i++) {
                     displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`
                 }
-                console.log(displaySaved);
                 response.render('index2.hbs', {
                     savedSpots: displaySaved,
                     testvar: displayText,
                     coord: `<script>latitude = ${response1.lat}; longitude = ${response1.lon};initMultPlaceMap()</script>`
-                });
-            });
-        });
-    });
-});
-
+                })
+            })
+            // response.render('index2.hbs', {
+            //     savedSpots: displaySaved,
+            //     coord: `<script>latitude = ${response.lat}; longitude = ${response.lon};defMap()</script>`
+            // })
+        })
+    })
+})
 
 app.get('/404', (request, response) => {
     response.send({
         error: 'Page not found'
-    });
-});
+    })
+})
 
 
 var server = app.listen(port, () => {
