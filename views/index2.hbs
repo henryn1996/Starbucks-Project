@@ -10,14 +10,8 @@
 </head>
 
 <body id="body2">
-    <div id="header2"></div>
-    <form action="/favdata" method='post'>
-        <div id="map">
-            <input type='submit' onclick="savelocation()" value="Save to Favorites" id='savecurrentloc'>
-            <div id='newmap'></div>
-        </div>
-    </form>
-        <ul>
+    <div id="header2">
+         <ul>
             <li>
                 <a><input type="submit" onclick="showfavs()" value="Favorites" id='savedlocations'></a>
             </li>
@@ -25,6 +19,13 @@
                 <a><input type="submit" value="Back to Search" id='Searchlocation'></a>
             </li>
         </ul>
+        <input type='submit' onclick="savelocation()" value="Save to Favorites" id='savecurrentloc'>
+    </div>
+    <form action="/favdata" method='post'>
+        <div id="map">
+            <div id='newmap'></div>
+        </div>
+    </form>
     <div id="nearme">
         <div id="searchbox">
             <form action='/loginsearch' method='post'>

@@ -8,7 +8,7 @@ var latitude = 49.1783518;
 var longitude = -123.2760839;
 var currentSB = "";
 var botMheight = 0;
-var choiceheight = 90;
+var choiceheight = 93;
 
 /**
 This functions runs functions "/getLocation" on the server. The server's function will get current location, based on the IP.
@@ -177,7 +177,7 @@ document.getElementById("savedlocations").addEventListener("click", function () 
 
     }
     setTimeout(function () {
-        while (botMheight < 90) {
+        while (botMheight < 93) {
             botMheight += 1;
             document.getElementById("savedloc").style.height = botMheight + '%';
         }
@@ -191,7 +191,7 @@ document.getElementById("Searchlocation").addEventListener("click", function () 
 
     }
     setTimeout(function () {
-        while (choiceheight < 90) {
+        while (choiceheight < 93) {
             choiceheight += 1;
             document.getElementById("nearme").style.height = choiceheight + '%';
         }

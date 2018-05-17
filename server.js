@@ -1,14 +1,16 @@
+/*jshint esversion: 6 */
+
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
-const maps = require('./maps.js')
-const current_ip = require('./get_current_ip.js')
-const credentials = JSON.parse(fs.readFileSync('./credentials.json'))
-const crypto = require('crypto')
+const maps = require('./maps.js');
+const current_ip = require('./get_current_ip.js');
+const credentials = JSON.parse(fs.readFileSync('./credentials.json'));
+const crypto = require('crypto');
 const mysql = require('mysql');
 const nodemailer = require('nodemailer');
-const email = require('./send_email.js')
+const email = require('./send_email.js');
 
 var app = express();
 const port = process.env.PORT || 8080;
@@ -19,14 +21,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-var Accs = []
+var Accs = [];
 var place = '';
-var logged_in = ""
-var current_long = ''
-var current_lat = ''
-var last_save = ""
+var logged_in = "";
+var current_long = '';
+var current_lat = '';
+var last_save = "";
 var user_id = '';
-var saved_loc
+var saved_loc;
 /**
  * Calls the function ReadAccfile and returns the list into the variable Accs
  */
@@ -38,13 +40,13 @@ var con = mysql.createConnection({
     database: credentials.database,
     port: credentials.port
 });
-var Accs = []
+var Accs = [];
 
 var send_mail = () => {   
-    options = email.mailOptions
-    options.to = 'viktor.sheverdin@gmail.com'
-    options.subject = 'Test email from Sb app'
-    options.text = 'OK! It actually works!'
+    options = email.mailOptions;
+    options.to = 'viktor.sheverdin@gmail.com';
+    options.subject = 'Test email from Sb app';
+    options.text = 'OK! It actually works!';
     console.log(options);
     email.send_email(options);
 
@@ -56,7 +58,7 @@ var send_mail = () => {
     //         console.log('Email sent: ', info.response);
     //     }
     // });
-}
+};
 
 // transporter.sendMail(mailOptions, function(error, info){
 //   if (error) {
@@ -69,42 +71,40 @@ var send_mail = () => {
 var LoadAccfile = () => {
     return new Promise(resolve => {
         con.query('SELECT * FROM users', function (err, res, fields) {
-            resolve(Accs = JSON.parse(JSON.stringify(res)))
+            resolve(Accs = JSON.parse(JSON.stringify(res)));
 
-        })
-    })
-}
+        });
+    });
+};
 
 var loadUserdata = (user) => {
     return new Promise(resolve => {
-        console.log(user)
+        console.log(user);
         con.query("SELECT * from UserData WHERE username = '" + user + "'", function (err, res, fields) {
             //console.log(res)
-            resolve(saved_loc = JSON.parse(JSON.stringify(res)))
-        })
-    })
-}
+            resolve(saved_loc = JSON.parse(JSON.stringify(res)));
+        });
+    });
+};
 
 var checkLocations = (user, location) => {
     return new Promise(function (resolve, reject) {
-        console.log("SELECT * from UserData WHERE username ='" + user + "' AND location_id = '" + location + "'")
+        console.log("SELECT * from UserData WHERE username ='" + user + "' AND location_id = '" + location + "'");
         con.query("SELECT * from UserData WHERE username ='" + user + "' AND location_id = '" + location + "'", function (err, res, fields) {
-            var loc = JSON.stringify(res)
-            console.log(loc)
+            var loc = JSON.stringify(res);
+            console.log(loc);
             if (loc == '[]') {
-                resolve()
+                resolve();
             } else {
-
-                reject()
+                reject();
             }
-        })
-
-    })
-}
+        });
+    });
+};
 
 var addLocations = (user, location) => {
-    con.query("INSERT INTO UserData (username, location_id) values ('" + user + "','" + location + "')")
-}
+    con.query("INSERT INTO UserData (username, location_id) values ('" + user + "','" + location + "')");
+};
 
 /**
  * Reads the account file and also calls the function LoginCheck. Renders error page or index page
@@ -116,11 +116,11 @@ var Login = (request, response) => {
     LoadAccfile().then(res => {
         LoginCheck(request, Accs).then(res => {
             loadUserdata(logged_in.username).then(res => {
-                displaySaved = ''
+                displaySaved = '';
                 //console.log(saved_loc)
                 for (var i = 0; i < saved_loc.length; i++) {
                     //console.log(saved_loc[i].location_id)
-                    displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`
+                    displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`;
                 }
 
 
@@ -128,31 +128,31 @@ var Login = (request, response) => {
                     console.log(response1);
                     maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
                         console.log(response2.list_of_places);
-                        displayText = ' '
+                        displayText = ' ';
                         for (var i = 0; i < response2.list_of_places.length; i++) {
-                            displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`
+                            displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;
                         }
                         response.render('index2.hbs', {
                             savedSpots: displaySaved,
                             testvar: displayText,
                             coord: `<script>latitude = ${response1.lat}; longitude = ${response1.lon};initMultPlaceMap()</script>`
-                        })
-                    })
+                        });
+                    });
                     // response.render('index2.hbs', {
                     //     savedSpots: displaySaved,
                     //     coord: `<script>latitude = ${response.lat}; longitude = ${response.lon};defMap()</script>`
                     // })
-                })
-            })
+                });
+            });
         },
             rej => {
                 response.render('index.hbs', {
                     username: 3
                 });
             }
-        )
-    })
-}
+        );
+    });
+};
 
 /**
  * Verifies that the username and password exist in the accs arg.
@@ -165,16 +165,16 @@ var LoginCheck = (request, accs) => {
     return new Promise(function (resolve, reject) {
         for (i = 0; i < accs.length; i++) {
             //console.log(accs[i].username, request.body.username)
-            console.log(accs[i].salt)
+            console.log(accs[i].salt);
             if ((request.body.username == accs[i].username) && (hash_data(request.body.password + accs[i].salt) == accs[i].pass)) {
                 console.log("User pass is ", accs[i].pass);
-                logged_in = accs[i]
-                user_id = i
-                resolve(0)
+                logged_in = accs[i];
+                user_id = i;
+                resolve(0);
             }
-        };
-        reject(1)
-    })
+        }
+        reject(1);
+    });
 
 };
 
@@ -187,27 +187,27 @@ var LoginCheck = (request, accs) => {
 var AddUsr = (request, response) => {
     LoadAccfile().then(res => {
         if (UserNameCheck(request, response, Accs) == 0 && PasswordCheck(request, response) == 0) {
-            var salt = generateSalt()
-            hash_password = hash_data(request.body.NewPassword + salt)
+            var salt = generateSalt();
+            hash_password = hash_data(request.body.NewPassword + salt);
             var acc = {
                 'user': request.body.NewUser,
                 'pass': hash_password,
-            }
+            };
             con.query("INSERT INTO users (username, pass, salt) values ('" + acc.user + "','" + acc.pass + "','" + salt + "')", function (err, res, fields) {
-                console.log(err)
-                console.log(salt)
-            })
+                console.log(err);
+                console.log(salt);
+            });
 
             response.render('index.hbs', {
                 username: 0
             });
         }
-    })
+    });
 };
 
 var hash_data = (data) => {
     return crypto.createHash('md5').update(data).digest('hex');
-}
+};
 
 var generateSalt = () => {
     var text = "";
@@ -216,8 +216,8 @@ var generateSalt = () => {
     for (var i = 0; i < 16; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-    return text
-}
+    return text;
+};
 
 /**
  * checks if new username is already saved
@@ -234,20 +234,20 @@ var UserNameCheck = (request, response, Accs) => {
                     response.render('index.hbs', {
                         username: 2
                     });
-                    return 1
+                    return 1;
                 }
             }
-            return 0
+            return 0;
         }
         response.render('index.hbs', {
             username: 1
         });
-        return 2
+        return 2;
     }
     response.render('index.hbs', {
         username: 6
     });
-    return 1
+    return 1;
 };
 
 
@@ -263,15 +263,15 @@ var PasswordCheck = (request, response) => {
             response.render('index.hbs', {
                 username: 4
             });
-            return 1
+            return 1;
         } else {
-            return 0
+            return 0;
         }
     }
     response.render('index.hbs', {
         username: 5
     });
-    return 2
+    return 2;
 };
 
 
@@ -293,9 +293,9 @@ app.post('/login', (request, response) => {
 
 app.get('/places_funct', (request, response) => {
     var places = fs.readFileSync('places.json');
-    var parsed_places = JSON.parse(places)
-    response.end(places)
-})
+    var parsed_places = JSON.parse(places);
+    response.end(places);
+});
 
 app.post('/home', (request, response) => {
     AddUsr(request, response);
@@ -305,7 +305,7 @@ app.post('/starbucksnearme', (request, response) => {
     longitude = request.body.longitude;
     latitude = request.body.latitude;
     maps.get_sturbuckses(latitude, longitude).then((response1) => {
-    })
+    });
 });
 
 
@@ -324,49 +324,49 @@ app.post('/loginsearch', (request, response) => {
         });
     }
     maps.getAddress(place).then((coordinates) => {
-        displaySaved = ''
+        displaySaved = '';
         loadUserdata(logged_in.username).then(res => {
-            displaySaved = ''
-            console.log(saved_loc)
+            displaySaved = '';
+            console.log(saved_loc);
             for (var i = 0; i < saved_loc.length; i++) {
-                console.log(saved_loc[i].location_id)
-                displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`
+                console.log(saved_loc[i].location_id);
+                displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`;
             }
-        })
+        });
         console.log(coordinates);
-        displayText = ' '
+        displayText = ' ';
         if (coordinates.lat && coordinates.long) {
             maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
                 console.log(response1.list_of_places);
                 for (var i = 0; i < response1.list_of_places.length; i++) {
-                    displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response1.list_of_places[i]}\'); currentSB=\'${response1.list_of_places[i]}\'"> ${response1.list_of_places[i]}</a></div>`
+                    displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response1.list_of_places[i]}\'); currentSB=\'${response1.list_of_places[i]}\'"> ${response1.list_of_places[i]}</a></div>`;
                 }
                 response.render('index2.hbs', {
                     savedSpots: displaySaved,
                     testvar: displayText,
                     coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};initMultPlaceMap()</script>`
-                })
-            })
+                });
+            });
         } else {
             response.render('index2.hbs', {
                 error: 1
-            })
+            });
 
         }
-    })
-})
+    });
+});
 /**
  * gets the longitude and latitude of the location that you enter in
  * @param {string} request - gets the value of the location that you enter in 
  * @param {string} response - sends the coordinates of the location that you entered in
  */
 app.post('/getLocation', (request, response) => {
-    place = request.body.location
+    place = request.body.location;
     maps.getAddress(place).then((coordinates) => {
         console.log(coordinates.lat, coordinates.long);
-        response.send(coordinates)
-    })
-})
+        response.send(coordinates);
+    });
+});
 
 /**
  * saves the selected location into the file
@@ -385,22 +385,22 @@ app.post('/storeuserdata', (request, response) => {
     fs.writeFileSync('accounts.json', JSON.stringify(account));*/
     last_save = request.body.location
     checkLocations(logged_in.username, request.body.location).then(res => {
-        addLocations(logged_in.username, request.body.location)
-    }, rej => { console.log('failed') }
-    )
-})
+        addLocations(logged_in.username, request.body.location);
+    }, rej => { console.log('failed');
+    });
+});
 /**
  * populates the saved div with all the locations that you have saved to your account
  * @param {string} response - Renders the index2.hbs page with the variable displaySaved which is a list of all your saved locations and displayText that shows the SB based on IP 
  */
 app.post('/favdata', (request, response) => {
-    displaySaved = ''
+    displaySaved = '';
     loadUserdata(logged_in.username).then(res => {
-        displaySaved = ''
-        console.log(saved_loc)
+        displaySaved = '';
+        console.log(saved_loc);
         for (var i = 0; i < saved_loc.length; i++) {
-            console.log(saved_loc[i].location_id)
-            displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`
+            console.log(saved_loc[i].location_id);
+            displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`;
         }
          displaySaved += `<div id=s${saved_loc.length} class="favItems"><a onclick="getMap(${last_save})"> ${last_save}</a></div>`
 
@@ -409,29 +409,29 @@ app.post('/favdata', (request, response) => {
             console.log(response1);
             maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
                 console.log(response2.list_of_places);
-                displayText = ' '
+                displayText = ' ';
                 for (var i = 0; i < response2.list_of_places.length; i++) {
-                    displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`
+                    displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;
                 }
                 response.render('index2.hbs', {
                     savedSpots: displaySaved,
                     testvar: displayText,
                     coord: `<script>latitude = ${response1.lat}; longitude = ${response1.lon};initMultPlaceMap()</script>`
-                })
-            })
+                });
+            });
             // response.render('index2.hbs', {
             //     savedSpots: displaySaved,
             //     coord: `<script>latitude = ${response.lat}; longitude = ${response.lon};defMap()</script>`
             // })
-        })
-    })
-})
+        });
+    });
+});
 
 app.get('/404', (request, response) => {
     response.send({
         error: 'Page not found'
-    })
-})
+    });
+});
 
 
 var server = app.listen(port, () => {
@@ -444,4 +444,4 @@ module.exports = {
     PasswordCheck,
     LoginCheck,
     server
-}
+};

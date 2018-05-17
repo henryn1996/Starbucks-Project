@@ -64,12 +64,16 @@ function acctFadeIn(){
     acctDiv.style.display = "block";
     newuser.style.left = "0px";
     newuser.style.opacity = 1;
-    newpw.style.transitionDelay = "0.2s"
+    useremail.style.transitionDelay = "0.2s";
+    useremail.style.left = "0px";
+    useremail.style.opacity =1;
+    newpw.style.transitionDelay = "0.4s";
     newpw.style.left = "0px";
     newpw.style.opacity = 1;
-    confirmpw.style.transitionDelay = "0.4s";
+    confirmpw.style.transitionDelay = "0.6s";
     confirmpw.style.left = "0px";
     confirmpw.style.opacity = 1;;
+    submitbutton.style.transitionDelay = "0.8s";
     submitbutton.style.left = "0px";
     submitbutton.style.opacity = 1;
     cancelBtn.style.opacity = 1;
@@ -78,6 +82,8 @@ function acctFadeIn(){
 function acctFadeOut(){
     newuser.style.left = "-150px";
     newuser.style.opacity = 0;
+    useremail.style.left = "-150px";
+    useremail.style.opacity = 0;
     newpw.style.left = "-150px";
     newpw.style.opacity = 0;
     confirmpw.style.left = "-150px";
