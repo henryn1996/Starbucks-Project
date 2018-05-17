@@ -73,17 +73,17 @@ var showfavs = () => {
     xmlhttp.send(`OK`);
 };
 
-// /**
-// This functions creates an empty map on the html page
-// @param {none}
-// @returns {none} 
-// */
-// var defMap = () => {
-//     newmap = new google.maps.Map(document.getElementById('newmap'), {
-//         zoom: 7,
-//         center: { lat: latitude, lng: longitude }
-//     });
-// }
+/**
+This functions creates an empty map on the html page
+@param {none}
+@returns {none} 
+*/
+var defMap = () => {
+    newmap = new google.maps.Map(document.getElementById('newmap'), {
+        zoom: 7,
+        center: { lat: latitude, lng: longitude }
+    });
+}
 
 /**
 This function initialize the empty map on the html page and place the marker on the current position
@@ -218,6 +218,8 @@ function getLocation() {
 function errorMessages(number){
     if (number == 1){
         swal('Invalid Location')
+    } else if (number == 2){
+        swal('Cannot search an empty value')
     }
 }
 //     document.getElementById("nearme").style.top = '0%';

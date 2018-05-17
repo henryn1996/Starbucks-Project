@@ -317,6 +317,12 @@ app.post('/starbucksnearme', (request, response) => {
  */
 app.post('/loginsearch', (request, response) => {
     place = request.body.search;
+    if (place == ''){
+        response.render('index2.hbs', {
+            error: 2,
+            coord: `<script>latitude = ${49.2827}; longitude = ${123.1207}; z = ${19};initMultPlaceMap()</script>`
+        });
+    }
     maps.getAddress(place).then((coordinates) => {
         displaySaved = ''
         loadUserdata(logged_in.username).then(res => {
