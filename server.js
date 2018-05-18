@@ -461,6 +461,7 @@ var server = app.listen(port, () => {
 
 
 module.exports = {
+    send_mail,
     UserNameCheck,
     PasswordCheck,
     LoginCheck,
