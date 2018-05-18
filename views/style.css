@@ -384,6 +384,7 @@ form {
 ul {
     position: absolute;
     font-size: 0;
+    float: left;
     box-sizing: border-box;
     width:40%;
     padding:4px;
@@ -543,4 +544,8 @@ a {
     color:#00704a;
     font-size:18px;
 
+}
+
+.delButton {
+    display:none;
 }
