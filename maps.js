@@ -2,10 +2,10 @@ const request = require('request');
 const fs = require('fs');
 var list_of_places=[];
 /**
-This function is used to get Sbs near you based on the coordinates. THIS IS A TEST
-It uses Google Place API. It creates a Promise and if the body.status=="OK", will return tuple of body and list of places
-@param {string} lat - Latitude of the position
-@param {string} long - Longtitude of the position
+*This function is used to get Sbs near you based on the coordinates. THIS IS A TEST
+*It uses Google Place API. It creates a Promise and if the body.status=="OK", will return tuple of body and list of places
+*@param {string} lat - Latitude of the position
+*@param {string} long - Longtitude of the position
 */
 var get_sturbuckses = (lat, long) => {
 	return new Promise((resolve, reject) => {
@@ -14,10 +14,10 @@ var get_sturbuckses = (lat, long) => {
 			json: true
 		}, (error, response, body) => {
 			if(error){
-				reject('Can not connect to Maps');
-			}
-			else if(body.status=="OK"){
-				
+				resolve('Can not connect to Maps');
+			} else if (body.status === 'ZERO_RESULTS') {
+                resolve('Cannot find requested address');
+            } else if(body.status=="OK"){
 				for(place in body.results){
 					list_of_places.unshift(body.results[place].vicinity);
 				}
@@ -30,9 +30,9 @@ var get_sturbuckses = (lat, long) => {
 };
 
 /**
-This function is used to get address based on the word position and returns the latitude and longtitude
-@param {string} address - Address in words, that will be converted to the URI format
-@returns {dictionary} Dict of the long and lat of the address 
+*This function is used to get address based on the word position and returns the latitude and longtitude
+*@param {string} address - Address in words, that will be converted to the URI format
+*@returns {dictionary} Dict of the long and lat of the address 
 */
 var getAddress = (address) => {
     return new Promise((resolve,reject)=> {

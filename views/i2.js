@@ -1,6 +1,6 @@
 /**
-@file This is the JavaScript file for the index2.hbs view. It includes the functions with the detecting current position,
-drawing the map on the page and display both multiple and single places on it.
+*@file This is the JavaScript file for the index2.hbs view. It includes the functions with the detecting current position,
+*drawing the map on the page and display both multiple and single places on it.
 */
 
 var newmap;
@@ -11,10 +11,10 @@ var botMheight = 0;
 var choiceheight = 93;
 
 /**
-This functions runs functions "/getLocation" on the server. The server's function will get current location, based on the IP.
-It will initialize the initMap function and pass the cooerdinates as parametrs.
-@param {string} location
-@returns {none} 
+*This functions runs functions "/getLocation" on the server. The server's function will get current location, based on the IP.
+*It will initialize the initMap function and pass the cooerdinates as parametrs.
+*@param {string} location - is the address of the selected location
+*@returns {none} 
 */
 var getMap = (location) => {
     var xmlhttp = new XMLHttpRequest();
@@ -34,10 +34,11 @@ var getMap = (location) => {
 };
 
 /**
-This functions runs functions "/storeuserdata" on the server. The server's function will checks the logged in persone and
-then add the location to the list of the saved locations. It will send empty string back to the server.
-@param {none}
-@returns {none} 
+*This functions runs functions "/storeuserdata" on the server. The server's function will checks the logged in persone and
+*then add the location to the list of the saved locations. It will send empty string back to the server.
+*gives a confirmation message to render
+*@param {none}
+*@returns {none} 
 */
 var savelocation = () => {
     if (currentSB != '') {
@@ -57,9 +58,9 @@ var savelocation = () => {
 };
 
 /**
-This functions runs the server function "/favdata", that will add a string of the favotires places, and sends "OK" response.
-@param {none}
-@returns {none} 
+*This functions runs the server function "/favdata", that will add a string of the favotires places, and sends "OK" response.
+*@param {none}
+*@returns {none} 
 */
 var showfavs = () => {
     var xmlhttp = new XMLHttpRequest();
@@ -74,9 +75,9 @@ var showfavs = () => {
 };
 
 /**
-This functions creates an empty map on the html page
-@param {none}
-@returns {none} 
+*This functions creates an empty map on the html page
+*@param {none}
+*@returns {none} 
 */
 var defMap = () => {
     newmap = new google.maps.Map(document.getElementById('newmap'), {
@@ -86,9 +87,11 @@ var defMap = () => {
 }
 
 /**
-This function initialize the empty map on the html page and place the marker on the current position
-@param {none}
-@returns {none}
+*This function initialize the empty map on the html page and place the marker on the current position
+*@param {string} latitude - the latitude of the selected/searched location
+*@param {string} longitude - the longitude of the selected/searched location
+*@param {int} z - the amount of zoom used for the map to focus on location
+*@returns {none}
 */
 var initMap = (latitude, longitude, z) => {
     newmap = new google.maps.Map(document.getElementById('newmap'), {
@@ -98,12 +101,11 @@ var initMap = (latitude, longitude, z) => {
     addMarkerWithTimeout({ lat: latitude, lng: longitude },200);
 }
 
-// }
 /**
-This function is used to initialize the map. The function populates the the map with the list of places.
-List of places is created by the fuction in the map.js file and send by thr server side from the http://localhost:8080/places_funct.
-@param {none}
-@returns {none} 
+*This function is used to initialize the map. The function populates the the map with the list of places.
+*List of places is created by the fuction in the map.js file and send by thr server side from the http://localhost:8080/places_funct.
+*@param {none}
+*@returns {none} 
 */
 var initMultPlaceMap = () => {
     newmap = new google.maps.Map(document.getElementById('newmap'), {
@@ -146,9 +148,9 @@ var initMultPlaceMap = () => {
 }
 
 /**
-This is advanced virsion of the placing the marker on the map. It will pop it out with snall delay.
-@param {string} latLng - string, that include latitude and longitude, or the folowing object { lat: latitude, lng: longitude }.
-@param {int} timeout - number in milisec for the delay (pop-up) time. 
+*This is advanced virsion of the placing the marker on the map. It will pop it out with snall delay.
+*@param {string} latLng - string, that include latitude and longitude, or the folowing object { lat: latitude, lng: longitude }.
+*@param {int} timeout - number in milisec for the delay (pop-up) time. 
 */
 var addMarkerWithTimeout = (latLng, timeout) => {
                 window.setTimeout(() => {
@@ -160,8 +162,8 @@ var addMarkerWithTimeout = (latLng, timeout) => {
                 }, timeout);
               }
 /**
-This function placese the marker on the map
-@param {none}
+*This function placese the marker on the map
+*@param {none}
 */
 var place_marker = () => {
     var marker = new google.maps.Marker({
@@ -198,6 +200,11 @@ document.getElementById("Searchlocation").addEventListener("click", function () 
     }, 400)
 });
 
+/**
+*This function initialize the empty map on the html page and place the marker on the current position
+*@param {none}
+*@returns {none}
+*/
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -215,6 +222,9 @@ function getLocation() {
         });
 }};
 
+/**
+*gives what type of error to show
+*/
 function errorMessages(number){
     if (number == 1){
         swal('Invalid Location')
