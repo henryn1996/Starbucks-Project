@@ -235,6 +235,12 @@ function errorMessages(number){
         swal('Invalid Location')
     } else if (number == 2){
         swal('Cannot search an empty value')
+    } else if (number == 3){
+        swal('Location already')
+    } else if (number == 4){
+        swal('Select a location')
+    } else if (number == 5){
+        swal('You have saved a')
     }
 }
 
