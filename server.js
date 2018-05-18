@@ -464,5 +464,9 @@ module.exports = {
     UserNameCheck,
     PasswordCheck,
     LoginCheck,
-    server
+    server,
+    LoadAccfile,
+    loadUserdata,
+    checkLocations
+
 };
