@@ -66,7 +66,7 @@ describe('login', () => {
         
     })
     test("fail", () => {
-        testFunc.LoginCheck(fail, Accs).catch(e => {
+        return testFunc.LoginCheck(fail, Accs).catch(e => {
             expect(e).toBe(1)
         })
     })
@@ -102,6 +102,43 @@ describe('registerPassword', () => {
     })
     test('Not 5 Chars', () => {
         expect(testFunc.PasswordCheck(fail2, response)).toBe(2)
+    })
+})
+
+describe('LoadAccfile', () => {
+    test('Not empty', () => {
+        return testFunc.LoadAccfile().then(i => {
+            expect(i).not.toBe(undefined)
+        })
+    })
+
+})
+
+describe('loadUserdata', () => {
+    test('Not empty', () => {
+        return testFunc.loadUserdata().then(i => {
+            expect(i).not.toBe(undefined)
+        })
+    })
+})
+
+describe('checkLocations', () => {
+    test('Nothing returned', () => {
+        return testFunc.checkLocations().then(i => {
+            expect(i).toBe(undefined)
+        })
+    })
+
+/*    test('Nothing returned', () => {
+        return testFunc.checkLocations().catch(i => {
+            expect(i).not.toBeUndefined()
+        })
+    }) */
+})
+
+describe('send_mail', () => {
+    test('pass', () => {
+        expect(testFunc.send_mail()).toBeUndefined()
     })
 })
 
