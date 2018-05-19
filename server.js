@@ -416,11 +416,6 @@ app.post('/storeuserdata', (request, response) => {
     console.log(account);
     fs.writeFileSync('accounts.json', JSON.stringify(account));*/
 
-<<<<<<< HEAD
-    last_save = request.body.location;
-
-=======
->>>>>>> bf01517e7f9183d79f2ed7318dc2a5a1e823b2f3
     checkLocations(logged_in.username, request.body.location).then(res => {
         last_save = request.body.location;
         addLocations(logged_in.username, request.body.location);
