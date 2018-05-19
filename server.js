@@ -48,6 +48,7 @@ var send_mail = () => {
     options.to = 'viktor.sheverdin@gmail.com';
     options.subject = 'Test email from Sb app';
     options.text = 'OK! It actually works!';
+
     console.log(options);
     email.send_email(options);
 
@@ -168,6 +169,7 @@ var Login = (request, response) => {
             }
         );
     });
+    });
 };
 
 /**
@@ -214,6 +216,7 @@ var AddUsr = (request, response) => {
             response.render('index.hbs', {
                 username: 0
             });
+            return 'success!'
         }
     });
 };
@@ -336,6 +339,8 @@ app.post('/loginsearch', (request, response) => {
     if (place == ''){
         response.render('index2.hbs', {
             error: 2,
+            savedSpots: displaySaved,
+            testvar: displayText,
             coord: `<script>latitude = ${49.2827}; longitude = ${123.1207}; z = ${19};initMultPlaceMap()</script>`
         });
     }
@@ -411,8 +416,11 @@ app.post('/storeuserdata', (request, response) => {
     console.log(account);
     fs.writeFileSync('accounts.json', JSON.stringify(account));*/
 
+<<<<<<< HEAD
     last_save = request.body.location;
 
+=======
+>>>>>>> bf01517e7f9183d79f2ed7318dc2a5a1e823b2f3
     checkLocations(logged_in.username, request.body.location).then(res => {
         last_save = request.body.location;
         addLocations(logged_in.username, request.body.location);
@@ -477,7 +485,9 @@ module.exports = {
     server,
     LoadAccfile,
     loadUserdata,
-    checkLocations
-
+    checkLocations,
+    hash_data,
+    generateSalt,
+    AddUsr
 };
 

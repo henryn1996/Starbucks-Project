@@ -1,4 +1,7 @@
+jest.setTimeout(20000)
+
 var testFunc = require("./server")
+var testMap = require("./maps")
 var Accs = [{ "username": "jason", "pass": "2416fa350b95e3792b1709a8892647d0", 'salt': '7vUnsBk08fp6sEkU', "saved": ["600 Dunsmuir Street, Vancouver", "80 Pine St, New York", "885 Dunsmuir St, Vancouver", "600 Dunsmuir Street, Vancouver", "720 Granville St, Vancouver", "398 Robson St Unit #5, Vancouver", "811 Hornby St, Vancouver"] }]
 
 var success = {
@@ -52,6 +55,13 @@ var failSpace = {
     }
 }
 
+/*  fakePw: Fake password input */
+var fakePw = 'password123'
+
+var loginSuccess = {
+
+}
+
 var response = {
     render: function(...args){}
 
@@ -62,8 +72,6 @@ describe('login', () => {
         return testFunc.LoginCheck(success, Accs).then(e => {
             expect(e).toBe(0)
         })
-
-        
     })
     test("fail", () => {
         return testFunc.LoginCheck(fail, Accs).catch(e => {
@@ -136,10 +144,46 @@ describe('checkLocations', () => {
     }) */
 })
 
-describe('send_mail', () => {
+describe.skip('send_mail', () => {
     test('pass', () => {
         expect(testFunc.send_mail()).toBeUndefined()
     })
 })
+
+describe('hash_data', () => {
+    test('return hash', () => {
+        expect(testFunc.hash_data(fakePw)).not.toBeUndefined()
+    })
+})
+
+describe('generateSalt', () => {
+    test('return hash', () => {
+        expect(testFunc.generateSalt()).toBeDefined()
+    })
+})
+
+describe('AddUsr', () => {
+    test('Add a username', () => {
+        expect(testFunc.AddUsr(success, response)).toBeUndefined()
+    })
+})
+
+describe('get_starbuckes', () => {
+    test('Get a starbucks', () => {
+        return testMap.get_sturbuckses(49, 123).then(i => {
+            expect(i).toBeDefined()
+            })
+      })
+})
+
+/*fixme*/
+describe.skip('getAddresss', () => {
+    test('Get store address', () => {
+        return testMap.get_sturbuckses('Vancouver').then(i => {
+            expect(i).toBeDefined()
+            })
+      })
+})
+
 
 testFunc.server.close();
