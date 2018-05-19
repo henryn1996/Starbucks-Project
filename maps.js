@@ -29,6 +29,7 @@ var get_sturbuckses = (lat, long) => {
 	});
 };
 
+
 /**
 *This function is used to get address based on the word position and returns the latitude and longtitude
 *@param {string} address - Address in words, that will be converted to the URI format

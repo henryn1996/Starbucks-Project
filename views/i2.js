@@ -9,7 +9,6 @@ var longitude = -123.2760839;
 var currentSB = "";
 var botMheight = 0;
 var choiceheight = 93;
-
 var forDeletion = []
 var editing = 0
 
@@ -77,7 +76,6 @@ var showfavs = () => {
     xmlhttp.send(`OK`);
 };
 
-
 /**
 *This functions creates an empty map on the html page
 *@param {none}
@@ -89,7 +87,6 @@ var defMap = () => {
         center: { lat: latitude, lng: longitude }
     });
 }
-
 
 /**
 *This function initialize the empty map on the html page and place the marker on the current position
@@ -235,14 +232,9 @@ function errorMessages(number){
         swal('Invalid Location')
     } else if (number == 2){
         swal('Cannot search an empty value')
-    } else if (number == 3){
-        swal('Location already')
-    } else if (number == 4){
-        swal('Select a location')
-    } else if (number == 5){
-        swal('You have saved a')
     }
 }
+
 
 function deleteFav(num){
     if (forDeletion.includes(num)) {
@@ -278,7 +270,6 @@ function editMode() {
     }
 
 }
-
 //     document.getElementById("nearme").style.top = '0%';
 //     document.getElementById('savedloc').style.top = '-100%';
 // });
