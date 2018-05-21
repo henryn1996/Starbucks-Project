@@ -10,6 +10,8 @@
     font-family:'Segoe UI';
     background-color: rgba(0,0,0,0.4);
     padding-left:10px;
+    display: table;
+    color: white;
 }
 
 #header2 {
@@ -119,20 +121,44 @@ form {
     text-align: center;
 }
 
-#userlogin, #passwordlogin {
+.iconBox {
     position: relative;
-    width: 80%;
+    width:80%;
+    left:0;
+    border-bottom: 1px solid green;
+    margin:auto;
+    text-align: center;
+    transition-duration: 0.5s;
+}
+
+i {
+    line-height: 2;
+    position: absolute;
+    top:0px;
+    left:0;
+    color: grey;
+    z-index: 9999;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+}
+
+
+
+#userlogin, #passwordlogin{
     font-size: 100%;
-    left: 0px;
+    left: 0;
+    width:75%;
     border: 0;
     padding: 0;
     background-color: transparent;
     line-height: 2rem;
-    border-bottom: 1px solid green;
     color: #777;
     outline: none;
     transition-duration: 0.5s;
 }
+
 
 #login {
     position: relative;
@@ -351,6 +377,19 @@ form {
     left:0px;
 }
 
+
+.iconBox2 {
+    position: relative;
+    width:80%;
+    left:-150px;
+    border-bottom: 1px solid green;
+    margin:auto;
+    text-align: center;
+    transition-duration: 0.5s;
+    opacity: 0;
+
+}
+
 #createacc{
     position: absolute;
     height:40%;
@@ -361,23 +400,26 @@ form {
     bottom:10%;
     text-align: center;
     display: none;
+    transition-duration: 0.5s;
+
 }
 
-#newuser, #useremail, #newpw, #confirmpw{
-    position: relative;
-    width: 80%;
+
+#newuser, #useremail,#newpw, #confirmpw {
     font-size: 100%;
     left: -150px;
+    width:75%;
     border: 0;
     padding: 0;
     background-color: transparent;
-    line-height: 18px;
-    border-bottom: 1px solid green;
+    line-height: 2rem;
     color: #777;
     outline: none;
-    opacity: 0;
-    transition-duration:0.5s;
+    transition-duration: 0.5s;
 }
+
+
+
 #confirmtitle{
     position: absolute;
     left:0px;
@@ -614,6 +656,7 @@ fieldset .rating {
     background-color: green;
     color:white;
     text-align: center;
+    margin-bottom: 5%;
 }
 
 h4 {
@@ -658,6 +701,7 @@ h4 {
 #comment {
     width:9em;
     height:5em;
+    margin-bottom: 10px;
     font-family: "Segoe UI";
 }
 
@@ -698,4 +742,14 @@ h4 {
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
 
+
+
+h2 {
+    margin:0;
+    letter-spacing:3px;
+    font-weight: lighter;
+    font-size: 20px;
+    display:table-cell;
+    vertical-align: middle;
+}
 
