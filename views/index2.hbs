@@ -5,6 +5,7 @@
     <title>Web-App</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" type="image/png" href="starbucks.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrkIopyh3b866b5HgCZpRGT2CXlBGny_M&callback=initMap">
     </script>
 </head>
@@ -22,8 +23,26 @@
     <form action="/favdata" method='post'>
         <input type='submit' onclick="savelocation()" value="Save to Favorites" id='savecurrentloc'>
     </div>
-
-
+    <form action="/rating" method="post">
+        <fieldset id="ratingID" class="rating">
+                <div id="ratingHeader">
+                    <h4>Give Us Feedback</h4>
+                </div>
+                <input type="radio" id="star5" name="rating" value="5"/><label class ="full" for="star5"></label>
+                <input type="radio" id="star4" name="rating" value="4"/><label class ="full" for="star4"></label>
+                <input type="radio" id="star3" name="rating" value="3"/><label class ="full" for="star3"></label>
+                <input type="radio" id="star2" name="rating" value="2"/><label class ="full" for="star2"></label>
+                <input type="radio" id="star1" name="rating" value="1"/><label class ="full" for="star1"></label>
+                <div id="ratingFooter">
+                <textarea name="comment" cols="20" rows="5"
+                 id="comment"/ placeholder="Your message"></textarea></br>
+                    <div id="sendButton">
+                        <input type="submit" value="Send" id="send"/>
+                    </div>
+                </div>
+        </fieldset>
+    </form>
+    <form action="/favdata" method='post'>
         <div id="map">
             <div id='newmap'></div>
         </div>
@@ -32,13 +51,13 @@
         <div id="searchbox">
             <form action='/loginsearch' method='post'>
                 <input type="submit" value="Search" id='go'>
-                <input type="text" name="search" id="search">
+                <input type="text" name="search" id="search" placeholder="Search City Name">
             </form>
         </div>
         {{{testvar}}}
     </div>
     <div id="savedloc">
-        <div id="searchbox">Saved Locations   <button id="edit" onclick="editMode()">Edit</button></div>
+        <div id="searchbox"><h5>Saved Locations</h5>  <button id="edit" onclick="editMode()">Edit</button></div>
         {{{savedSpots}}}
     </div>
     <!---

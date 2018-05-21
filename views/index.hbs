@@ -4,10 +4,13 @@
         <title>Web-App</title>
         <link href="style.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="starbucks.png"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <div class="slideshow">
-            <div id="header">FIND YOUR STARBUCKS</div>
+            <div id="header">
+                <h2>FIND YOUR STARBUCKS</h2>
+            </div>
             <div id="bg1" class="bg" style='background-image: url("bgImg/bg1.jpg'); display:"></div>
             <div id="bg2" class="bg" style='background-image: url("bgImg/bg2.jpg');"></div>
             <div id="bg3" class="bg" style='background-image: url("bgImg/bg3.jpg');"></div>
@@ -20,10 +23,15 @@
             <div id='loginout'>
                 <form action='/login' method='post'>
                     <br>
-                    <input type="text" id='userlogin' name="username" placeholder="username">
+                    <div id="uName" class="iconBox">
+                        <i class="fas fa-user" aria-hidden="hidden"></i>
+                        <input type="text" id='userlogin' name="username" placeholder="username">
+                    </div>
                     <br>
-                    <br>
-                    <input type="password" id='passwordlogin' name="password" placeholder="password">
+                    <div id ="uPassword" class="iconBox">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id='passwordlogin' name="password" placeholder="password">
+                    </div>
                     <br><br>
                     <button type="login" id='login'>Login</button>
                 </form>
@@ -31,14 +39,22 @@
             </div>
         <div id="createacc">
             <form action='/home' method='post'>
-                <input class='inputs' type="text" name="NewUser" id='newuser' placeholder="enter username">
-                <br><br>
-                <input class='inputs' type="text" name="UserEmail" id='useremail' placeholder="enter your email">
-                <br><br>
-                <input class='inputs' type="password" name="NewPassword" id='newpw' placeholder="enter password">
-                <br><br>
+                <div id="nUser" class="iconBox2">
+                    <i class="fas fa-user" aria-hidden="hidden"></i>
+                    <input class='inputs' type="text" name="NewUser" id='newuser' placeholder="enter username">
+                </div>
+                <div id="nEmail" class="iconBox2">
+                    <i class="fas fa-envelope" aria-hidden="hidden"></i>
+                    <input class='inputs' type="text" name="UserEmail" id='useremail' placeholder="enter your email">
+                </div>
+                <div id="nPassword" class="iconBox2">
+                    <i class="fas fa-key" aria-hidden="hidden"></i>
+                    <input class='inputs' type="password" name="NewPassword" id='newpw' placeholder="enter password">
+                </div>
+                <div id="cPassword" class="iconBox2">
+                    <i class="fas fa-key" aria-hidden="hidden"></i>
                 <input class='inputs' type="password" name="confirmp" id='confirmpw' placeholder="confirm password">
-                <br><br>
+                </div>
                 <input type="submit" value="Submit" id='submitbutton'>
             </form>
             <button id="cancelBtn">Cancel</button>

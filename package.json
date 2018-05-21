@@ -10,11 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "crypto": "^1.0.1",
+    "email-templates": "^3.6.0",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "hbs": "^4.0.1",
     "mysql": "^2.15.0",
     "nodemailer": "^4.6.4",
+    "pug": "^2.0.3",
     "request": "^2.85.0"
   },
   "devDependencies": {

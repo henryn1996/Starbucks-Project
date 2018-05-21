@@ -285,3 +285,19 @@ function editMode() {
 // document.getElementById('savecurrentloc').addEventListener("click", function () {
 //     window.alert('You have saved the location');
 // });
+
+var lot=document.getElementById("savedloc").children;
+for (var el in lot) {
+    var id=lot[el].id;
+    if (id=="searchbox") continue;
+    else {
+        lot[el].onclick=function(par) {
+            var rect=this.getBoundingClientRect();
+            var pos=[rect.x,rect.y];
+            document.getElementById("ratingID").style.display="block";
+            document.getElementById("ratingID").style.position="absolute";
+            document.getElementById("ratingID").style.top=pos[1]+"px";
+            console.log(rect, pos);
+        }
+    }
+}

@@ -35,10 +35,10 @@ document.getElementById("cancelBtn").addEventListener("click", function(){
 
 
 function loginFadeIn(){
-    userlogin.style.left = "0px";
-    userlogin.style.opacity = 1;
-    passwordlogin.style.left = "0px";
-    passwordlogin.style.opacity = 1;
+    uName.style.left ="0px";
+    uName.style.opacity = 1;
+    uPassword.style.left = "0px";
+    uPassword.style.opacity = 1;
     login.style.left = "0px";
     login.style.opacity = 1;
     createBtn.style.opacity = 1;
@@ -46,11 +46,11 @@ function loginFadeIn(){
 
 
 function loginFadeOut(){
-    userlogin.style.left = "150px";
-    userlogin.style.opacity = 0;
-    passwordlogin.style.transitionDelay = "0.2s";
-    passwordlogin.style.left = "150px";
-    passwordlogin.style.opacity = 0;
+    uName.style.left ="150px";
+    uName.style.opacity = 0;
+    uPassword.style.transitionDelay ="0.2s";
+    uPassword.style.left = "150px";
+    uPassword.style.opacity = 0;
     login.style.transitionDelay = "0.4s";
     login.style.left = "150px";
     login.style.opacity = 0;
@@ -62,17 +62,17 @@ function loginFadeOut(){
 
 function acctFadeIn(){
     acctDiv.style.display = "block";
-    newuser.style.left = "0px";
-    newuser.style.opacity = 1;
-    useremail.style.transitionDelay = "0.2s";
-    useremail.style.left = "0px";
-    useremail.style.opacity =1;
-    newpw.style.transitionDelay = "0.4s";
-    newpw.style.left = "0px";
-    newpw.style.opacity = 1;
-    confirmpw.style.transitionDelay = "0.6s";
-    confirmpw.style.left = "0px";
-    confirmpw.style.opacity = 1;;
+    nUser.style.left = "0px";
+    nUser.style.opacity = 1;
+    nEmail.style.transitionDelay = "0.2s";
+    nEmail.style.left = "0px";
+    nEmail.style.opacity =1;
+    nPassword.style.transitionDelay = "0.4s";
+    nPassword.style.left = "0px";
+    nPassword.style.opacity = 1;
+    cPassword.style.transitionDelay = "0.6s";
+    cPassword.style.left = "0px";
+    cPassword.style.opacity = 1;;
     submitbutton.style.transitionDelay = "0.8s";
     submitbutton.style.left = "0px";
     submitbutton.style.opacity = 1;
@@ -80,14 +80,14 @@ function acctFadeIn(){
 }
 
 function acctFadeOut(){
-    newuser.style.left = "-150px";
-    newuser.style.opacity = 0;
-    useremail.style.left = "-150px";
-    useremail.style.opacity = 0;
-    newpw.style.left = "-150px";
-    newpw.style.opacity = 0;
-    confirmpw.style.left = "-150px";
-    confirmpw.style.opacity = 0;
+    nUser.style.left = "-150px";
+    nUser.style.opacity = 0;
+    nEmail.style.left = "-150px";
+    nEmail.style.opacity = 0;
+    nPassword.style.left = "-150px";
+    nPassword.style.opacity = 0;
+    cPassword.style.left = "-150px";
+    cPassword.style.opacity = 0;
     submitbutton.style.left = "-150px";
     submitbutton.style.opacity = 0;
     cancelBtn.style.opacity = 0;
