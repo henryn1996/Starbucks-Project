@@ -94,9 +94,397 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="con"><span class="type-signature"></span>con<span class="type-signature"></span></h4>
+
+
+<p class="summary"><p>Calls the function ReadAccfile and returns the list into the variable Accs</p>.</p>
+
+
+
+<div class="description">
+    <p>Calls the function ReadAccfile and returns the list into the variable Accs</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addLocations"><span class="type-signature"></span>addLocations<span class="signature">(user, location)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>Connects to database, adds location to userdata table using location and logged in user</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>Connects to database, adds location to userdata table using location and logged in user</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>is the logged in user</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Is the location address the user is trying to save</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line122">line 122</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addMarkerWithTimeout"><span class="type-signature"></span>addMarkerWithTimeout<span class="signature">(latLng, timeout)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary">This is advanced virsion of the placing the marker on the map.</p>
+    
+
+
+
+<div class="description">
+    <p>This is advanced virsion of the placing the marker on the map. It will pop it out with snall delay.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>latLng</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>string, that include latitude and longitude, or the folowing object { lat: latitude, lng: longitude }.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timeout</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>number in milisec for the delay (pop-up) time.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line155">line 155</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
             
@@ -108,11 +496,13 @@
     
 
     
+    <p class="summary">Adds a user to the file and Acc list variable if UserNameCheck and PasswordCheck returns 0.</p>
+    
 
 
 
 <div class="description">
-    Adds a user to the file and Acc list variable if UserNameCheck and PasswordCheck returns 0.
+    <p>Adds a user to the file and Acc list variable if UserNameCheck and PasswordCheck returns 0.</p>
 </div>
 
 
@@ -164,7 +554,7 @@
 
             
 
-            <td class="description last">Grabs the username, password and confirm password values from the form createacc</td>
+            <td class="description last"><p>Grabs the username, password and confirm password values from the form createacc</p></td>
         </tr>
 
     
@@ -187,7 +577,167 @@
 
             
 
-            <td class="description last">renders origional login page</td>
+            <td class="description last"><p>renders origional login page</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line200">line 200</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkLocations"><span class="type-signature"></span>checkLocations<span class="signature">(user, location)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>Connects to database, checks if location is already saved by the user by Where query</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>Connects to database, checks if location is already saved by the user by Where query</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>takes the logged in username</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Is the location address the user is trying to save</p></td>
         </tr>
 
     
@@ -262,15 +812,168 @@
     
 
     
-    <h4 class="name" id="LoadAccfile"><span class="type-signature"></span>LoadAccfile<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="defMap"><span class="type-signature"></span>defMap<span class="signature">()</span><span class="type-signature"> &rarr; {none}</span></h4>
     
 
+    
+    <p class="summary"><p>This functions creates an empty map on the html page</p>.</p>
     
 
 
 
 <div class="description">
-    Calls the function ReadAccfile and returns the list into the variable Accs
+    <p>This functions creates an empty map on the html page</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">none</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line82">line 82</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">none</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="errorMessages"><span class="type-signature"></span>errorMessages<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>gives what type of error to show</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>gives what type of error to show</p>
 </div>
 
 
@@ -314,7 +1017,1437 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line28">line 28</a>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line228">line 228</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="generateSalt"><span class="type-signature"></span>generateSalt<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>generates a 15 length salt, for password purposes</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>generates a 15 length salt, for password purposes</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line232">line 232</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="get_sturbuckses"><span class="type-signature"></span>get_sturbuckses<span class="signature">(lat, long)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary">This function is used to get Sbs near you based on the coordinates.</p>
+    
+
+
+
+<div class="description">
+    <p>This function is used to get Sbs near you based on the coordinates. THIS IS A TEST
+It uses Google Place API. It creates a Promise and if the body.status==&quot;OK&quot;, will return tuple of body and list of places</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>lat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Latitude of the position</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>long</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Longtitude of the position</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="maps.js.html">maps.js</a>, <a href="maps.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getAddress"><span class="type-signature"></span>getAddress<span class="signature">(address)</span><span class="type-signature"> &rarr; {dictionary}</span></h4>
+    
+
+    
+    <p class="summary"><p>This function is used to get address based on the word position and returns the latitude and longtitude</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>This function is used to get address based on the word position and returns the latitude and longtitude</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Address in words, that will be converted to the URI format</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="maps.js.html">maps.js</a>, <a href="maps.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Dict of the long and lat of the address</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">dictionary</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getLocation"><span class="type-signature"></span>getLocation<span class="signature">()</span><span class="type-signature"> &rarr; {none}</span></h4>
+    
+
+    
+    <p class="summary"><p>This function initialize the empty map on the html page and place the marker on the current position</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>This function initialize the empty map on the html page and place the marker on the current position</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">none</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line208">line 208</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">none</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getMap"><span class="type-signature"></span>getMap<span class="signature">(location)</span><span class="type-signature"> &rarr; {none}</span></h4>
+    
+
+    
+    <p class="summary">This functions runs functions &quot;/getLocation&quot; on the server.</p>
+    
+
+
+
+<div class="description">
+    <p>This functions runs functions &quot;/getLocation&quot; on the server. The server's function will get current location, based on the IP.
+It will initialize the initMap function and pass the cooerdinates as parametrs.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>is the address of the selected location</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">none</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="hash_data"><span class="type-signature"></span>hash_data<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>uses the crypto module to hash the data (usually a password)</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>uses the crypto module to hash the data (usually a password)</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>is the string that is going to be hashed</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line225">line 225</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="initMap"><span class="type-signature"></span>initMap<span class="signature">(latitude, longitude, z)</span><span class="type-signature"> &rarr; {none}</span></h4>
+    
+
+    
+    <p class="summary"><p>This function initialize the empty map on the html page and place the marker on the current position</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>This function initialize the empty map on the html page and place the marker on the current position</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>latitude</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the latitude of the selected/searched location</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>longitude</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the longitude of the selected/searched location</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>z</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the amount of zoom used for the map to focus on location</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line96">line 96</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">none</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="initMultPlaceMap"><span class="type-signature"></span>initMultPlaceMap<span class="signature">()</span><span class="type-signature"> &rarr; {none}</span></h4>
+    
+
+    
+    <p class="summary">This function is used to initialize the map.</p>
+    
+
+
+
+<div class="description">
+    <p>This function is used to initialize the map. The function populates the the map with the list of places.
+List of places is created by the fuction in the map.js file and send by thr server side from the http://localhost:8080/places_funct.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">none</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line110">line 110</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">none</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="LoadAccfile"><span class="type-signature"></span>LoadAccfile<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>Connects to database and runs query to get all user accounts</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>Connects to database and runs query to get all user accounts</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line74">line 74</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="loadUserdata"><span class="type-signature"></span>loadUserdata<span class="signature">(user)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>Connects to database, loads user's favorites list and saves it as a variable</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>Connects to database, loads user's favorites list and saves it as a variable</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>takes the logged in username to select where username is arg user to get list of favorite locations</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line86">line 86</a>
     </li></ul></dd>
     
 
@@ -352,11 +2485,13 @@
     
 
     
+    <p class="summary">Reads the account file and also calls the function LoginCheck.</p>
+    
 
 
 
 <div class="description">
-    Reads the account file and also calls the function LoginCheck. Renders error page or index page
+    <p>Reads the account file and also calls the function LoginCheck. Renders error page or index page</p>
 </div>
 
 
@@ -408,7 +2543,7 @@
 
             
 
-            <td class="description last">Grabs the username and password values from the form lin loginbox</td>
+            <td class="description last"><p>Grabs the username and password values from the form lin loginbox</p></td>
         </tr>
 
     
@@ -431,7 +2566,7 @@
 
             
 
-            <td class="description last">Renders index2.hbs or error1.hbs</td>
+            <td class="description last"><p>Renders index2.hbs or error1.hbs</p></td>
         </tr>
 
     
@@ -472,7 +2607,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line66">line 66</a>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line131">line 131</a>
     </li></ul></dd>
     
 
@@ -510,11 +2645,13 @@
     
 
     
+    <p class="summary">Verifies that the username and password exist in the accs arg.</p>
+    
 
 
 
 <div class="description">
-    Verifies that the username and password exist in the accs arg.
+    <p>Verifies that the username and password exist in the accs arg.</p>
 </div>
 
 
@@ -566,7 +2703,7 @@
 
             
 
-            <td class="description last">Grabs the username and password values from the form</td>
+            <td class="description last"><p>Grabs the username and password values from the form</p></td>
         </tr>
 
     
@@ -589,7 +2726,7 @@
 
             
 
-            <td class="description last">The list object passed in from Login fucntion</td>
+            <td class="description last"><p>The list object passed in from Login fucntion</p></td>
         </tr>
 
     
@@ -630,7 +2767,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line82">line 82</a>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line178">line 178</a>
     </li></ul></dd>
     
 
@@ -668,11 +2805,13 @@
     
 
     
+    <p class="summary"><p>checks if password and confirmed password is not the same</p>.</p>
+    
 
 
 
 <div class="description">
-    checks if password and confirmed password is not the same
+    <p>checks if password and confirmed password is not the same</p>
 </div>
 
 
@@ -724,7 +2863,7 @@
 
             
 
-            <td class="description last">Grabs the password and confirm password</td>
+            <td class="description last"><p>Grabs the password and confirm password</p></td>
         </tr>
 
     
@@ -747,7 +2886,7 @@
 
             
 
-            <td class="description last">renders errorpage</td>
+            <td class="description last"><p>renders errorpage</p></td>
         </tr>
 
     
@@ -788,7 +2927,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line143">line 143</a>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line277">line 277</a>
     </li></ul></dd>
     
 
@@ -822,15 +2961,414 @@
     
 
     
-    <h4 class="name" id="ReadAccfile"><span class="type-signature"></span>ReadAccfile<span class="signature">(file)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="place_marker"><span class="type-signature"></span>place_marker<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
+    
+    <p class="summary"><p>This function placese the marker on the map</p>.</p>
     
 
 
 
 <div class="description">
-    Reads the file and returns the contents so its usable in node. If the file doesnt exist it will create the file with an empty list
+    <p>This function placese the marker on the map</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">none</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line168">line 168</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="request_coodrs"><span class="type-signature"></span>request_coodrs<span class="signature">()</span><span class="type-signature"> &rarr; {json}</span></h4>
+    
+
+    
+    <p class="summary">This function gets the current IP and return the coordinates of it.</p>
+    
+
+
+
+<div class="description">
+    <p>This function gets the current IP and return the coordinates of it.
+It should be used to find current location and show Sbs near by</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="get_current_ip.js.html">get_current_ip.js</a>, <a href="get_current_ip.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>JSON dict with the coords.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">json</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="savelocation"><span class="type-signature"></span>savelocation<span class="signature">()</span><span class="type-signature"> &rarr; {none}</span></h4>
+    
+
+    
+    <p class="summary">This functions runs functions &quot;/storeuserdata&quot; on the server.</p>
+    
+
+
+
+<div class="description">
+    <p>This functions runs functions &quot;/storeuserdata&quot; on the server. The server's function will checks the logged in persone and
+then add the location to the list of the saved locations. It will send empty string back to the server.
+gives a confirmation message to render</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">none</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line43">line 43</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">none</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="send_email"><span class="type-signature"></span>send_email<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>Sends the emial based on optionss</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>Sends the emial based on optionss</p>
 </div>
 
 
@@ -866,7 +3404,7 @@
 
         <tr>
             
-                <td class="name"><code>file</code></td>
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
@@ -882,7 +3420,7 @@
 
             
 
-            <td class="description last">The file that you want to read</td>
+            <td class="description last"><p>the information of the sender and reciever</p></td>
         </tr>
 
     
@@ -923,7 +3461,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line37">line 37</a>
+        <a href="send_email.js.html">send_email.js</a>, <a href="send_email.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -946,6 +3484,245 @@
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="send_mail"><span class="type-signature"></span>send_mail<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>Takes user's favorites list and Emails it to user</p>.</p>
+    
+
+
+
+<div class="description">
+    <p>Takes user's favorites list and Emails it to user</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="showfavs"><span class="type-signature"></span>showfavs<span class="signature">()</span><span class="type-signature"> &rarr; {none}</span></h4>
+    
+
+    
+    <p class="summary">This functions runs the server function &quot;/favdata&quot;, that will add a string of the favotires places, and sends &quot;OK&quot; response.</p>
+    
+
+
+
+<div class="description">
+    <p>This functions runs the server function &quot;/favdata&quot;, that will add a string of the favotires places, and sends &quot;OK&quot; response.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">none</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="views_i2.js.html">views/i2.js</a>, <a href="views_i2.js.html#line65">line 65</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">none</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -961,11 +3738,13 @@
     
 
     
+    <p class="summary"><p>checks if new username is already saved</p>.</p>
+    
 
 
 
 <div class="description">
-    checks if new username is already saved
+    <p>checks if new username is already saved</p>
 </div>
 
 
@@ -1017,7 +3796,7 @@
 
             
 
-            <td class="description last">Grabs the new username</td>
+            <td class="description last"><p>Grabs the new username</p></td>
         </tr>
 
     
@@ -1040,7 +3819,7 @@
 
             
 
-            <td class="description last">renders errorpage</td>
+            <td class="description last"><p>renders errorpage</p></td>
         </tr>
 
     
@@ -1081,93 +3860,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line126">line 126</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="WriteAccfile"><span class="type-signature"></span>WriteAccfile<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Turns the variable Accs into a string and writes it into the accounts.json file
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="server.js.html">server.js</a>, <a href="server.js.html#line56">line 56</a>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line246">line 246</a>
     </li></ul></dd>
     
 
@@ -1211,17 +3904,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddUsr">AddUsr</a></li><li><a href="global.html#LoadAccfile">LoadAccfile</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#LoginCheck">LoginCheck</a></li><li><a href="global.html#PasswordCheck">PasswordCheck</a></li><li><a href="global.html#ReadAccfile">ReadAccfile</a></li><li><a href="global.html#UserNameCheck">UserNameCheck</a></li><li><a href="global.html#WriteAccfile">WriteAccfile</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addLocations">addLocations</a></li><li><a href="global.html#addMarkerWithTimeout">addMarkerWithTimeout</a></li><li><a href="global.html#AddUsr">AddUsr</a></li><li><a href="global.html#checkLocations">checkLocations</a></li><li><a href="global.html#con">con</a></li><li><a href="global.html#defMap">defMap</a></li><li><a href="global.html#errorMessages">errorMessages</a></li><li><a href="global.html#generateSalt">generateSalt</a></li><li><a href="global.html#get_sturbuckses">get_sturbuckses</a></li><li><a href="global.html#getAddress">getAddress</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getMap">getMap</a></li><li><a href="global.html#hash_data">hash_data</a></li><li><a href="global.html#initMap">initMap</a></li><li><a href="global.html#initMultPlaceMap">initMultPlaceMap</a></li><li><a href="global.html#LoadAccfile">LoadAccfile</a></li><li><a href="global.html#loadUserdata">loadUserdata</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#LoginCheck">LoginCheck</a></li><li><a href="global.html#PasswordCheck">PasswordCheck</a></li><li><a href="global.html#place_marker">place_marker</a></li><li><a href="global.html#request_coodrs">request_coodrs</a></li><li><a href="global.html#savelocation">savelocation</a></li><li><a href="global.html#send_email">send_email</a></li><li><a href="global.html#send_mail">send_mail</a></li><li><a href="global.html#showfavs">showfavs</a></li><li><a href="global.html#UserNameCheck">UserNameCheck</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-<<<<<<< HEAD
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Apr 27 2018 15:45:07 GMT-0700 (Pacific Daylight Time)
-=======
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Apr 28 2018 17:38:37 GMT-0700 (Pacific Daylight Time)
->>>>>>> c927add96fe3ced9eef595095b0b7bfe16fd76e3
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri May 18 2018 17:03:40 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -15,6 +15,11 @@ var mailOptions = {
   text: 'Success!'
 };
 
+
+/**
+*Sends the emial based on optionss
+*@param {string} options - the information of the sender and reciever
+*/
 var send_email = (options) => {
   transporter.sendMail(options, function(error, info){
   if (error) {
