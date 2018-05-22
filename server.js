@@ -92,8 +92,7 @@ var LoadAccfile = () => {
 var LoadEmail = (user) => {
     return new Promise(resolve => {
         con.query("SELECT email FROM users WHERE username = '" + user + "'", function (err, res, fields) {
-            console.log("poo")
-            console.log(res)
+
             resolve(user_email = JSON.parse(JSON.stringify(res)));
         })
     })
@@ -101,9 +100,7 @@ var LoadEmail = (user) => {
 
 var loadUserdata = (user) => {
     return new Promise(resolve => {
-        console.log(user);
         con.query("SELECT * from UserData WHERE username = '" + user + "'", function(err, res, fields) {
-            //console.log(res)
             resolve(saved_loc = JSON.parse(JSON.stringify(res)));
         });
     });
@@ -116,10 +113,8 @@ var loadUserdata = (user) => {
 */
 var checkLocations = (user, location) => {
     return new Promise(function(resolve, reject) {
-        console.log("SELECT * from UserData WHERE username ='" + user + "' AND location_id = '" + location + "'");
         con.query("SELECT * from UserData WHERE username ='" + user + "' AND location_id = '" + location + "'", function(err, res, fields) {
             var loc = JSON.stringify(res);
-            console.log(loc);
             if (loc == '[]') {
                 resolve();
             } else {
@@ -151,17 +146,12 @@ var Login = (request, response) => {
         LoginCheck(request, Accs).then(res => {
             loadUserdata(logged_in.username).then(res => {
                 displaySaved = '';
-                //console.log(saved_loc)
                 for (var i = 0; i < saved_loc.length; i++) {
-                    //console.log(saved_loc[i].location_id)
-                    displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+                    displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
                 }
 
-
                 current_ip.request_coodrs().then((response1) => {
-                    console.log(response1);
                     maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
-                        console.log(response2.list_of_places);
                         displayText = ' ';
                         for (var i = 0; i < response2.list_of_places.length; i++) {
                             displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;
@@ -199,9 +189,7 @@ var LoginCheck = (request, accs) => {
     return new Promise(function(resolve, reject) {
         for (i = 0; i < accs.length; i++) {
             //console.log(accs[i].username, request.body.username)
-            console.log(accs[i].salt);
             if ((request.body.username == accs[i].username) && (hash_data(request.body.password + accs[i].salt) == accs[i].pass)) {
-                console.log("User pass is ", accs[i].pass);
                 logged_in = accs[i];
                 user_id = i;
                 //user_email = request.body.
@@ -241,8 +229,6 @@ var AddUsr = (request, response) => {
                 'email': request.body.UserEmail
             };
             con.query("INSERT INTO users (username, pass, salt, email) values ('" + acc.user + "','" + acc.pass + "','" + salt + "','" + acc.email + "')", function (err, res, fields) {
-                console.log(err);
-                console.log(salt);
                 console.log(request.body.UserEmail);
             });
 
@@ -385,16 +371,13 @@ app.post('/loginsearch', (request, response) => {
         displaySaved = '';
         loadUserdata(logged_in.username).then(res => {
             displaySaved = '';
-            console.log(saved_loc);
             for (var i = 0; i < saved_loc.length; i++) {
-                console.log(saved_loc[i].location_id);
                 displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
             }
         });
         displayText = ' ';
         if (coordinates.lat && coordinates.long) {
             maps.get_sturbuckses(coordinates.lat, coordinates.long).then((response1) => {
-                console.log(response1.list_of_places);
                 for (var i = 0; i < response1.list_of_places.length; i++) {
                     displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response1.list_of_places[i]}\'); currentSB=\'${response1.list_of_places[i]}\'"> ${response1.list_of_places[i]}</a></div>`;
                 }
@@ -407,12 +390,10 @@ app.post('/loginsearch', (request, response) => {
         } else {
                 displaySaved = '';
         loadUserdata(logged_in.username).then(res => {
-            console.log(saved_loc);
             for (var i = 0; i < saved_loc.length; i++) {
-                console.log(saved_loc[i].location_id);
-                displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`;
+                displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a></div>`;
             }
-                        response.render('index2.hbs', {
+            response.render('index2.hbs', {
                 error: 1,
                 coord:`<script>latitude = ${49.2827}; longitude = ${123.1207}; z = ${19};initMultPlaceMap()</script>`,
                 savedSpots: displaySaved
@@ -429,7 +410,6 @@ app.post('/loginsearch', (request, response) => {
 app.post('/getLocation', (request, response) => {
     place = request.body.location;
     maps.getAddress(place).then((coordinates) => {
-        console.log(coordinates.lat, coordinates.long);
         response.send(coordinates);
     });
 });
@@ -443,7 +423,7 @@ app.post('/storeuserdata', (request, response) => {
     checkLocations(logged_in.username, request.body.location).then(res => {
         last_save = request.body.location;
         addLocations(logged_in.username, request.body.location);
-    }, rej => { console.log('failed'); }
+    }, rej => { response.send("exists"); }
     );
 });
 
@@ -455,13 +435,13 @@ app.post('/favdata', (request, response) => {
     displaySaved = '';
     loadUserdata(logged_in.username).then(res => {
         displaySaved = '';
-        console.log(saved_loc);
         for (var i = 0; i < saved_loc.length; i++) {
             console.log(saved_loc[i].location_id);
-            displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+            displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
         }
-
-        displaySaved += `<div id=s${saved_loc.length} class="favItems"><a onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+        if(last_save != ""){
+            displaySaved += `<div id=s${saved_loc.length} class="favItems"><a href="#" onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+        }
        
         // LoadEmail(logged_in.username).then(email_res => {
         //     console.log("Res from database",email_res[0].email);
@@ -471,9 +451,7 @@ app.post('/favdata', (request, response) => {
         // });
 
             current_ip.request_coodrs().then((response1) => {
-                console.log(response1);
                 maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
-                    console.log(response2.list_of_places);
                     displayText = ' ';
                     for (var i = 0; i < response2.list_of_places.length; i++) {
                         displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;

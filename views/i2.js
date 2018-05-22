@@ -50,6 +50,7 @@ var savelocation = () => {
         xmlhttp.onreadystatechange = () => {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 console.log(xmlhttp.responseText)
+                swal('Location already saved')
             }
         };
         xmlhttp.send(`location=${currentSB}`);
