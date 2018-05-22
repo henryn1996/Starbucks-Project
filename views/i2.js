@@ -253,19 +253,23 @@ function editMode() {
     var count = document.getElementsByClassName("delButton").length;
     if (editing == 0) {
         console.log(count)
-        document.getElementById("edit").innerHTML = "Save";
+        document.getElementById("edit").value = 'Save';
+        document.getElementById("edit").type = "button";
         for (var i = 0; i < count; i++){
             document.getElementsByClassName("delButton")[i].style.display = "block";
         }
         editing = 1
     } else {
-        document.getElementById("edit").innerHTML = "Edit";
+        document.getElementById("edit").value = "Edit";
+        forDeletion.sort(function(a, b){return b-a})
+        document.getElementById("hidden").value = forDeletion
+        document.getElementById("edit").type = "submit";
         for (var i = 0; i < count; i++){
             document.getElementsByClassName("delButton")[i].style.display = "none";
         }
         for (var i in forDeletion){
-            console.log(i)
-            document.getElementById("s"+i).style.display = "none"
+            console.log(forDeletion[i])
+            document.getElementById("s"+forDeletion[i]).style.display = "none"
         }
         editing = 0
     }

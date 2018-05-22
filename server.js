@@ -39,7 +39,8 @@ var con = mysql.createConnection({
     user: credentials.user,
     password: credentials.password,
     database: credentials.database,
-    port: credentials.port
+    port: credentials.port,
+    multipleStatements: true
 });
 
 
@@ -100,7 +101,7 @@ var LoadEmail = (user) => {
 
 var loadUserdata = (user) => {
     return new Promise(resolve => {
-        con.query("SELECT * from UserData WHERE username = '" + user + "'", function(err, res, fields) {
+        con.query(`SELECT * from UserData WHERE username = '${user}' ORDER BY location_num`, function(err, res, fields) {
             resolve(saved_loc = JSON.parse(JSON.stringify(res)));
         });
     });
@@ -132,8 +133,8 @@ var checkLocations = (user, location) => {
 * @param {string} location - Is the location address the user is trying to save
 */
 var addLocations = (user, location) => {
-    con.query("INSERT INTO UserData (username, location_id) values ('" + user + "','" + location + "')");
-};
+    con.query("INSERT INTO UserData (username, location_id, location_num) values ('" + user + "','" + location + "'," +saved_loc.length+")"
+)};
 
 /**
  * Reads the account file and also calls the function LoginCheck. Renders error page or index page
@@ -316,6 +317,60 @@ var PasswordCheck = (request, response) => {
     return 2;
 };
 
+
+
+
+var delFavourites = (nums) => {
+    return new Promise(function(resolve,reject){
+        var sql =''
+        for (var i in nums){
+            sql += `DELETE FROM UserData WHERE username = '${logged_in.username}' AND location_num = ${nums[i]};\n`
+            sql += `UPDATE UserData SET location_num = location_num - 1 WHERE username = '${logged_in.username}' and location_num > ${nums[i]};\n`
+            
+        }
+        console.log(sql)
+        con.query(sql, function(err, res, fields){
+            resolve()
+        })
+    })
+}
+
+app.post('/edit', (request, response) => {
+    delFavourites(request.body.forDel.split(',')).then(res => {
+        displaySaved = '';
+        loadUserdata(logged_in.username).then(res => {
+            displaySaved = '';
+            for (var i = 0; i < saved_loc.length; i++) {
+                console.log(saved_loc[i].location_id);
+                displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+            }
+            if(last_save != ""){
+                displaySaved += `<div id=s${saved_loc.length} class="favItems"><a href="#" onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+            }
+           
+            // LoadEmail(logged_in.username).then(email_res => {
+            //     console.log("Res from database",email_res[0].email);
+            //    var user_email = email_res[0].email;
+            //    var new_text = "This is new test of email."
+            //   send_mail(user_email,new_text);
+            // });
+    
+            current_ip.request_coodrs().then((response1) => {
+                maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
+                    displayText = ' ';
+                    for (var i = 0; i < response2.list_of_places.length; i++) {
+                        displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;
+                    }
+                    response.render('index2.hbs', {
+                        savedSpots: displaySaved,
+                        testvar: displayText,
+                        coord: `<script>latitude = ${response1.lat}; longitude = ${response1.lon};initMultPlaceMap()</script>`
+                    });
+                });
+            });
+        });
+    })
+})
 
 
 app.set('view engine', 'hbs');

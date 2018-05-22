@@ -57,7 +57,13 @@
         {{{testvar}}}
     </div>
     <div id="savedloc">
-        <div id="searchbox"><h5>Saved Locations</h5>  <button id="edit" onclick="editMode()">Edit</button></div>
+        <div id="searchbox"><h5>Saved Locations</h5>  
+            <form action='/edit' method='post'>
+                <input type='button' id="edit" onclick="editMode()" value='Edit'>
+                <input type='text' id='hidden' style="display:none" name='forDel'>
+        
+            </form>
+        </div>
         {{{savedSpots}}}
     </div>
     <!---
