@@ -503,6 +503,7 @@ app.post('/favdata', (request, response) => {
             console.log(saved_loc[i].location_id);
             displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
         }
+
         if(last_save != ""){
             displaySaved += `<div id=s${saved_loc.length} class="favItems"><a href="#" onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
         }
@@ -539,6 +540,7 @@ var server = app.listen(port, () => {
 
 
 module.exports = {
+    send_mail,
     UserNameCheck,
     PasswordCheck,
     LoginCheck,
@@ -548,6 +550,11 @@ module.exports = {
     checkLocations,
     hash_data,
     generateSalt,
-    AddUsr
+    AddUsr,
+    LoadEmail,
+    addLocations,
+    Login,
+    EmailCheck,
+    delFavourites
 };
 
