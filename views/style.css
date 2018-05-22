@@ -433,7 +433,7 @@ i {
 
 /*input-submit:Back to Search*/
 /*input-submit:Favorite*/
-#savedlocations, #Searchlocation {
+#savedlocations, #Searchlocation, #SendMail {
     outline:none;
     border:none;
     background:transparent;

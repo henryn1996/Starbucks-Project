@@ -17,7 +17,10 @@
                 <a><input type="submit" onclick="showfavs()" value="Favorites" id='savedlocations'></a>
             </li>
             <li>
-                <a><input type="submit" value="Back to Search" id='Searchlocation'></a>
+                <a><input type="submit" onclick="send_via_mail()" value="Back to Search" id='Searchlocation'></a>
+            </li>
+            <li>
+                <a><input type="submit" value="Send my Locations" id='SendMail'></a>
             </li>
         </ul>
     <form action="/favdata" method='post'>
