@@ -10,11 +10,16 @@ var transporter = nodemailer.createTransport({
 
 var mailOptions = {
   from: 'youremail@gmail.com',
-  to: 'viktor.sheverdin@gmail.com',
+  to: 'starbucks.team.2018@gmail.com',
   subject: 'Test Sb',
   text: 'Success!'
 };
 
+
+/**
+*Sends the emial based on optionss
+*@param {string} options - the information of the sender and reciever
+*/
 var send_email = (options) => {
   transporter.sendMail(options, function(error, info){
   if (error) {

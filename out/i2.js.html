@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: i2.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: i2.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
 *@file This is the JavaScript file for the index2.hbs view. It includes the functions with the detecting current position,
 *drawing the map on the page and display both multiple and single places on it.
 */
@@ -9,8 +37,6 @@ var longitude = -123.2760839;
 var currentSB = "";
 var botMheight = 0;
 var choiceheight = 93;
-var forDeletion = []
-var editing = 0
 
 /**
 *This functions runs functions "/getLocation" on the server. The server's function will get current location, based on the IP.
@@ -23,7 +49,7 @@ var getMap = (location) => {
     xmlhttp.open("POST", "/getLocation", true);
     xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
     xmlhttp.onreadystatechange = () => {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {
             console.log(xmlhttp.responseText);
             coordinates = JSON.parse(xmlhttp.responseText);
             console.log(coordinates);
@@ -48,9 +74,8 @@ var savelocation = () => {
         xmlhttp.open("POST", "/storeuserdata", true);
         xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
         xmlhttp.onreadystatechange = () => {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {
                 console.log(xmlhttp.responseText)
-                swal('Location already saved')
             }
         };
         xmlhttp.send(`location=${currentSB}`);
@@ -70,7 +95,7 @@ var showfavs = () => {
     xmlhttp.open("POST", "/favdata", true);
     xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
     xmlhttp.onreadystatechange = () => {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {
             console.log(xmlhttp.responseText)
         }
     };
@@ -132,7 +157,7 @@ var initMultPlaceMap = () => {
 
             markers = [];
             // var drop = () => {
-            //     for (var i = 0; i < neighborhoods.length; i++) {
+            //     for (var i = 0; i &lt; neighborhoods.length; i++) {
             //       addMarkerWithTimeout(neighborhoods[i], i * 200);
             //     }
             //   }
@@ -182,7 +207,7 @@ document.getElementById("savedlocations").addEventListener("click", function () 
 
     }
     setTimeout(function () {
-        while (botMheight < 93) {
+        while (botMheight &lt; 93) {
             botMheight += 1;
             document.getElementById("savedloc").style.height = botMheight + '%';
         }
@@ -196,7 +221,7 @@ document.getElementById("Searchlocation").addEventListener("click", function () 
 
     }
     setTimeout(function () {
-        while (choiceheight < 93) {
+        while (choiceheight &lt; 93) {
             choiceheight += 1;
             document.getElementById("nearme").style.height = choiceheight + '%';
         }
@@ -215,11 +240,11 @@ function getLocation() {
             xmlhttp.open("POST", "/starbucksnearme", true);
             xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
             xmlhttp.onreadystatechange = () => {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {
                     console.log(xmlhttp.responseText)
                 }
             };
-            xmlhttp.send(`longitude=${position.coords.longitude}&latitude=${position.coords.latitude}`);
+            xmlhttp.send(`longitude=${position.coords.longitude}&amp;latitude=${position.coords.latitude}`);
             latitude = position.coords.latitude
             longitude = position.coords.longitude
         });
@@ -234,46 +259,6 @@ function errorMessages(number){
     } else if (number == 2){
         swal('Cannot search an empty value')
     }
-}
-
-
-function deleteFav(num){
-    if (forDeletion.includes(num)) {
-        forDeletion = forDeletion.filter(i => i !== num);
-        document.getElementById("s"+num).style.backgroundColor = "white";
-    } else {
-        forDeletion.push(num)
-        document.getElementById("s"+num).style.backgroundColor = "pink";
-    }
-    console.log(forDeletion)
-
-}
-
-function editMode() {
-    var count = document.getElementsByClassName("delButton").length;
-    if (editing == 0) {
-        console.log(count)
-        document.getElementById("edit").value = 'Save';
-        document.getElementById("edit").type = "button";
-        for (var i = 0; i < count; i++){
-            document.getElementsByClassName("delButton")[i].style.display = "block";
-        }
-        editing = 1
-    } else {
-        document.getElementById("edit").value = "Edit";
-        forDeletion.sort(function(a, b){return b-a})
-        document.getElementById("hidden").value = forDeletion
-        document.getElementById("edit").type = "submit";
-        for (var i = 0; i < count; i++){
-            document.getElementsByClassName("delButton")[i].style.display = "none";
-        }
-        for (var i in forDeletion){
-            console.log(forDeletion[i])
-            document.getElementById("s"+forDeletion[i]).style.display = "none"
-        }
-        editing = 0
-    }
-
 }
 //     document.getElementById("nearme").style.top = '0%';
 //     document.getElementById('savedloc').style.top = '-100%';
@@ -290,19 +275,26 @@ function editMode() {
 // document.getElementById('savecurrentloc').addEventListener("click", function () {
 //     window.alert('You have saved the location');
 // });
+</code></pre>
+        </article>
+    </section>
 
-var lot=document.getElementById("savedloc").children;
-for (var el in lot) {
-    var id=lot[el].id;
-    if (id=="searchbox") continue;
-    else {
-        lot[el].onclick=function(par) {
-            var rect=this.getBoundingClientRect();
-            var pos=[rect.x,rect.y];
-            document.getElementById("ratingID").style.display="block";
-            document.getElementById("ratingID").style.position="absolute";
-            document.getElementById("ratingID").style.top=pos[1]+"px";
-            console.log(rect, pos);
-        }
-    }
-}
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addMarkerWithTimeout">addMarkerWithTimeout</a></li><li><a href="global.html#defMap">defMap</a></li><li><a href="global.html#errorMessages">errorMessages</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getMap">getMap</a></li><li><a href="global.html#initMap">initMap</a></li><li><a href="global.html#initMultPlaceMap">initMultPlaceMap</a></li><li><a href="global.html#place_marker">place_marker</a></li><li><a href="global.html#savelocation">savelocation</a></li><li><a href="global.html#showfavs">showfavs</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri May 18 2018 16:05:51 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
