@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
@@ -35,11 +36,11 @@ var saved_loc;
  */
 
 var con = mysql.createConnection({
-    host: credentials.host,
-    user: credentials.user,
-    password: credentials.password,
-    database: credentials.database,
-    port: credentials.port,
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database,
+    port: process.env.dbport,
     multipleStatements: true
 });
 
