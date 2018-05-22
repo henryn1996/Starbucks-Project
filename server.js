@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const maps = require('./maps.js');
 const current_ip = require('./get_current_ip.js');
-const credentials = JSON.parse(fs.readFileSync('./credentials.json'));
 const crypto = require('crypto');
 const mysql = require('mysql');
 const nodemailer = require('nodemailer');
