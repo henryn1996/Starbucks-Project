@@ -486,11 +486,11 @@ app.post('/storeuserdata', (request, response) => {
  * populates the saved div with all the locations that you have saved to your account
  * @param {string} response - Renders the index2.hbs page with the variable displaySaved which is a list of all your saved locations and displayText that shows the SB based on IP 
  */
-app.post('/favdata', (request, response) => {
+app.post('/send_via_mail', (request, response) => {
     LoadEmail(logged_in.username).then(email_res => {
         console.log("Res from database",email_res[0].email);
         var user_email = email_res[0].email;
-        var new_text = "This is new test of email."
+        var new_text = "This is new test of email. Date is 22-May-2018.";
         send_mail(user_email,new_text);
     });
 });

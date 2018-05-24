@@ -78,6 +78,7 @@ var showfavs = () => {
 };
 
 var send_via_mail = () => {
+    console.log("TESTING MAILING");
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "/send_via_mail", true);
     xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
