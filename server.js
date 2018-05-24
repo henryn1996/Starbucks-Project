@@ -348,9 +348,6 @@ app.post('/edit', (request, response) => {
                 console.log(saved_loc[i].location_id);
                 displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
             }
-            if(last_save != ""){
-                displaySaved += `<div id=s${saved_loc.length} class="favItems"><a href="#" onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
-            }
            
             // LoadEmail(logged_in.username).then(email_res => {
             //     console.log("Res from database",email_res[0].email);
@@ -418,6 +415,12 @@ app.post('/starbucksnearme', (request, response) => {
 app.post('/loginsearch', (request, response) => {
     place = request.body.search;
     if (place == ''){
+        loadUserdata(logged_in.username).then(res => {
+            displaySaved = '';
+            for (var i = 0; i < saved_loc.length; i++) {
+                displaySaved += `<div id=s${i} class="favItems"><a onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+            }
+        });
         response.render('index2.hbs', {
             error: 2,
             savedSpots: displaySaved,
@@ -477,7 +480,6 @@ app.post('/getLocation', (request, response) => {
  * @param {string} request - grabs the location that you have clicked on
  */
 app.post('/storeuserdata', (request, response) => {
-    last_save = request.body.location;
     checkLocations(logged_in.username, request.body.location).then(res => {
         last_save = request.body.location;
         addLocations(logged_in.username, request.body.location);
@@ -511,7 +513,7 @@ app.post('/favdata', (request, response) => {
             displaySaved += `<div id=s${saved_loc.length} class="favItems"><a href="#" onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
         }
 
-        displaySaved += `<div id=s${saved_loc.length} class="favItems"><a onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+        // displaySaved += `<div id=s${saved_loc.length} class="favItems"><a onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
 
             current_ip.request_coodrs().then((response1) => {
                 maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
