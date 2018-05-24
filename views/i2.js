@@ -224,8 +224,8 @@ document.getElementById("Searchlocation").addEventListener("click", function () 
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "/starbucksnearme", true);
+            /*var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/login", true);
             xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
             xmlhttp.onreadystatechange = () => {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -234,9 +234,13 @@ function getLocation() {
             };
             xmlhttp.send(`longitude=${position.coords.longitude}&latitude=${position.coords.latitude}`);
             latitude = position.coords.latitude
-            longitude = position.coords.longitude
+            longitude = position.coords.longitude*/
+            document.getElementById('long').value = position.coords.longitude
+            document.getElementById('lat').value = position.coords.latitude
+            console.log('success');
         });
 }};
+getLocation();
 
 /**
 *gives what type of error to show

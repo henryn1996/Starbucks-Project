@@ -1,10 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const maps = require('./maps.js');
 const current_ip = require('./get_current_ip.js');
-const credentials = JSON.parse(fs.readFileSync('./credentials.json'));
 const crypto = require('crypto');
 const mysql = require('mysql');
 const nodemailer = require('nodemailer');
@@ -35,14 +35,16 @@ var saved_loc;
  */
 
 var con = mysql.createConnection({
-    host: credentials.host,
-    user: credentials.user,
-    password: credentials.password,
-    database: credentials.database,
-    port: credentials.port,
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database,
+    port: process.env.dbport,
     multipleStatements: true
 });
-
+con.on('error', function(err){
+    console.log('mysql error', err);
+})
 
 /**
  * Takes user's favorites list and Emails it to user
@@ -80,6 +82,7 @@ var send_mail = (send_to, email_text) => {
 var LoadAccfile = () => {
     return new Promise(resolve => {
         con.query('SELECT * FROM users', function(err, res, fields) {
+            console.log(err);
             resolve(Accs = JSON.parse(JSON.stringify(res)));
 
         });
@@ -153,6 +156,7 @@ var Login = (request, response) => {
 
                 current_ip.request_coodrs().then((response1) => {
                     maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
+                        console.log('error', response2);
                         displayText = ' ';
                         for (var i = 0; i < response2.list_of_places.length; i++) {
                             displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;
@@ -421,7 +425,6 @@ app.post('/loginsearch', (request, response) => {
             coord: `<script>latitude = ${49.2827}; longitude = ${123.1207}; z = ${19};initMultPlaceMap()</script>`
         });
     }
-
     maps.getAddress(place).then((coordinates) => {
         displaySaved = '';
         loadUserdata(logged_in.username).then(res => {
@@ -557,4 +560,3 @@ module.exports = {
     EmailCheck,
     delFavourites
 };
-

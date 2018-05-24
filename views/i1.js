@@ -33,6 +33,26 @@ document.getElementById("cancelBtn").addEventListener("click", function(){
         loginFadeIn()}, 1000)
 });
 
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            /*var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "/login", true);
+            xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+            xmlhttp.onreadystatechange = () => {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    console.log(xmlhttp.responseText)
+                }
+            };
+            xmlhttp.send(`longitude=${position.coords.longitude}&latitude=${position.coords.latitude}`);
+            latitude = position.coords.latitude
+            longitude = position.coords.longitude*/
+            document.getElementById('long').value = position.coords.longitude
+            document.getElementById('lat').value = position.coords.latitude
+            console.log('success');
+        });
+}};
+getLocation();
 
 function loginFadeIn(){
     uName.style.left ="0px";
