@@ -42,7 +42,9 @@ var con = mysql.createConnection({
     port: process.env.dbport,
     multipleStatements: true
 });
-
+con.on('error', function(err){
+    console.log('mysql error', err);
+})
 
 /**
  * Takes user's favorites list and Emails it to user
