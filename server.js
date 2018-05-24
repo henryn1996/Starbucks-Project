@@ -80,6 +80,7 @@ var send_mail = (send_to, email_text) => {
 var LoadAccfile = () => {
     return new Promise(resolve => {
         con.query('SELECT * FROM users', function(err, res, fields) {
+            console.log(err);
             resolve(Accs = JSON.parse(JSON.stringify(res)));
 
         });
