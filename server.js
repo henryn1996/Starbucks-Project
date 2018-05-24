@@ -155,24 +155,25 @@ var Login = (request, response) => {
                 }
 
                 // current_ip.request_coodrs().then((response1) => {
-                //     console.log('another error', response1);
-                    maps.get_sturbuckses(request.body.latitude, request.body.longitude).then((response2) => {
+                //     console.log('another error', error);
+                    maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
                         console.log('error', response2);
                         displayText = ' ';
-                        for (var i = 0; i < response2.list_of_places.length; i++) {
+                        /*for (var i = 0; i < response2.list_of_places.length; i++) {
                             displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;
-                        }
+                        }*/
+                        displayText='Hey'   
                         response.render('index2.hbs', {
                             savedSpots: displaySaved,
                             testvar: displayText,
-                            coord: `<script>latitude = ${request.body.latitude}; longitude = ${request.body.longitude};initMultPlaceMap()</script>`
+                            coord: `<script>latitude = ${response1.lat}; longitude = ${response1.lon};initMultPlaceMap()</script>`
                         });
                         // response.render('index2.hbs', {
                         //     savedSpots: displaySaved,
                         //     coord: `<script>latitude = ${response.lat}; longitude = ${response.lon};defMap()</script>`
                         // })
                     });
-                //});
+                // });
             },
             rej => {
                 response.render('index.hbs', {
