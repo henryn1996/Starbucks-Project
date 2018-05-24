@@ -156,11 +156,12 @@ var Login = (request, response) => {
 
                 current_ip.request_coodrs().then((response1) => {
                     maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
+                        console.log(response2);
                         displayText = ' ';
                         /*for (var i = 0; i < response2.list_of_places.length; i++) {
                             displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;
                         }*/
-                        displayText='Hey'
+                        displayText='Hey'   
                         response.render('index2.hbs', {
                             savedSpots: displaySaved,
                             testvar: displayText,
