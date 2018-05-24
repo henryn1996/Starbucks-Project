@@ -212,7 +212,7 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "/starbucksnearme", true);
+            xmlhttp.open("POST", "/login", true);
             xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
             xmlhttp.onreadystatechange = () => {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
