@@ -23,8 +23,8 @@ var request_coodrs = () => {
 				console.log(location.latitude);
 				console.log(location.longitude);
 				resolve({					
-					lat: location.latitude,
-					lon: location.longitude,
+					lat: 49.2478,
+					lon: -122.9938,
 				});
 			}
 		})

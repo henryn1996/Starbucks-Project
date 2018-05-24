@@ -154,15 +154,13 @@ var Login = (request, response) => {
                     displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
                 }
 
-                // current_ip.request_coodrs().then((response1) => {
-                //     console.log('another error', error);
+                current_ip.request_coodrs().then((response1) => {
                     maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
                         console.log('error', response2);
                         displayText = ' ';
-                        /*for (var i = 0; i < response2.list_of_places.length; i++) {
+                        for (var i = 0; i < response2.list_of_places.length; i++) {
                             displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;
-                        }*/
-                        displayText='Hey'   
+                        }
                         response.render('index2.hbs', {
                             savedSpots: displaySaved,
                             testvar: displayText,
@@ -173,7 +171,7 @@ var Login = (request, response) => {
                         //     coord: `<script>latitude = ${response.lat}; longitude = ${response.lon};defMap()</script>`
                         // })
                     });
-                // });
+                });
             },
             rej => {
                 response.render('index.hbs', {
