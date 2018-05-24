@@ -1,7 +1,10 @@
-jest.setTimeout(20000)
+jest.setTimeout(10000)
 
-var testFunc = require("./server")
-var testMap = require("./maps")
+var testFunc = require("./server"),
+    testMap = require("./maps"),
+    testGetIp = require("./get_current_ip"),
+    testSendEmail = require("./send_email");
+
 var Accs = [{ "username": "jason", "pass": "2416fa350b95e3792b1709a8892647d0", 'salt': '7vUnsBk08fp6sEkU', "saved": ["600 Dunsmuir Street, Vancouver", "80 Pine St, New York", "885 Dunsmuir St, Vancouver", "600 Dunsmuir Street, Vancouver", "720 Granville St, Vancouver", "398 Robson St Unit #5, Vancouver", "811 Hornby St, Vancouver"] }]
 
 var success = {
@@ -55,16 +58,45 @@ var failSpace = {
     }
 }
 
+/* fakeUser: Fake username input */
+var fakeUser = 'guest';
+
 /*  fakePw: Fake password input */
 var fakePw = 'password123'
 
-var loginSuccess = {
-
-}
+var loginSuccess = {}
 
 var response = {
     render: function(...args){}
+}
 
+var options = {
+  from: 'youremail@gmail.com',
+  to: 'starbucks.team.2018@gmail.com',
+  subject: 'Test Sb',
+  text: 'Success!'
+};
+
+var fakeTo = 'email@fake.com';
+
+var fakeText = 'This is a real email!';
+
+var emptyEmail = {
+    body: {
+        UserEmail: ''
+    }
+}
+
+var bodyEmail = {
+    body: {
+        UserEmail: 'email@fake.com'
+    }
+}
+
+var fakeUser = {
+    body: {
+        username: 'user'
+    }
 }
 
 describe('login', () => {
@@ -79,6 +111,7 @@ describe('login', () => {
         })
     })
 })
+
 
 describe('registerUsername', () => {
     test("pass", () => {
@@ -101,6 +134,7 @@ describe('registerUsername', () => {
     })
 })
 
+
 describe('registerPassword', () => {
     test('pass', () => {
         expect(testFunc.PasswordCheck(success, response)).toBe(0)
@@ -113,6 +147,7 @@ describe('registerPassword', () => {
     })
 })
 
+
 describe('LoadAccfile', () => {
     test('Not empty', () => {
         return testFunc.LoadAccfile().then(i => {
@@ -122,6 +157,7 @@ describe('LoadAccfile', () => {
 
 })
 
+
 describe('loadUserdata', () => {
     test('Not empty', () => {
         return testFunc.loadUserdata().then(i => {
@@ -129,6 +165,7 @@ describe('loadUserdata', () => {
         })
     })
 })
+
 
 describe('checkLocations', () => {
     test('Nothing returned', () => {
@@ -144,11 +181,13 @@ describe('checkLocations', () => {
     }) */
 })
 
+
 describe.skip('send_mail', () => {
     test('pass', () => {
         expect(testFunc.send_mail()).toBeUndefined()
     })
 })
+
 
 describe('hash_data', () => {
     test('return hash', () => {
@@ -156,17 +195,20 @@ describe('hash_data', () => {
     })
 })
 
+
 describe('generateSalt', () => {
     test('return hash', () => {
         expect(testFunc.generateSalt()).toBeDefined()
     })
 })
 
+
 describe('AddUsr', () => {
     test('Add a username', () => {
         expect(testFunc.AddUsr(success, response)).toBeUndefined()
     })
 })
+
 
 describe('get_starbuckes', () => {
     test('Get a starbucks', () => {
@@ -176,6 +218,7 @@ describe('get_starbuckes', () => {
       })
 })
 
+
 /*fixme*/
 describe.skip('getAddresss', () => {
     test('Get store address', () => {
@@ -183,6 +226,73 @@ describe.skip('getAddresss', () => {
             expect(i).toBeDefined()
             })
       })
+})
+
+
+describe('request_coodrs', () => {
+    test('Get coordinates', () => {
+        return testGetIp.request_coodrs().then(i => {
+            expect(i).toBeDefined()
+        })
+    })
+})
+
+
+describe('send_email', () => {
+    test('Add a username', () => {
+        expect(testSendEmail.send_email(options)).toBeUndefined()
+    })
+})
+
+
+describe('send_mail', () => {
+    test('Send mail', () => {
+        expect(testSendEmail.send_email(fakeTo, fakeText)).toBeUndefined()
+    })
+})
+
+
+describe('LoadEmail', () => {
+    test('Get coordinates', () => {
+        return testFunc.LoadEmail().then(i => {
+            expect(i).toBeDefined()
+        })
+    })
+})
+
+
+describe('addLocations', () => {
+    test('Add locations', () => {
+        expect(testSendEmail.send_email(fakeUser, fakeText)).toBeUndefined()
+    })
+})
+
+
+describe('Login', () => {
+    test('Login test', () => {
+        expect(testFunc.Login()).toBeUndefined()
+    })
+})
+
+
+describe('EmailCheck', () => {
+    test('Email not blank', () => {
+        expect(testFunc.EmailCheck(bodyEmail)).toBe(0)
+    })
+    test('Email blank', () => {
+        expect(testFunc.EmailCheck(emptyEmail)).toBe(1)
+    })
+})
+
+
+/*FIX ME
+Why is this triggering an error in the LoginCheck function?*/
+describe('delFavourites', () => {
+    test('Delete favourites', () => {
+        return testFunc.delFavourites().then(i => {
+            expect(i).toBeUndefined()
+        })
+    })
 })
 
 

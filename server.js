@@ -490,6 +490,15 @@ app.post('/storeuserdata', (request, response) => {
  * @param {string} response - Renders the index2.hbs page with the variable displaySaved which is a list of all your saved locations and displayText that shows the SB based on IP 
  */
 app.post('/favdata', (request, response) => {
+    LoadEmail(logged_in.username).then(email_res => {
+        console.log("Res from database",email_res[0].email);
+        var user_email = email_res[0].email;
+        var new_text = "This is new test of email."
+        send_mail(user_email,new_text);
+    });
+});
+
+app.post('/favdata', (request, response) => {
     displaySaved = '';
     loadUserdata(logged_in.username).then(res => {
         displaySaved = '';
@@ -497,16 +506,12 @@ app.post('/favdata', (request, response) => {
             console.log(saved_loc[i].location_id);
             displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
         }
+
         if(last_save != ""){
             displaySaved += `<div id=s${saved_loc.length} class="favItems"><a href="#" onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
         }
-       
-        // LoadEmail(logged_in.username).then(email_res => {
-        //     console.log("Res from database",email_res[0].email);
-        //    var user_email = email_res[0].email;
-        //    var new_text = "This is new test of email."
-        //   send_mail(user_email,new_text);
-        // });
+
+        displaySaved += `<div id=s${saved_loc.length} class="favItems"><a onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
 
             current_ip.request_coodrs().then((response1) => {
                 maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
@@ -538,6 +543,7 @@ var server = app.listen(port, () => {
 
 
 module.exports = {
+    send_mail,
     UserNameCheck,
     PasswordCheck,
     LoginCheck,
@@ -547,5 +553,10 @@ module.exports = {
     checkLocations,
     hash_data,
     generateSalt,
-    AddUsr
+    AddUsr,
+    LoadEmail,
+    addLocations,
+    Login,
+    EmailCheck,
+    delFavourites
 };

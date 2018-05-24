@@ -77,6 +77,18 @@ var showfavs = () => {
     xmlhttp.send(`OK`);
 };
 
+var send_via_mail = () => {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "/send_via_mail", true);
+    xmlhttp.setRequestHeader('Content-type', "application/x-www-form-urlencoded");
+    xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            console.log(xmlhttp.responseText)
+        }
+    };
+    xmlhttp.send(`OK`);
+};
+
 /**
 *This functions creates an empty map on the html page
 *@param {none}
