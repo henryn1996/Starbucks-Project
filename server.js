@@ -190,7 +190,7 @@ var Login = (request, response) => {
  */
 
 
-var LoginCheck = (request, accs) => {
+var LoginCheck = (request, accs,response) => {
     return new Promise(function(resolve, reject) {
         for (i = 0; i < accs.length; i++) {
             //console.log(accs[i].username, request.body.username)
@@ -348,6 +348,9 @@ app.post('/edit', (request, response) => {
                 console.log(saved_loc[i].location_id);
                 displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
             }
+            // if(last_save != ""){
+            //     displaySaved += `<div id=s${saved_loc.length} class="favItems"><a href="#" onclick="getMap(${last_save})"> ${last_save}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+            // }
            
             // LoadEmail(logged_in.username).then(email_res => {
             //     console.log("Res from database",email_res[0].email);
@@ -392,6 +395,7 @@ app.post('/login', (request, response) => {
 app.get('/places_funct', (request, response) => {
     var places = fs.readFileSync('places.json');
     var parsed_places = JSON.parse(places);
+    console.log(parsed_places);
     response.end(places);
 });
 

@@ -144,6 +144,8 @@ function shortusername(username){
         swal("Username may not contain spaces or special characters")
     } else if (username === 0){
         swal('Congratulations you have successfully created an account')
+    } else if (username === 7){
+        swal('Incorrect password or account doesnt exist')
     }
 };
 
