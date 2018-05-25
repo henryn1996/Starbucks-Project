@@ -149,39 +149,43 @@ var Login = (request, response) => {
     LoadAccfile().then(res => {
         LoginCheck(request, Accs).then(res => {
             loadUserdata(logged_in.username).then(res => {
-                displaySaved = '';
+                displaySaved = ''
+                //console.log(saved_loc)
                 for (var i = 0; i < saved_loc.length; i++) {
-                    displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
+                    //console.log(saved_loc[i].location_id)
+                   displaySaved += `<div id=s${i} class="favItems"><a href="#" onclick="getMap(${saved_loc[i].location_id})"> ${saved_loc[i].location_id}</a><button id="del${i}" class="delButton" onclick="deleteFav(${i})">x</button></div>`;
                 }
 
+
                 current_ip.request_coodrs().then((response1) => {
+                    console.log(response1);
                     maps.get_sturbuckses(response1.lat, response1.lon).then((response2) => {
-                        console.log('error', response2);
-                        displayText = ' ';
+                        console.log(response2.list_of_places);
+                        displayText = ' '
                         for (var i = 0; i < response2.list_of_places.length; i++) {
-                            displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`;
+                            displayText += `<div id=d${i} class='favItems'><a href="#" onclick="getMap(\'${response2.list_of_places[i]}\'); currentSB=\'${response2.list_of_places[i]}\'"> ${response2.list_of_places[i]}</a></div>`
                         }
                         response.render('index2.hbs', {
                             savedSpots: displaySaved,
                             testvar: displayText,
                             coord: `<script>latitude = ${response1.lat}; longitude = ${response1.lon};initMultPlaceMap()</script>`
-                        });
-                        // response.render('index2.hbs', {
-                        //     savedSpots: displaySaved,
-                        //     coord: `<script>latitude = ${response.lat}; longitude = ${response.lon};defMap()</script>`
-                        // })
-                    });
-                });
-            },
+                        })
+                    })
+                    // response.render('index2.hbs', {
+                    //     savedSpots: displaySaved,
+                    //     coord: `<script>latitude = ${response.lat}; longitude = ${response.lon};defMap()</script>`
+                    // })
+                })
+            })
+        },
             rej => {
                 response.render('index.hbs', {
                     username: 3
                 });
             }
-        );
-    });
-    });
-};
+        )
+    })
+}
 
 /**
  * Verifies that the username and password exist in the accs arg.
@@ -190,7 +194,7 @@ var Login = (request, response) => {
  */
 
 
-var LoginCheck = (request, accs,response) => {
+var LoginCheck = (request, accs) => {
     return new Promise(function(resolve, reject) {
         for (i = 0; i < accs.length; i++) {
             //console.log(accs[i].username, request.body.username)
